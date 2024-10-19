@@ -76,4 +76,26 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-fetchPokemons();
+function ableToggleTheme(themeToggleButton) {
+    // get the saved theme
+    const savedTheme = localStorage.getItem("theme") || "light";
+    const isDarkMode = savedTheme === "dark";
+
+    document.body.classList.toggle("dark-mode", isDarkMode);
+    themeToggleButton.textContent = isDarkMode ? "🌞" : "🌙";
+
+    // add the click event to change the theme
+    themeToggleButton.addEventListener("click", () => {
+        const isCurrentlyLightMode =
+            document.body.classList.toggle("dark-mode");
+        themeToggleButton.textContent = isCurrentlyLightMode ? "🌞" : "🌙";
+        localStorage.setItem("theme", isCurrentlyLightMode ? "dark" : "light");
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const themeToggleButton = document.getElementById("theme-toggle");
+    ableToggleTheme(themeToggleButton);
+
+    fetchPokemons();
+});

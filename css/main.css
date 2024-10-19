@@ -1,10 +1,30 @@
+:root {
+    --body-bgc: white;
+    --pokemon-name: hsl(204, 10%, 48%);
+    --pokemon-name-hover: hsl(205, 67%, 19%);
+    --pokemon-type: hsl(212, 33%, 65%);
+    --border: lightgray;
+    --title: hsl(0, 78%, 55%);
+}
+
 body {
+    background-color: var(--body-bgc);
     min-height: 100vh;
     padding: 4rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     font-size: 16px;
+    transition: 0.2s;
+}
+
+body.dark-mode {
+    --body-bgc: hsl(240, 3%, 7%);
+    --pokemon-name: hsl(200, 6%, 80%);
+    --pokemon-name-hover: hsl(0, 0%, 100%);
+    --pokemon-type: hsl(212, 5%, 60%);
+    --border: hsl(212, 7%, 15%);
+    --title: hsl(0, 100%, 73%);
 }
 
 header {
@@ -13,14 +33,35 @@ header {
 }
 
 h1 {
-    color: hsl(0, 78%, 55%);
+    color: var(--title);
+    transition: 0.2s;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+h1 button {
+    background-color: var(--border);
+    padding: 0.5rem;
+    border-radius: 50%;
+    border: 0;
+    transition: 0.2s;
+}
+
+h1 button:hover {
+    transform: translateY(-0.2rem);
+    background-color: var(--pokemon-type);
+    cursor: pointer;
 }
 
 hr {
     height: 2px;
     width: 30%;
     border: 0;
-    background-color: lightgray;
+    background-color: var(--border);
 }
 
 #loader {
@@ -37,7 +78,7 @@ hr {
 li {
     list-style: none;
     padding: 1rem;
-    border: 1px solid lightgray;
+    border: 1px solid var(--border);
     border-radius: 4px;
     transition: 0.2s;
     display: grid;
@@ -46,14 +87,14 @@ li {
 }
 
 li p {
-    color: rgb(138, 165, 196);
+    color: var(--pokemon-type);
     font-size: 0.9em;
 }
 
 .name {
     font-weight: bold;
     font-size: 1.1em;
-    color: hsl(204, 10%, 48%);
+    color: var(--pokemon-name);
     transition: 0.2s;
 }
 
@@ -62,19 +103,23 @@ li img {
 }
 
 li:hover {
-    background-color: lightgray;
+    background-color: var(--border);
     cursor: pointer;
     transform: translateY(-0.2rem);
 }
 
 li:hover .name {
-    color: hsl(205, 67%, 19%);
+    color: var(--pokemon-name-hover);
 }
 
 /* mobile */
 @media (max-width: 576px) {
     body {
         font-size: 14px;
+    }
+
+    h1 {
+        flex-direction: column;
     }
 
     #pokemons-container {
