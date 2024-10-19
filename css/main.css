@@ -22,7 +22,12 @@ hr {
     background-color: lightgray;
 }
 
-ul {
+#loader {
+    display: none;
+    color: gray;
+}
+
+#pokemons-container {
     display: grid;
     /* grid-template-columns: repeat(8, 1fr); */
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
@@ -37,19 +42,22 @@ li {
     transition: 0.2s;
     display: grid;
     place-items: center;
-    gap: 1rem;  
+    gap: 1rem;
 }
 
 li p {
-    font-size: 1.1em;
+    color: rgb(138, 165, 196);
+}
+
+.name {
     font-weight: bold;
+    font-size: 1.1em;
     color: hsl(204, 10%, 48%);
 }
 
 li img {
     height: 100px;
 }
-
 
 li:hover {
     background-color: lightgray;

@@ -1,16 +1,26 @@
 // create a html element with the pokemon's name and img
-function createPokemonElement(name, img) {
-    const pokemon = document.createElement("li");
-    const pokemonSprite = document.createElement("img");
+function createPokemonElement(pokemon) {
+    const types = pokemon.types
+        .map((item) => capitalizeFirstLetter(item.type.name))
+        .join(", ");
+
+    const pokemonElement = document.createElement("li");
     const pokemonName = document.createElement("p");
+    pokemonName.className = "name";
+    const pokemonSprite = document.createElement("img");
+    const pokemonTypes = document.createElement("p");
 
-    pokemonName.textContent = capitalizeFirstLetter(name);
-    pokemonSprite.src = img;
-    pokemonSprite.alt = `${name} image`;
+    pokemonName.textContent = `${pokemon.id}. ${capitalizeFirstLetter(
+        pokemon.name
+    )}`;
 
-    pokemon.append(pokemonName, pokemonSprite);
+    pokemonSprite.src = pokemon.sprites["front_default"];
+    pokemonSprite.alt = `${pokemon.name} image`;
+    pokemonTypes.textContent = types;
 
-    return pokemon;
+    pokemonElement.append(pokemonName, pokemonSprite, pokemonTypes);
+
+    return pokemonElement;
 }
 
 // fetch the pokemon details from the url
@@ -28,7 +38,10 @@ async function fetchPokemon(url) {
 // Busca os primeiros 151 Pokémon
 async function fetchPokemons() {
     const apiURL = "https://pokeapi.co/api/v2/pokemon?limit=151";
-    const pokemonsContainer = document.getElementById("pokemon-list");
+    const pokemonsContainer = document.getElementById("pokemons-container");
+
+    const loader = document.getElementById("loader");
+    loader.style.display = "block";
 
     try {
         const response = await fetch(apiURL);
@@ -46,17 +59,16 @@ async function fetchPokemons() {
         );
 
         // create all the elements
-        const pokemonElements = validPokemonData.map((pokemon, index) =>
-            createPokemonElement(
-                `${index + 1}. ${pokemon.name}`,
-                pokemon.sprites["front_default"]
-            )
+        const pokemonElements = validPokemonData.map((pokemon) =>
+            createPokemonElement(pokemon)
         );
 
         // insert all the elements once
         pokemonsContainer.append(...pokemonElements);
     } catch (error) {
         console.error("Erro ao buscar Pokémon:", error);
+    } finally {
+        loader.style.display = "none";
     }
 }
 
