@@ -18,7 +18,7 @@ function createPokemonElement(pokemon) {
     pokemonSprite.alt = `${pokemon.name} image`;
     pokemonTypes.textContent = types;
 
-    pokemonElement.append(pokemonName, pokemonSprite, pokemonTypes);
+    pokemonElement.append(pokemonName, pokemonTypes, pokemonSprite);
 
     return pokemonElement;
 }

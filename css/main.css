@@ -12,7 +12,7 @@ header {
 }
 
 h1 {
-    color: rgb(230, 48, 48);
+    color: hsl(0, 78%, 55%);
 }
 
 hr {
@@ -29,7 +29,6 @@ hr {
 
 #pokemons-container {
     display: grid;
-    /* grid-template-columns: repeat(8, 1fr); */
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     gap: 0.7rem;
 }
@@ -42,17 +41,19 @@ li {
     transition: 0.2s;
     display: grid;
     place-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 li p {
     color: rgb(138, 165, 196);
+    font-size: 0.9em;
 }
 
 .name {
     font-weight: bold;
     font-size: 1.1em;
     color: hsl(204, 10%, 48%);
+    transition: 0.2s;
 }
 
 li img {
@@ -63,4 +64,8 @@ li:hover {
     background-color: lightgray;
     cursor: pointer;
     transform: translateY(-0.2rem);
+}
+
+li:hover .name {
+    color: hsl(205, 67%, 19%);
 }
