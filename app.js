@@ -35,7 +35,7 @@ async function fetchPokemon(url) {
     }
 }
 
-// Busca os primeiros 151 Pokémon
+// fetch the first 151 pokemons (kanto)
 async function fetchPokemons() {
     const apiURL = "https://pokeapi.co/api/v2/pokemon?limit=151";
     const pokemonsContainer = document.getElementById("pokemons-container");
