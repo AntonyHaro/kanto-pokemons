@@ -4,6 +4,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    font-size: 16px;
 }
 
 header {
@@ -68,4 +69,38 @@ li:hover {
 
 li:hover .name {
     color: hsl(205, 67%, 19%);
+}
+
+/* mobile */
+@media (max-width: 576px) {
+    body {
+        font-size: 14px;
+    }
+
+    #pokemons-container {
+        grid-template-columns: 1fr;
+    }
+
+    li {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    li img {
+        height: 60px;
+    }
+}
+
+/* medium */
+@media (max-width: 768px) {
+    body {
+        font-size: 15px;
+    }
+
+    header {
+        width: 100%;
+        justify-content: center;
+        place-items: center;
+        text-align: center;
+    }
 }
