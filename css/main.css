@@ -1,0 +1,58 @@
+body {
+    min-height: 100vh;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+header {
+    display: grid;
+    gap: 1rem;
+}
+
+h1 {
+    color: rgb(230, 48, 48);
+}
+
+hr {
+    height: 2px;
+    width: 30%;
+    border: 0;
+    background-color: lightgray;
+}
+
+ul {
+    display: grid;
+    /* grid-template-columns: repeat(8, 1fr); */
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 0.7rem;
+}
+
+li {
+    list-style: none;
+    padding: 1rem;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    transition: 0.2s;
+    display: grid;
+    place-items: center;
+    gap: 1rem;  
+}
+
+li p {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: hsl(204, 10%, 48%);
+}
+
+li img {
+    height: 100px;
+}
+
+
+li:hover {
+    background-color: lightgray;
+    cursor: pointer;
+    transform: translateY(-0.2rem);
+}
