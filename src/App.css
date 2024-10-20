@@ -7,6 +7,7 @@
     --pokemon-type: hsl(212, 33%, 65%);
     --border: lightgray;
     --title: hsl(0, 78%, 55%);
+    --error-message: hsl(0, 100%, 76%);
 }
 
 * {
@@ -34,6 +35,7 @@ body.dark-mode {
     --pokemon-type: hsl(212, 5%, 60%);
     --border: hsl(212, 7%, 15%);
     --title: hsl(0, 100%, 73%);
+    --error-message: hsl(0, 29%, 61%);
 }
 
 .app-container {
@@ -81,8 +83,11 @@ hr {
 }
 
 #loader {
-    display: none;
     color: gray;
+}
+
+#error-message {
+    color: var(--error-message);
 }
 
 #pokemons-container {

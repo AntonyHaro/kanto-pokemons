@@ -74,7 +74,7 @@ function App() {
             {loading ? (
                 <p id="loader">Carregando Pokémons...</p>
             ) : error ? (
-                <p className="error-message">{error}</p>
+                <p id="error-message">{error}</p>
             ) : (
                 <PokemonsList pokemons={pokemons} />
             )}
