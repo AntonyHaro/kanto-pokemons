@@ -124,7 +124,7 @@ li img {
 }
 
 li:hover {
-    background-color: var(--border);
+    border-color: var(--pokemon-name);
     cursor: pointer;
     transform: translateY(-0.2rem);
 }
