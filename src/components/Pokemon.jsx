@@ -14,11 +14,23 @@ function Pokemon({ pokemon }) {
         flying: "hsla(0, 0%, 85%, 0.2)",
         fighting: "hsla(40, 14%, 64%, 0.2)",
         normal: "hsla(0, 50%, 10%, 0.2)",
-        ghost: "hsla(271, 34%, 53%, 0.2)"
+        ghost: "hsla(271, 34%, 53%, 0.2)",
     };
 
     const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+
+    const playSound = async (id) => {
+        const soundUrl = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`;
+        try {
+            const audio = new Audio(soundUrl);
+            await audio
+                .play()
+                .catch((err) => console.error("Playback failed:", err));
+        } catch (error) {
+            console.error("Erro ao tocar áudio:", error);
+        }
     };
 
     const primaryType = pokemon.types[0].type.name;
@@ -28,7 +40,10 @@ function Pokemon({ pokemon }) {
         .join(", ");
 
     return (
-        <li style={{ backgroundColor: colors[primaryType] }}>
+        <li
+            style={{ backgroundColor: colors[primaryType] }}
+            onClick={() => playSound(pokemon.id)}
+        >
             <p className="name">{capitalizeFirstLetter(pokemon.name)}</p>
             <img src={pokemon.sprites["front_default"]} alt={pokemon.name} />
             <p>{types}</p>
