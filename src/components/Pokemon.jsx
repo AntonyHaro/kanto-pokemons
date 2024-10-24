@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 function Pokemon({ pokemon }) {
+    const navigate = useNavigate();
+    
     const colors = {
         fire: "hsla(0, 100%, 50%, 0.2)",
         grass: "hsla(128, 43%, 53%, 0.2)",
@@ -39,10 +43,15 @@ function Pokemon({ pokemon }) {
         .map((item) => capitalizeFirstLetter(item.type.name))
         .join(", ");
 
+    const handleClick = () => {
+        playSound(pokemon.id);
+        navigate(`/pokemoninfo/${pokemon.id}`);
+    }
+
     return (
         <li
             style={{ backgroundColor: colors[primaryType] }}
-            onClick={() => playSound(pokemon.id)}
+            onClick={handleClick}
         >
             <p className="name">{capitalizeFirstLetter(pokemon.name)}</p>
             <img src={pokemon.sprites["front_default"]} alt={pokemon.name} />
