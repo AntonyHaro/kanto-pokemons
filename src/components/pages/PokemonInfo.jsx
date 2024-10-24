@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+
+import colors from "../../constants/colors";
 
 import "./PokemonInfo.css";
 
 function PokemonInfo() {
-    const { id } = useParams(); // Pega o ID da URL
+    const { id } = useParams(); 
     const [pokemon, setPokemon] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -31,28 +33,37 @@ function PokemonInfo() {
     }, [id]);
 
     if (loading) {
-        return <p>Carregando Pokémon...</p>;
+        return <p id="loader">Carregando Pokémon...</p>;
     }
 
     if (error) {
-        return <p>{error}</p>;
+        return <p id="error-message">{error}</p>;
     }
 
     if (!pokemon) {
-        return <p>Nenhum Pokémon encontrado</p>;
+        return <p id="error-message">Nenhum Pokémon encontrado</p>;
     }
 
-    // Função para formatar o nome com a primeira letra maiúscula
     const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
     return (
         <div className="pokemon-info">
+            <div className="buttons-container">
+                <Link to="/">
+                    Voltar
+                </Link>
+                <button>
+                    Adicionar ao time
+                </button>
+            </div>
+
             <h2>{capitalizeFirstLetter(pokemon.name)}</h2>
             <img
                 src={pokemon.sprites.other["official-artwork"].front_default}
                 alt={pokemon.name}
+                
             />
             
             <h3>Informações Gerais</h3>

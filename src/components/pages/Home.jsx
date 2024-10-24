@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import PokemonsList from "../PokemonsList";
+import PokemonsList from "../layout/PokemonsList";
+
 import "./Home.css";
 
 function Home() {

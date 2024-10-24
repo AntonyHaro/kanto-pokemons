@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+
+:root {
+    --body-bgc: white;
+    --pokemon-name: hsl(204, 10%, 48%);
+    --pokemon-name-hover: hsl(205, 67%, 19%);
+    --pokemon-type: hsl(212, 33%, 65%);
+    --border: lightgray;
+    --title: hsl(0, 78%, 55%);
+    --error-message: hsl(0, 100%, 76%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Space Grotesk", Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: var(--body-bgc);
+    min-height: 100vh;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+body.dark-mode {
+    --body-bgc: hsl(240, 3%, 7%);
+    --pokemon-name: hsl(200, 6%, 80%);
+    --pokemon-name-hover: hsl(0, 0%, 100%);
+    --pokemon-type: hsl(212, 5%, 60%);
+    --border: hsl(212, 7%, 15%);
+    --title: hsl(0, 100%, 73%);
+    --error-message: hsl(0, 29%, 61%);
+}
+
+#loader {
+    color: gray;
+}
+
+#error-message {
+    color: var(--error-message);
+}

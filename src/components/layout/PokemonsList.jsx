@@ -1,5 +1,7 @@
 import Pokemon from "./Pokemon";
 
+import "./PokemonsList.css"
+
 function PokemonsList({ pokemons }) {
     return (
         <ul id="pokemons-container">
