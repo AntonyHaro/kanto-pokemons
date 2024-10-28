@@ -1,10 +1,9 @@
-import Pokemon from "./Pokemon";
-
-import "./PokemonsList.css"
+import Pokemon from "../Pokemon/Pokemon";
+import styles from "./PokemonsList.module.css";
 
 function PokemonsList({ pokemons }) {
     return (
-        <ul id="pokemons-container">
+        <ul id={styles.pokemonsContainer}>
             {pokemons.map((pokemon) => (
                 <Pokemon key={pokemon.id} pokemon={pokemon} />
             ))}

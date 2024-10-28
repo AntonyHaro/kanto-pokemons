@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from "./components/pages/Home";
-import PokemonInfo from "./components/pages/PokemonInfo";
+import Home from "./pages/Home";
+import PokemonInfo from "./pages/PokemonInfo";
 
 import "./index.css";
 
@@ -13,7 +13,7 @@ function App() {
                 <Route path="/pokemon/:id" element={<PokemonInfo />} />
             </Routes>
         </Router>
-    )
+    );
 }
 
 export default App;

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import colors from "../../../constants/colors.js";
+import colors from "../../constants/colors";
 import styles from "./Pokemon.module.css";
 
 function Pokemon({ pokemon }) {

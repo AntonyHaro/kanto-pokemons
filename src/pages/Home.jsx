@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import PokemonsList from "../layout/PokemonsList";
-
+import PokemonsList from "../components/PokemonsList/PokemonsList";
 import "./Home.css";
 
 function Home() {
@@ -22,11 +21,9 @@ function Home() {
         const themeToggleButton = document.getElementById("theme-toggle");
         themeToggleButton.textContent = isDarkMode ? "🌞" : "🌙";
 
-        // Event listener for the theme toggle button
         const handleToggleClick = () => toggleTheme(themeToggleButton);
         themeToggleButton.addEventListener("click", handleToggleClick);
 
-        // Cleanup event listener on unmount
         return () => {
             themeToggleButton.removeEventListener("click", handleToggleClick);
         };
