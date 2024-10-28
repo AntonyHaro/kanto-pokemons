@@ -2,9 +2,9 @@
 
 :root {
     --body-bgc: white;
-    --pokemon-name: hsl(204, 10%, 48%);
-    --pokemon-name-hover: hsl(205, 67%, 19%);
-    --pokemon-type: hsl(212, 33%, 65%);
+    --pokemon-name: hsl(204, 10%, 40%);
+    --pokemon-name-hover: hsl(205, 40%, 15%);
+    --pokemon-type: hsl(212, 33%, 45%);
     --border: lightgray;
     --title: hsl(0, 78%, 55%);
     --error-message: hsl(0, 100%, 76%);

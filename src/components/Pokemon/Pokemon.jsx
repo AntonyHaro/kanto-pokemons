@@ -22,6 +22,9 @@ function Pokemon({ pokemon }) {
     };
 
     const primaryType = pokemon.types[0].type.name;
+    const secondaryType = pokemon.types[1]
+        ? pokemon.types[1].type.name
+        : pokemon.types[0].type.name;
 
     const types = pokemon.types
         .map((item) => capitalizeFirstLetter(item.type.name))
@@ -34,13 +37,15 @@ function Pokemon({ pokemon }) {
 
     return (
         <li
-            style={{ backgroundColor: colors[primaryType] }}
+            style={{
+                backgroundImage: `linear-gradient(to bottom right, ${colors[primaryType]}, ${colors[secondaryType]})`,
+            }}
             onClick={handleClick}
             className={styles.pokemonCard}
         >
             <p className={styles.name}>{capitalizeFirstLetter(pokemon.name)}</p>
             <img src={pokemon.sprites["front_default"]} alt={pokemon.name} />
-            <p>{types}</p>
+            <p className={styles.types}>{types}</p>
         </li>
     );
 }
