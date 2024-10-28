@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import "./PokemonInfo.css";
+import styles from "./PokemonInfo.module.css";
 
 function PokemonInfo() {
     const { id } = useParams();
@@ -48,8 +48,8 @@ function PokemonInfo() {
     };
 
     return (
-        <div className="pokemon-info">
-            <div className="buttons-container">
+        <div className={styles.pokemon_info}>
+            <div className={styles.buttons_container}>
                 <Link to="/">Voltar</Link>
                 <button>Adicionar ao time</button>
             </div>
@@ -130,7 +130,7 @@ function PokemonInfo() {
             )}
 
             <h3>Sprites</h3>
-            <div className="sprites">
+            <div className={styles.sprites}>
                 <img src={pokemon.sprites.front_default} alt="Front Default" />
                 <img src={pokemon.sprites.back_default} alt="Back Default" />
                 {pokemon.sprites.front_shiny && (

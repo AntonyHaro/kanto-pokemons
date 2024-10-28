@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import PokemonsList from "../components/PokemonsList/PokemonsList";
-import "./Home.css";
+import PokemonsList from "../../components/PokemonsList/PokemonsList";
+import styles from "./Home.module.css";
 
 function Home() {
     const [pokemons, setPokemons] = useState([]);
@@ -61,7 +61,7 @@ function Home() {
     }, []);
 
     return (
-        <div className="app-container">
+        <div className={styles.app_container}>
             <header>
                 <h1>
                     Kanto Pokémons <button id="theme-toggle"></button>

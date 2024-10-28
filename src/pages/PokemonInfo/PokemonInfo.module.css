@@ -1,4 +1,4 @@
-.pokemon-info {
+.pokemon_info {
     border: 2px solid var(--border);
     border-radius: 12px;
     padding: 2rem;
@@ -7,15 +7,15 @@
     transition: background-color 0.2s, border-color 0.2s;
 }
 
-.buttons-container {
+.buttons_container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
 }
 
-.buttons-container a,
-.buttons-container button {
+.buttons_container a,
+.buttons_container button {
     background-color: var(--title); 
     color: white;
     padding: 0.75rem 1.5rem;
@@ -26,17 +26,17 @@
     cursor: pointer;
 }
 
-.buttons-container a {
+.buttons_container a {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.buttons-container button {
+.buttons_container button {
     background-color: var(--pokemon-type); 
 }
 
-.pokemon-info h2 {
+.pokemon_info h2 {
     color: var(--pokemon-name);
     font-size: 2rem;
     text-align: center;
@@ -44,18 +44,18 @@
     transition: color 0.2s;
 }
 
-.pokemon-info h2:hover {
+.pokemon_info h2:hover {
     color: var(--pokemon-name-hover);
 }
 
-.pokemon-info img {
+.pokemon_info img {
     display: block;
     margin: 0 auto 1.5rem auto;
     width: 200px;
     height: auto;
 }
 
-.pokemon-info h3 {
+.pokemon_info h3 {
     color: var(--title);
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
@@ -63,19 +63,19 @@
     padding-bottom: 0.5rem;
 }
 
-.pokemon-info p,
-.pokemon-info ul {
+.pokemon_info p,
+.pokemon_info ul {
     color: var(--pokemon-type);
     margin: 0.5rem 0 1rem 0;
     line-height: 1.5;
 }
 
-.pokemon-info ul {
+.pokemon_info ul {
     list-style: none;
     padding: 0;
 }
 
-.pokemon-info li {
+.pokemon_info li {
     margin-left: 1rem;
 }
 
@@ -91,19 +91,19 @@
 }
 
 @media (max-width: 768px) {
-    .pokemon-info {
+    .pokemon_info {
         padding: 1rem;
     }
 
-    .pokemon-info h2 {
+    .pokemon_info h2 {
         font-size: 1.5rem;
     }
 
-    .pokemon-info h3 {
+    .pokemon_info h3 {
         font-size: 1.25rem;
     }
 
-    .pokemon-info img {
+    .pokemon_info img {
         width: 150px;
     }
     
