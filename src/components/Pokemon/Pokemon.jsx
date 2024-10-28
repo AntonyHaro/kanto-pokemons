@@ -38,7 +38,8 @@ function Pokemon({ pokemon }) {
     return (
         <li
             style={{
-                backgroundImage: `linear-gradient(to bottom right, ${colors[primaryType]}, ${colors[secondaryType]})`,
+                backgroundColor: colors[primaryType],
+                // backgroundImage: `linear-gradient(to bottom right, ${colors[primaryType]}, ${colors[secondaryType]})`,
             }}
             onClick={handleClick}
             className={styles.pokemonCard}

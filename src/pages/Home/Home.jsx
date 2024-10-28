@@ -87,15 +87,13 @@ function Home() {
                     Kanto Pokémons <button id="theme-toggle"></button>
                 </h1>
                 <hr />
-
-                <Filters
-                    selectedType={selectedType}
-                    setSelectedType={setSelectedType}
-                    types={types}
-                    pokemons={pokemons}
-                />
             </header>
-
+            <Filters
+                selectedType={selectedType}
+                setSelectedType={setSelectedType}
+                types={types}
+                pokemons={pokemons}
+            />
             {loading ? (
                 <p id="loader">Carregando Pokémons...</p>
             ) : error ? (

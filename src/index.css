@@ -3,7 +3,7 @@
 :root {
     --body-bgc: white;
     --pokemon-name: hsl(204, 20%, 25%);
-    --pokemon-name-hover: hsl(205, 30%, 5%);
+    --pokemon-name-hover: hsl(205, 50%, 15%);
     --pokemon-type: hsl(212, 8%, 30%);
     --border: lightgray;
     --title: hsl(0, 78%, 55%);
