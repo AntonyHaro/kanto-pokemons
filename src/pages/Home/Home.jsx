@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import PokemonsList from "../../components/PokemonsList/PokemonsList";
-import colors from "../../constants/colors";
 import styles from "./Home.module.css";
 import Filters from "../../components/Filters/Filters";
 
@@ -49,7 +48,8 @@ function Home() {
 
             try {
                 const response = await fetch(url);
-                if (!response.ok) throw new Error("Erro ao buscar a lista de Pokémons");
+                if (!response.ok)
+                    throw new Error("Erro ao buscar a lista de Pokémons");
 
                 const data = await response.json();
                 const pokemonDetails = await Promise.all(
@@ -61,7 +61,9 @@ function Home() {
 
                 setPokemons(pokemonDetails);
             } catch (error) {
-                setError("Erro ao buscar Pokémons. Tente novamente mais tarde.");
+                setError(
+                    "Erro ao buscar Pokémons. Tente novamente mais tarde."
+                );
                 console.error("Erro ao buscar Pokémon:", error);
             } finally {
                 setLoading(false);
@@ -74,8 +76,8 @@ function Home() {
 
     const filteredPokemons = selectedType
         ? pokemons.filter((pokemon) =>
-            pokemon.types.some((type) => type.type.name === selectedType)
-        )
+              pokemon.types.some((type) => type.type.name === selectedType)
+          )
         : pokemons;
 
     return (
@@ -86,10 +88,10 @@ function Home() {
                 </h1>
                 <hr />
 
-                <Filters 
+                <Filters
                     selectedType={selectedType}
-                    setSelectedType={setSelectedType} 
-                    types={types} 
+                    setSelectedType={setSelectedType}
+                    types={types}
                     pokemons={pokemons}
                 />
             </header>
@@ -102,7 +104,6 @@ function Home() {
                 <PokemonsList pokemons={filteredPokemons} />
             )}
         </div>
-
     );
 }
 

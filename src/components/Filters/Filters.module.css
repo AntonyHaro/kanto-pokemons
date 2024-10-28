@@ -1,20 +1,25 @@
 .filter_container {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
     gap: 0.7rem;
 }
 
 .filter_container button {
+    background-color: transparent;
     padding: 0.5rem 1rem;
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 4px;
     color: var(--pokemon-name);
     cursor: pointer;
-    transition: .2s;
+    transition: 0.2s;
+}
+
+.filter_container button:hover {
+    transform: translateY(-0.2rem);
 }
 
 .filter_container button.active {
-    border: 1px solid var(--pokemon-name);
-    transform: scale(0.9) translateY(-0.2rem);
+    border-color: var(--pokemon-name);
+    transform: translateY(-0.2rem);
 }
