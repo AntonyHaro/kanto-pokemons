@@ -80,7 +80,7 @@ function Home() {
             : true;
         const matchesSearch = pokemon.name
             .toLowerCase()
-            .includes(searchTerm.toLowerCase());
+            .startsWith(searchTerm.toLowerCase());
 
         return matchesType && matchesSearch;
     });
