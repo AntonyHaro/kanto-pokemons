@@ -1,4 +1,3 @@
-import { FaSearch } from "react-icons/fa";
 import styles from "./SearchInput.module.css";
 
 function SearchInput({ searchTerm, setSearchTerm }) {
@@ -12,14 +11,11 @@ function SearchInput({ searchTerm, setSearchTerm }) {
                 type="text"
                 name="pokemon"
                 id="pokemon"
-                placeholder="Search Pokémon"
+                placeholder="Search Pokémon:"
                 autoComplete="off"
-                value={searchTerm} 
+                value={searchTerm}
                 onChange={handleInputChange}
             />
-            <button>
-                <FaSearch />
-            </button>
         </div>
     );
 }

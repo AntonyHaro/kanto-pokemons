@@ -9,14 +9,14 @@ function Header({ searchTerm, setSearchTerm }) {
                     Kanto Pokémons <button id="theme-toggle"></button>
                 </h1>
 
-                <SearchInput 
-                    searchTerm={searchTerm} 
-                    setSearchTerm={setSearchTerm} 
+                <SearchInput
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
                 />
             </div>
             <hr />
         </header>
-    )
+    );
 }
 
 export default Header;

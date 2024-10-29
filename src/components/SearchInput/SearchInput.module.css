@@ -1,15 +1,16 @@
 .search_input_container {
+    flex: 0.6;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 2px solid var(--border);
+    border: 1px solid var(--border);
     border-radius: 2rem;
     overflow: hidden;
 }
 
 .search_input_container input {
     background-color: transparent;
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     border: none;
     outline: none;
     font-size: 0.9em;
@@ -18,7 +19,7 @@
 
 .search_input_container button {
     margin-right: 1rem;
-    padding: .5rem;
+    padding: 0.5rem;
     border: none;
     background: transparent;
     font-size: 1em;
