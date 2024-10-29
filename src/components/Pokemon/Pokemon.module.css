@@ -1,4 +1,5 @@
 .pokemonCard {
+    /* max-width: 200px; */
     list-style: none;
     padding: 1rem;
     border: 1px solid var(--border);

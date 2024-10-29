@@ -8,10 +8,12 @@
 }
 
 .search_input_container input {
+    background-color: transparent;
     padding: .5rem 1rem;
     border: none;
     outline: none;
     font-size: 0.9em;
+    color: var(--pokemon-name);
 }
 
 .search_input_container button {

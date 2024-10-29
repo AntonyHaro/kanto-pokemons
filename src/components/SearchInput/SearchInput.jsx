@@ -13,6 +13,7 @@ function SearchInput({ searchTerm, setSearchTerm }) {
                 name="pokemon"
                 id="pokemon"
                 placeholder="Search Pokémon"
+                autoComplete="off"
                 value={searchTerm} 
                 onChange={handleInputChange}
             />
