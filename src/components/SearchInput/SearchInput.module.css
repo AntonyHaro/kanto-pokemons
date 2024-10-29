@@ -1,0 +1,25 @@
+.search_input_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid var(--border);
+    border-radius: 2rem;
+    overflow: hidden;
+}
+
+.search_input_container input {
+    padding: .5rem 1rem;
+    border: none;
+    outline: none;
+    font-size: 0.9em;
+}
+
+.search_input_container button {
+    margin-right: 1rem;
+    padding: .5rem;
+    border: none;
+    background: transparent;
+    font-size: 1em;
+    color: var(--pokemon-type);
+    cursor: pointer;
+}

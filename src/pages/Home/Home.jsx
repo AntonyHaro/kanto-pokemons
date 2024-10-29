@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import Header from "../../components/Header/Header";
+import Filters from "../../components/Filters/Filters";
 import PokemonsList from "../../components/PokemonsList/PokemonsList";
 import styles from "./Home.module.css";
-import Filters from "../../components/Filters/Filters";
 
 function Home() {
     const [pokemons, setPokemons] = useState([]);
@@ -9,6 +10,7 @@ function Home() {
     const [error, setError] = useState(null);
     const [types, setTypes] = useState([]);
     const [selectedType, setSelectedType] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
 
     const toggleTheme = (themeToggleButton) => {
         const isDarkMode = document.body.classList.toggle("dark-mode");
@@ -39,7 +41,7 @@ function Home() {
                 const data = await response.json();
                 setTypes(data.results);
             } catch (error) {
-                console.error("Erro ao buscar tipos:", error);
+                console.error("Error fetching types:", error);
             }
         };
 
@@ -49,7 +51,7 @@ function Home() {
             try {
                 const response = await fetch(url);
                 if (!response.ok)
-                    throw new Error("Erro ao buscar a lista de Pokémons");
+                    throw new Error("Failed to fetch Pokémon list");
 
                 const data = await response.json();
                 const pokemonDetails = await Promise.all(
@@ -61,10 +63,8 @@ function Home() {
 
                 setPokemons(pokemonDetails);
             } catch (error) {
-                setError(
-                    "Erro ao buscar Pokémons. Tente novamente mais tarde."
-                );
-                console.error("Erro ao buscar Pokémon:", error);
+                setError("Failed to fetch Pokémon. Please try again later.");
+                console.error("Error fetching Pokémon:", error);
             } finally {
                 setLoading(false);
             }
@@ -74,20 +74,23 @@ function Home() {
         fetchPokemons();
     }, []);
 
-    const filteredPokemons = selectedType
-        ? pokemons.filter((pokemon) =>
-              pokemon.types.some((type) => type.type.name === selectedType)
-          )
-        : pokemons;
+    const filteredPokemons = pokemons.filter((pokemon) => {
+        const matchesType = selectedType
+            ? pokemon.types.some((type) => type.type.name === selectedType)
+            : true;
+        const matchesSearch = pokemon.name
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase());
+
+        return matchesType && matchesSearch;
+    });
 
     return (
         <div className={styles.app_container}>
-            <header>
-                <h1>
-                    Kanto Pokémons <button id="theme-toggle"></button>
-                </h1>
-                <hr />
-            </header>
+            <Header 
+                searchTerm={searchTerm} 
+                setSearchTerm={setSearchTerm} 
+            />
             <Filters
                 selectedType={selectedType}
                 setSelectedType={setSelectedType}
@@ -95,7 +98,7 @@ function Home() {
                 pokemons={pokemons}
             />
             {loading ? (
-                <p id="loader">Carregando Pokémons...</p>
+                <p id="loader">Loading Pokémons...</p>
             ) : error ? (
                 <p id="error-message">{error}</p>
             ) : (

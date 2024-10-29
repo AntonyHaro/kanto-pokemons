@@ -17,7 +17,7 @@ function Pokemon({ pokemon }) {
                 .play()
                 .catch((err) => console.error("Playback failed:", err));
         } catch (error) {
-            console.error("Erro ao tocar áudio:", error);
+            console.error("Error playing audio:", error);
         }
     };
 

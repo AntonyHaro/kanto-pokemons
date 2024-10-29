@@ -14,15 +14,13 @@ function PokemonInfo() {
 
             try {
                 const response = await fetch(url);
-                if (!response.ok) throw new Error("Erro ao buscar o Pokémon");
+                if (!response.ok) throw new Error("Failed to fetch Pokémon");
 
                 const data = await response.json();
                 setPokemon(data);
             } catch (error) {
-                setError(
-                    "Erro ao buscar o Pokémon. Tente novamente mais tarde."
-                );
-                console.error("Erro ao buscar Pokémon:", error);
+                setError("Failed to fetch Pokémon. Please try again later.");
+                console.error("Error fetching Pokémon:", error);
             } finally {
                 setLoading(false);
             }
@@ -32,7 +30,7 @@ function PokemonInfo() {
     }, [id]);
 
     if (loading) {
-        return <p id="loader">Carregando Pokémon...</p>;
+        return <p id="loader">Loading Pokémon...</p>;
     }
 
     if (error) {
@@ -40,7 +38,7 @@ function PokemonInfo() {
     }
 
     if (!pokemon) {
-        return <p id="error-message">Nenhum Pokémon encontrado</p>;
+        return <p id="error-message">No Pokémon found</p>;
     }
 
     const capitalizeFirstLetter = (string) => {
@@ -50,8 +48,8 @@ function PokemonInfo() {
     return (
         <div className={styles.pokemon_info}>
             <div className={styles.buttons_container}>
-                <Link to="/">Voltar</Link>
-                <button>Adicionar ao time</button>
+                <Link to="/">Back</Link>
+                <button>Add to Team</button>
             </div>
 
             <h2>{capitalizeFirstLetter(pokemon.name)}</h2>
@@ -60,54 +58,52 @@ function PokemonInfo() {
                 alt={pokemon.name}
             />
 
-            <h3>Informações Gerais</h3>
+            <h3>General Information</h3>
             <p>
                 <strong>ID:</strong> {pokemon.id}
             </p>
             <p>
-                <strong>Altura:</strong> {pokemon.height / 10} m
+                <strong>Height:</strong> {pokemon.height / 10} m
             </p>
             <p>
-                <strong>Peso:</strong> {pokemon.weight / 10} kg
+                <strong>Weight:</strong> {pokemon.weight / 10} kg
             </p>
             <p>
-                <strong>Experiência Base:</strong> {pokemon.base_experience}
+                <strong>Base Experience:</strong> {pokemon.base_experience}
             </p>
 
-            <h3>Tipos</h3>
+            <h3>Types</h3>
             <p>
                 {pokemon.types
                     .map((type) => capitalizeFirstLetter(type.type.name))
                     .join(", ")}
             </p>
 
-            <h3>Habilidades</h3>
+            <h3>Abilities</h3>
             <ul>
                 {pokemon.abilities.map((ability) => (
                     <li key={ability.ability.name}>
                         {capitalizeFirstLetter(ability.ability.name)}{" "}
-                        {ability.is_hidden ? "(Oculta)" : ""}
+                        {ability.is_hidden ? "(Hidden)" : ""}
                     </li>
                 ))}
             </ul>
 
-            <h3>Estatísticas</h3>
-            <ul>
+            <h3>Stats</h3>
                 {pokemon.stats.map((stat) => (
-                    <li key={stat.stat.name}>
+                    <p key={stat.stat.name}>
                         <strong>
                             {capitalizeFirstLetter(stat.stat.name)}:
                         </strong>{" "}
                         {stat.base_stat}
-                    </li>
+                    </p>
                 ))}
-            </ul>
 
-            <h3>Movimentos</h3>
+            <h3>Moves</h3>
             <ul>
                 {pokemon.moves.slice(0, 10).map(
                     (
-                        move // Exibe os primeiros 10 movimentos
+                        move // Display the first 10 moves
                     ) => (
                         <li key={move.move.name}>
                             {capitalizeFirstLetter(move.move.name)}
@@ -116,7 +112,7 @@ function PokemonInfo() {
                 )}
             </ul>
 
-            <h3>Formas</h3>
+            <h3>Forms</h3>
             {pokemon.forms.length > 1 ? (
                 <ul>
                     {pokemon.forms.map((form) => (
@@ -147,7 +143,7 @@ function PokemonInfo() {
                 )}
             </div>
 
-            <h3>Jogo Original</h3>
+            <h3>Original Game</h3>
             <p>{capitalizeFirstLetter(pokemon.species.name)}</p>
         </div>
     );
