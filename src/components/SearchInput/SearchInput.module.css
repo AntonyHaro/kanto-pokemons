@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid var(--border);
+    border: 2px dashed var(--border);
     border-radius: 2rem;
     overflow: hidden;
 }
@@ -15,14 +15,4 @@
     outline: none;
     font-size: 0.9em;
     color: var(--pokemon-name);
-}
-
-.search_input_container button {
-    margin-right: 1rem;
-    padding: 0.5rem;
-    border: none;
-    background: transparent;
-    font-size: 1em;
-    color: var(--pokemon-type);
-    cursor: pointer;
 }

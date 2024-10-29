@@ -90,14 +90,12 @@ function PokemonInfo() {
             </ul>
 
             <h3>Stats</h3>
-                {pokemon.stats.map((stat) => (
-                    <p key={stat.stat.name}>
-                        <strong>
-                            {capitalizeFirstLetter(stat.stat.name)}:
-                        </strong>{" "}
-                        {stat.base_stat}
-                    </p>
-                ))}
+            {pokemon.stats.map((stat) => (
+                <p key={stat.stat.name}>
+                    <strong>{capitalizeFirstLetter(stat.stat.name)}:</strong>{" "}
+                    {stat.base_stat}
+                </p>
+            ))}
 
             <h3>Moves</h3>
             <ul>

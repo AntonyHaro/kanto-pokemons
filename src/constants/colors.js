@@ -17,6 +17,8 @@ const colors = {
     dark: "hsla(240, 20%, 20%, 0.5)",
     steel: "hsla(210, 20%, 70%, 0.5)",
     fairy: "hsla(330, 80%, 85%, 0.5)",
+    unknown: "hsla(0, 0%, 50%, 0.5)",
+    stellar: "hsla(240, 80%, 50%, 0.5)",
 };
 
 export default colors;

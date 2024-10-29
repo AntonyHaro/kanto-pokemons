@@ -19,13 +19,7 @@ function Filters({ selectedType, setSelectedType, types, pokemons }) {
             </button>
 
             {types.map((type) => {
-                const hasPokemonsOfType = pokemons.some((pokemon) =>
-                    pokemon.types.some(
-                        (pokemonType) => pokemonType.type.name === type.name
-                    )
-                );
-
-                return hasPokemonsOfType ? (
+                return (
                     <button
                         key={type.name}
                         onClick={() => setSelectedType(type.name)}
@@ -40,7 +34,7 @@ function Filters({ selectedType, setSelectedType, types, pokemons }) {
                     >
                         {capitalizeFirstLetter(type.name)}
                     </button>
-                ) : null;
+                );
             })}
         </div>
     );

@@ -5,7 +5,7 @@
     --pokemon-name: hsl(204, 20%, 25%);
     --pokemon-name-hover: hsl(205, 50%, 15%);
     --pokemon-type: hsl(212, 8%, 30%);
-    --border: lightgray;
+    --border: hsl(212, 5%, 75%);
     --title: hsl(0, 78%, 55%);
     --error-message: hsl(0, 100%, 76%);
 }
