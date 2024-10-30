@@ -1,4 +1,4 @@
-.header {
+header {
     width: 100%;
     display: grid;
     gap: 2rem;
@@ -54,7 +54,12 @@ input {
 }
 
 @media (max-width: 792px) {
+    header {
+        place-items: center;
+    }
+
     .flexContainer {
+        width: 100%;
         flex-direction: column;
         gap: 1rem;
     }
