@@ -1,41 +1,39 @@
 import colors from "../../constants/colors";
 import styles from "./Filters.module.css";
 
-function Filters({ selectedType, setSelectedType, types, pokemons }) {
+function Filters({ selectedTypes, handleTypeSelection, types }) {
     const capitalizeFirstLetter = (string) =>
         string.charAt(0).toUpperCase() + string.slice(1);
 
-    if (types.length === 0 || pokemons.length === 0) {
+    if (types.length === 0) {
         return null;
     }
 
     return (
         <div className={styles.filter_container}>
             <button
-                onClick={() => setSelectedType("")}
-                className={selectedType === "" ? styles.active : undefined}
+                onClick={() => handleTypeSelection("all")}
+                className={selectedTypes.length === 0 ? styles.active : undefined}
             >
                 All
             </button>
 
-            {types.map((type) => {
-                return (
-                    <button
-                        key={type.name}
-                        onClick={() => setSelectedType(type.name)}
-                        style={{
-                            backgroundColor: colors[type.name] || "lightgray",
-                        }}
-                        className={
-                            selectedType === type.name
-                                ? styles.active
-                                : undefined
-                        }
-                    >
-                        {capitalizeFirstLetter(type.name)}
-                    </button>
-                );
-            })}
+            {types.map((type) => (
+                <button
+                    key={type.name}
+                    onClick={() => handleTypeSelection(type.name)}
+                    style={{
+                        backgroundColor: colors[type.name] || "lightgray",
+                    }}
+                    className={
+                        selectedTypes.includes(type.name)
+                            ? styles.active
+                            : undefined
+                    }
+                >
+                    {capitalizeFirstLetter(type.name)}
+                </button>
+            ))}
         </div>
     );
 }
