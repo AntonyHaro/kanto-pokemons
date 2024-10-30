@@ -4,7 +4,7 @@
     gap: 2rem;
 }
 
-.flex_container {
+.flexContainer {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -12,7 +12,7 @@
     gap: 3rem;
 }
 
-.flex_container h1 {
+.flexContainer h1 {
     color: var(--title);
     transition: 0.2s;
     display: flex;
@@ -20,7 +20,7 @@
     gap: 1rem;
 }
 
-.flex_container h1 button {
+.flexContainer h1 button {
     background-color: var(--border);
     padding: 0.5rem;
     border-radius: 50%;
@@ -28,13 +28,13 @@
     transition: 0.2s;
 }
 
-.flex_container h1 button:hover {
+.flexContainer h1 button:hover {
     transform: translateY(-0.2rem);
     background-color: var(--pokemon-type);
     cursor: pointer;
 }
 
-.header hr {
+hr {
     height: 2px;
     width: 100%;
     border: 0;
@@ -51,4 +51,19 @@ input {
     outline: none;
     font-size: 0.9em;
     color: var(--pokemon-name);
+}
+
+@media (max-width: 792px) {
+    .flexContainer {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    hr {
+        width: 75%;
+    }
 }

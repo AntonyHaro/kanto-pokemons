@@ -7,7 +7,7 @@ function Header({ searchTerm, setSearchTerm }) {
 
     return (
         <header className={styles.header}>
-            <div className={styles.flex_container}>
+            <div className={styles.flexContainer}>
                 <h1>
                     Kanto Pokémons <button id="theme-toggle"></button>
                 </h1>
