@@ -40,3 +40,15 @@
     border: 0;
     background-color: var(--border);
 }
+
+input {
+    width: 40%;
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    border: 2px dashed var(--border);
+    border-radius: 2rem;
+    overflow: hidden;
+    outline: none;
+    font-size: 0.9em;
+    color: var(--pokemon-name);
+}

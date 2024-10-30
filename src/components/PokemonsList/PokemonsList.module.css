@@ -1,7 +1,11 @@
 #pokemonsContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 0.7rem;
+}
+
+.noPokemons {
+    color: gray;
 }
 
 @media (max-width: 576px) {

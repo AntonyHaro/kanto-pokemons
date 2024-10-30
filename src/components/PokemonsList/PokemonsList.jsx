@@ -7,7 +7,7 @@ function PokemonsList({ pokemons }) {
             {pokemons.map((pokemon) => (
                 <Pokemon key={pokemon.id} pokemon={pokemon} />
             ))}
-            {pokemons.length == 0 && <p>No Pokemon of this type were found</p>}
+            {pokemons.length == 0 && <p className={styles.noPokemons}>No Pokemon of this type were found</p>}
         </ul>
     );
 }

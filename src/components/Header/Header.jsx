@@ -1,7 +1,10 @@
-import SearchInput from "../SearchInput/SearchInput";
 import styles from "./Header.module.css";
 
 function Header({ searchTerm, setSearchTerm }) {
+    const handleInputChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
     return (
         <header className={styles.header}>
             <div className={styles.flex_container}>
@@ -9,9 +12,14 @@ function Header({ searchTerm, setSearchTerm }) {
                     Kanto Pokémons <button id="theme-toggle"></button>
                 </h1>
 
-                <SearchInput
-                    searchTerm={searchTerm}
-                    setSearchTerm={setSearchTerm}
+                <input
+                    type="text"
+                    name="pokemon"
+                    id="pokemon"
+                    placeholder="Search Pokémon:"
+                    autoComplete="off"
+                    value={searchTerm}
+                    onChange={handleInputChange}
                 />
             </div>
             <hr />
