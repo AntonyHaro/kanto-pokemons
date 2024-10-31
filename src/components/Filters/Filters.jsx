@@ -1,7 +1,7 @@
 import colors from "../../constants/colors";
 import styles from "./Filters.module.css";
 
-function Filters({ selectedTypes, handleTypeSelection, types }) {
+function Filters({ selectedTypes, handleTypeSelection, types, isFilterOpen }) {
     const capitalizeFirstLetter = (string) =>
         string.charAt(0).toUpperCase() + string.slice(1);
 
@@ -10,31 +10,35 @@ function Filters({ selectedTypes, handleTypeSelection, types }) {
     }
 
     return (
-        <div className={styles.filter_container}>
-            <button
-                onClick={() => handleTypeSelection("all")}
-                className={selectedTypes.length === 0 ? styles.active : undefined}
-            >
-                All
-            </button>
+        <>
+            {isFilterOpen && (
+                <div className={styles.filter_container}>
+                    <button
+                        onClick={() => handleTypeSelection("all")}
+                        className={selectedTypes.length === 0 ? styles.active : undefined}
+                    >
+                        All
+                    </button>
 
-            {types.map((type) => (
-                <button
-                    key={type.name}
-                    onClick={() => handleTypeSelection(type.name)}
-                    style={{
-                        backgroundColor: colors[type.name] || "lightgray",
-                    }}
-                    className={
-                        selectedTypes.includes(type.name)
-                            ? styles.active
-                            : undefined
-                    }
-                >
-                    {capitalizeFirstLetter(type.name)}
-                </button>
-            ))}
-        </div>
+                    {types.map((type) => (
+                        <button
+                            key={type.name}
+                            onClick={() => handleTypeSelection(type.name)}
+                            style={{
+                                backgroundColor: colors[type.name] || "lightgray",
+                            }}
+                            className={
+                                selectedTypes.includes(type.name)
+                                    ? styles.active
+                                    : undefined
+                            }
+                        >
+                            {capitalizeFirstLetter(type.name)}
+                        </button>
+                    ))}
+                </div>
+            )}
+        </>
     );
 }
 

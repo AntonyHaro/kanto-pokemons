@@ -11,6 +11,7 @@ function Home() {
     const [types, setTypes] = useState([]);
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const [isFilterOpen, setIsFilterOpen] = useState(true)
 
     const toggleTheme = (themeToggleButton) => {
         const isDarkMode = document.body.classList.toggle("dark-mode");
@@ -105,12 +106,15 @@ function Home() {
             <Header
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
+                isFilterOpen={isFilterOpen}
+                setIsFilterOpen={setIsFilterOpen}
             />
             <Filters
                 selectedTypes={selectedTypes}
                 handleTypeSelection={handleTypeSelection}
                 types={types}
                 pokemons={pokemons}
+                isFilterOpen={isFilterOpen}
             />
             {loading ? (
                 <p id="loader">Loading Pokémons...</p>

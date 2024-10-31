@@ -34,13 +34,6 @@ header {
     cursor: pointer;
 }
 
-hr {
-    height: 2px;
-    width: 100%;
-    border: 0;
-    background-color: var(--border);
-}
-
 input {
     width: 40%;
     background-color: transparent;
@@ -53,9 +46,35 @@ input {
     color: var(--pokemon-name);
 }
 
+.rowContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.rowContainer hr {
+    height: 2px;
+    width: 100%;
+    border: 0;
+    background-color: var(--border);
+}
+
+.filterBtn {
+    padding: 0.8rem;
+    border-radius: 50%;
+    border: none;
+    background: var(--title);
+    color: var(--body-bgc);
+    font-size: 1.2em;
+    display: none;
+    place-items: center;
+}
+
 @media (max-width: 792px) {
     header {
-        place-items: center;
+        width: 100%;
     }
 
     .flexContainer {
@@ -68,7 +87,11 @@ input {
         width: 100%;
     }
 
-    hr {
-        width: 75%;
+    .rowContainer {
+        padding: 0 1rem;
+    }
+
+    .filterBtn {
+        display: grid;
     }
 }

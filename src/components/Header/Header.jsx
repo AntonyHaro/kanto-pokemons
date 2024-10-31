@@ -1,6 +1,7 @@
+import { IoMdMenu, IoMdClose } from "react-icons/io";
 import styles from "./Header.module.css";
 
-function Header({ searchTerm, setSearchTerm }) {
+function Header({ searchTerm, setSearchTerm, isFilterOpen, setIsFilterOpen }) {
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
     };
@@ -22,7 +23,18 @@ function Header({ searchTerm, setSearchTerm }) {
                     onChange={handleInputChange}
                 />
             </div>
-            <hr />
+
+            <div className={styles.rowContainer}>
+                <hr />
+
+                <button className={styles.filterBtn} onClick={() => setIsFilterOpen(!isFilterOpen)}>
+                    {isFilterOpen ? (
+                        <IoMdClose />
+                    ) : (
+                        <IoMdMenu />
+                    )}
+                </button>
+            </div>
         </header>
     );
 }

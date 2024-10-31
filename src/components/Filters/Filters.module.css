@@ -23,3 +23,10 @@
     border-color: var(--pokemon-name);
     transform: translateY(-0.2rem);
 }
+
+@media (max-width: 792px) {
+    .filter_container {
+        display: flex;
+        flex-direction: column;
+    }
+}

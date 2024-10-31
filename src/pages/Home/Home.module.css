@@ -21,11 +21,4 @@
     body {
         font-size: 15px;
     }
-
-    header {
-        width: 100%;
-        justify-content: center;
-        place-items: center;
-        text-align: center;
-    }
 }
