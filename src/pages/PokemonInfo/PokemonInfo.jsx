@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import colors from "../../constants/colors";
 import styles from "./PokemonInfo.module.css";
 
 function PokemonInfo() {
@@ -47,83 +48,21 @@ function PokemonInfo() {
 
     return (
         <div className={styles.pokemon_info}>
-            <div className={styles.buttons_container}>
-                <Link to="/">Back</Link>
-                <button>Add to Team</button>
-            </div>
-
-            <h2>{capitalizeFirstLetter(pokemon.name)}</h2>
-            <img
-                src={pokemon.sprites.other["official-artwork"].front_default}
-                alt={pokemon.name}
-            />
-
-            <h3>General Information</h3>
-            <p>
-                <strong>ID:</strong> {pokemon.id}
-            </p>
-            <p>
-                <strong>Height:</strong> {pokemon.height / 10} m
-            </p>
-            <p>
-                <strong>Weight:</strong> {pokemon.weight / 10} kg
-            </p>
-            <p>
-                <strong>Base Experience:</strong> {pokemon.base_experience}
-            </p>
-
-            <h3>Types</h3>
-            <p>
-                {pokemon.types
-                    .map((type) => capitalizeFirstLetter(type.type.name))
-                    .join(", ")}
-            </p>
-
-            <h3>Abilities</h3>
-            <ul>
-                {pokemon.abilities.map((ability) => (
-                    <li key={ability.ability.name}>
-                        {capitalizeFirstLetter(ability.ability.name)}{" "}
-                        {ability.is_hidden ? "(Hidden)" : ""}
-                    </li>
-                ))}
-            </ul>
-
-            <h3>Stats</h3>
-            {pokemon.stats.map((stat) => (
-                <p key={stat.stat.name}>
-                    <strong>{capitalizeFirstLetter(stat.stat.name)}:</strong>{" "}
-                    {stat.base_stat}
-                </p>
-            ))}
-
-            <h3>Moves</h3>
-            <ul>
-                {pokemon.moves.slice(0, 10).map(
-                    (
-                        move // Display the first 10 moves
-                    ) => (
-                        <li key={move.move.name}>
-                            {capitalizeFirstLetter(move.move.name)}
-                        </li>
-                    )
-                )}
-            </ul>
-
-            <h3>Forms</h3>
-            {pokemon.forms.length > 1 ? (
-                <ul>
-                    {pokemon.forms.map((form) => (
-                        <li key={form.name}>
-                            {capitalizeFirstLetter(form.name)}
-                        </li>
+            <header>
+                <h1>{capitalizeFirstLetter(pokemon.name)}</h1>
+                <div className={styles.typesContainer}>
+                    {pokemon.types.map((type, index) => (
+                        <p
+                            key={index}
+                            className={styles.type}
+                            style={{ backgroundColor: colors[type.type.name] }}
+                        >
+                            {capitalizeFirstLetter(type.type.name)}
+                        </p>
                     ))}
-                </ul>
-            ) : (
-                <p>{capitalizeFirstLetter(pokemon.forms[0].name)}</p>
-            )}
+                </div>
+            </header>
 
-            <h3>Sprites</h3>
             <div className={styles.sprites}>
                 <img src={pokemon.sprites.front_default} alt="Front Default" />
                 <img src={pokemon.sprites.back_default} alt="Back Default" />
@@ -139,10 +78,80 @@ function PokemonInfo() {
                         />
                     </>
                 )}
-            </div>
+            </div> 
+            
+            <section className={styles.generalInfo}>
+                <div className={styles.info}>
+                    <h2>General Information</h2>
+                    <p>
+                        <strong>ID:</strong> {pokemon.id}
+                    </p>
+                    <p>
+                        <strong>Height:</strong> {pokemon.height / 10} m
+                    </p>
+                    <p>
+                        <strong>Weight:</strong> {pokemon.weight / 10} kg
+                    </p>
+                    <p>
+                        <strong>Base Experience:</strong>{" "}
+                        {pokemon.base_experience}
+                    </p>
+                </div>
+            </section>
 
-            <h3>Original Game</h3>
-            <p>{capitalizeFirstLetter(pokemon.species.name)}</p>
+            <section>
+                <h2>Abilities</h2>
+                <ul>
+                    {pokemon.abilities.map((ability) => (
+                        <li key={ability.ability.name}>
+                            {capitalizeFirstLetter(ability.ability.name)}{" "}
+                            {ability.is_hidden ? "(Hidden)" : ""}
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            <section>
+                <h2>Stats</h2>
+                {pokemon.stats.map((stat) => (
+                    <p key={stat.stat.name}>
+                        <strong>
+                            {capitalizeFirstLetter(stat.stat.name)}:
+                        </strong>{" "}
+                        {stat.base_stat}
+                    </p>
+                ))}
+            </section>
+
+            <section>
+                <h2>Moves</h2>
+                <ul>
+                    {pokemon.moves.slice(0, 10).map(
+                        (
+                            move // Display the first 10 moves
+                        ) => (
+                            <li key={move.move.name}>
+                                {capitalizeFirstLetter(move.move.name)}
+                            </li>
+                        )
+                    )}
+                </ul>
+            </section>
+
+            <section>
+                <h2>Forms</h2>
+                {pokemon.forms.length > 1 ? (
+                    <ul>
+                        {pokemon.forms.map((form) => (
+                            <li key={form.name}>
+                                {capitalizeFirstLetter(form.name)}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>{capitalizeFirstLetter(pokemon.forms[0].name)}</p>
+                )}
+            </section>
         </div>
     );
 }

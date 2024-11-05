@@ -11,7 +11,7 @@ function Home() {
     const [types, setTypes] = useState([]);
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
-    const [isFilterOpen, setIsFilterOpen] = useState(true)
+    const [isFilterOpen, setIsFilterOpen] = useState(true);
 
     const toggleTheme = (themeToggleButton) => {
         const isDarkMode = document.body.classList.toggle("dark-mode");
@@ -51,7 +51,8 @@ function Home() {
 
             try {
                 const response = await fetch(url);
-                if (!response.ok) throw new Error("Failed to fetch Pokémon list");
+                if (!response.ok)
+                    throw new Error("Failed to fetch Pokémon list");
 
                 const data = await response.json();
                 const pokemonDetails = await Promise.all(
@@ -74,32 +75,34 @@ function Home() {
         fetchPokemons();
     }, []);
 
-    // Função que alterna a seleção de um tipo de Pokémon 
+    // Função que alterna a seleção de um tipo de Pokémon
     const handleTypeSelection = (type) => {
-        setSelectedTypes((prevTypes) =>
-            // Verifica se o tipo já está na lista de tipos selecionados
-            prevTypes.includes(type)
-                ? prevTypes.filter((t) => t !== type) // Se já estiver na lista, remove o tipo filtrando o array para não incluí-lo
-                : [...prevTypes, type] // Se não estiver na lista, adiciona o tipo ao final do array
+        setSelectedTypes(
+            (prevTypes) =>
+                // Verifica se o tipo já está na lista de tipos selecionados
+                prevTypes.includes(type)
+                    ? prevTypes.filter((t) => t !== type) // Se já estiver na lista, remove o tipo filtrando o array para não incluí-lo
+                    : [...prevTypes, type] // Se não estiver na lista, adiciona o tipo ao final do array
         );
     };
-
 
     // Filtra a lista de Pokémon com base nos tipos selecionados e no termo de busca
     const filteredPokemons = pokemons.filter((pokemon) => {
         const matchesTypes = selectedTypes.length // Checa se há tipos selecionados
-            ? selectedTypes.every((type) => // Se há tipos selecionados, verifica se todos estão presentes nos tipos do Pokémon
-                pokemon.types.some((pokemonType) => pokemonType.type.name === type) // Verifica se a lista de tipos do Pokémon atual coincide com `type`
-            )
+            ? // fitra o pokemon caso tenha pelo menos UM dos tiops já selecionados
+              selectedTypes.some((type) =>
+                  pokemon.types.some(
+                      (pokemonType) => pokemonType.type.name === type
+                  )
+              )
             : true; // Se nenhum tipo foi selecionado, aceita todos os Pokémon
 
         const matchesSearch = pokemon.name
-            .toLowerCase() // Transforma o nome em letras minúsculas para comparação
-            .startsWith(searchTerm.toLowerCase()); // Compara o início do nome com o termo de busca, também em minúsculas
+            .toLowerCase()
+            .startsWith(searchTerm.toLowerCase());
 
         return matchesTypes && matchesSearch;
     });
-
 
     return (
         <div className={styles.app_container}>

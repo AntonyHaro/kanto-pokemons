@@ -25,14 +25,11 @@ function Header({ searchTerm, setSearchTerm, isFilterOpen, setIsFilterOpen }) {
             </div>
 
             <div className={styles.rowContainer}>
-                <hr />
-
-                <button className={styles.filterBtn} onClick={() => setIsFilterOpen(!isFilterOpen)}>
-                    {isFilterOpen ? (
-                        <IoMdClose />
-                    ) : (
-                        <IoMdMenu />
-                    )}
+                <button
+                    className={styles.filterBtn}
+                    onClick={() => setIsFilterOpen(!isFilterOpen)}
+                >
+                    {isFilterOpen ? <IoMdClose /> : <IoMdMenu />}
                 </button>
             </div>
         </header>

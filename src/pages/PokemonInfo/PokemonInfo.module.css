@@ -1,69 +1,64 @@
 .pokemon_info {
-    border: 2px solid var(--border);
-    border-radius: 12px;
     padding: 2rem;
-    width: 80%;
-    margin: 0 auto;
-    transition: background-color 0.2s, border-color 0.2s;
-}
-
-.buttons_container {
+    transition: 0.2s;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
+    flex-direction: column;
+    gap: 2rem;
 }
 
-.buttons_container a,
-.buttons_container button {
-    background-color: var(--title); 
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.buttons_container a {
+.pokemon_info header {
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.buttons_container button {
-    background-color: var(--pokemon-type); 
-}
-
-.pokemon_info h2 {
-    color: var(--pokemon-name);
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 1rem;
-    transition: color 0.2s;
-}
-
-.pokemon_info h2:hover {
-    color: var(--pokemon-name-hover);
-}
-
-.pokemon_info img {
-    display: block;
-    margin: 0 auto 1.5rem auto;
-    width: 200px;
-    height: auto;
+section {
+    border: 1px dashed lightgray;
+    padding: 1.7rem;
+    border-radius: 4px;
+    display: grid;
+    gap: 1.7rem;
 }
 
 .pokemon_info h3 {
-    color: var(--title);
-    font-size: 1.5rem;
+    color: var(--pokemon-name);
+    font-size: 1.4rem;
     margin-bottom: 0.5rem;
     border-bottom: 2px solid var(--border);
     padding-bottom: 0.5rem;
 }
 
-.pokemon_info p,
+.typesContainer {
+    display: flex;
+    gap: 0.7rem;
+}
+
+.typesContainer .type {
+    padding: 0.7rem;
+    border-radius: 3px;
+}
+
+.generalInfo {
+    flex: 1;
+}
+
+.generalInfo .info {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sprites {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0;
+}
+
+.sprites img {
+    width: 160px;
+    height: auto;
+}
+
 .pokemon_info ul {
     color: var(--pokemon-type);
     margin: 0.5rem 0 1rem 0;
@@ -79,16 +74,7 @@
     margin-left: 1rem;
 }
 
-.sprites {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 1.5rem;
-}
 
-.sprites img {
-    width: 80px;
-    height: auto;
-}
 
 @media (max-width: 768px) {
     .pokemon_info {
@@ -107,7 +93,7 @@
         width: 150px;
     }
     
-    .sprites img {
+    .mainCard .sprites img {
         width: 60px;
     }
 }
