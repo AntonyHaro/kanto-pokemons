@@ -8,6 +8,9 @@ function PokemonInfo() {
     const [pokemon, setPokemon] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [pokemonMoves, setPokemonMoves] = useState(null);
+    const [loadingMoves, setLoadingMoves] = useState(true);
+    const [errorMoves, setErrorMoves] = useState(null);
 
     const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -27,6 +30,7 @@ function PokemonInfo() {
     ];
 
     useEffect(() => {
+        // Função para buscar os detalhes do Pokémon
         const fetchPokemon = async () => {
             const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
 
@@ -47,6 +51,43 @@ function PokemonInfo() {
         fetchPokemon();
     }, [id]);
 
+    useEffect(() => {
+        if (pokemon) {
+            const fetchMoves = async () => {
+                try {
+                    const moveDetails = await Promise.all(
+                        pokemon.moves.map(async (move) => {
+                            const moveResponse = await fetch(move.move.url);
+                            if (!moveResponse.ok)
+                                throw new Error(
+                                    `Failed to fetch move details for ${move.move.name}`
+                                );
+                            const moveData = await moveResponse.json();
+                            return {
+                                name: move.move.name,
+                                power: moveData.power,
+                                accuracy: moveData.accuracy,
+                                type: moveData.type.name,
+                                pp: moveData.pp,
+                            };
+                        })
+                    );
+
+                    setPokemonMoves(moveDetails);
+                } catch (error) {
+                    setErrorMoves(
+                        "Failed to fetch move details. Please try again later."
+                    );
+                    console.error("Error fetching move details:", error);
+                } finally {
+                    setLoadingMoves(false);
+                }
+            };
+
+            fetchMoves();
+        }
+    }, [pokemon]); // O useEffect só será chamado quando o estado `pokemon` estiver disponível.
+
     if (loading) {
         return <p id="loader">Loading Pokémon...</p>;
     }
@@ -58,8 +99,6 @@ function PokemonInfo() {
     if (!pokemon) {
         return <p id="error-message">No Pokémon found</p>;
     }
-
-    console.log(pokemon.stats);
 
     return (
         <div className={styles.pokemon_info}>
@@ -88,7 +127,6 @@ function PokemonInfo() {
             </header>
 
             <section className={styles.generalInfo}>
-                {/* <h2>General Information</h2> */}
                 <div className={styles.infoContainer}>
                     <p className={styles.info}>
                         <strong>ID:</strong> {pokemon.id}
@@ -160,7 +198,6 @@ function PokemonInfo() {
                 <ul className={styles.abilitiesContainer}>
                     {pokemon.abilities.map((ability) => (
                         <li key={ability.ability.name}>
-                            {/* {console.log(ability.ability)} */}
                             {capitalizeFirstLetter(ability.ability.name)}{" "}
                             {ability.is_hidden ? "(Hidden)" : ""}
                         </li>
@@ -168,15 +205,38 @@ function PokemonInfo() {
                 </ul>
             </section>
 
+            {/* Detalhes dos Movimentos */}
             <section className={styles.movesSection}>
                 <h2>Moves</h2>
                 <ul className={styles.movesContainer}>
-                    {pokemon.moves.map((move) => (
-                        <li key={move.move.name}>
-                            {/* {console.log(move.move.url)} */}
-                            {capitalizeFirstLetter(move.move.name)}
-                        </li>
-                    ))}
+                    {loadingMoves ? (
+                        <p>Loading moves...</p>
+                    ) : errorMoves ? (
+                        <p>{errorMoves}</p>
+                    ) : (
+                        pokemonMoves &&
+                        pokemonMoves.map((move, index) => (
+                            <li key={index}>
+                                <p>
+                                    <strong
+                                        style={{
+                                            backgroundColor: colors[move.type],
+                                        }}
+                                    >
+                                        {capitalizeFirstLetter(move.name)}
+                                    </strong>
+                                </p>
+
+                                <p>Type: {capitalizeFirstLetter(move.type)}</p>
+                                <p>Power: {move.power ? move.power : "N/A"}</p>
+                                <p>
+                                    Accuracy:{" "}
+                                    {move.accuracy ? move.accuracy : "N/A"}
+                                </p>
+                                <p>PP: {move.pp}</p>
+                            </li>
+                        ))
+                    )}
                 </ul>
             </section>
         </div>
