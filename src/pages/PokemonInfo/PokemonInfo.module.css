@@ -7,7 +7,13 @@
     transition: 0.2s;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 3rem;
+}
+
+.pokemon_info header {
+    display: grid;
+    gap: 0.7rem;
+    /* margin-bottom: 1%; */
 }
 
 .backButton {
@@ -20,15 +26,14 @@
     text-decoration: underline;
 }
 
-.pokemon_info header {
+.pokemon_info .pokemonHeader {
     display: flex;
     align-items: center;
-    gap: 3rem;
-    margin-bottom: 1%;
+    gap: 2rem;
 }
 
 .pokemon_info header h1 {
-    font-size: 3em;
+    font-size: 3.5em;
 }
 
 .typesContainer {
@@ -54,6 +59,20 @@ section {
     padding-bottom: 0.5rem;
 }
 
+.infoContainer {
+    display: flex;
+    gap: 0.7rem;
+}
+
+.generalInfo .info {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: hsl(210, 20%, 90%);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .sprites {
     display: flex;
     justify-content: space-between;
@@ -75,58 +94,31 @@ section {
 .dualSection {
     display: flex;
     justify-content: space-between;
-    /* align-items: flex-start; */
 }
 
-.generalInfo {
-    flex: 1;
-    border: 1px dashed var(--border-color);
-    padding: 1.5rem;
-    border-radius: 4px;
-}
-
-.infoContainer {
-    display: grid;
-    gap: 0.7rem;
-}
-
-.generalInfo .info {
-    padding: 0.7rem;
-    background-color: hsl(210, 30%, 95%);
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.statsContainer {
-    flex: 1;
-    border: 1px dashed var(--border-color);
-    padding: 1.5rem;
-    border-radius: 4px;
-}
+/* .statsContainer {
+} */
 
 .statsContainer .flexContainer {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
     gap: 0.7rem;
 }
 
 .statsContainer .stats {
-    min-width: 10rem;
+    min-width: 9rem;
     padding: 1rem;
     border-radius: 4px;
     border: 1px solid transparent;
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    display: grid;
+    gap: 0.6rem;
     text-align: center;
     transition: 0.2s;
 }
 
 .statsContainer .stats:hover {
     transform: translateY(-0.2rem);
-    border-color: var(--pokemon-name);
+    border-color: hsla(0, 0%, 0%, 0.6);
 }
 
 .statsContainer .stats .statName {
@@ -138,6 +130,22 @@ section {
     font-weight: bold;
     color: hsla(207, 9%, 19%, 0.75);
 }
+
+.statsContainer .stats .statBarContainer {
+    height: 5px;
+    width: 100%;
+    background-color: hsla(0, 0%, 0%, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.statsContainer .stats .statBar {
+    height: 100%;
+    background-color: hsla(0, 0%, 0%, 0.6);
+}
+
+/* .generalInfo {
+} */
 
 .abilitiesContainer {
     display: flex;

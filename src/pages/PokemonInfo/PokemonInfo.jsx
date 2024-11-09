@@ -9,6 +9,23 @@ function PokemonInfo() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+
+    const calculateStatBar = (stat, maxStat) => {
+        return (stat / maxStat) * 100;
+    };
+
+    const maxStats = [
+        255, // HP
+        190, // Attack
+        250, // Defense
+        194, // Special Attack
+        250, // Special Defense
+        200, // Speed
+    ];
+
     useEffect(() => {
         const fetchPokemon = async () => {
             const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -42,31 +59,52 @@ function PokemonInfo() {
         return <p id="error-message">No Pokémon found</p>;
     }
 
-    const capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
+    console.log(pokemon.stats);
 
     return (
         <div className={styles.pokemon_info}>
-            <Link to="/" className={styles.backButton}>
-                {">"} Back to Home
-            </Link>
             <header>
-                <h1 style={{ color: colors[pokemon.types[0].type.name] }}>
-                    {capitalizeFirstLetter(pokemon.name)}, #{pokemon.id}
-                </h1>
-                <div className={styles.typesContainer}>
-                    {pokemon.types.map((type, index) => (
-                        <p
-                            key={index}
-                            className={styles.type}
-                            style={{ backgroundColor: colors[type.type.name] }}
-                        >
-                            {capitalizeFirstLetter(type.type.name)}
-                        </p>
-                    ))}
+                <Link to="/" className={styles.backButton}>
+                    {">"} Back to Home
+                </Link>
+                <div className={styles.pokemonHeader}>
+                    <h1 style={{ color: colors[pokemon.types[0].type.name] }}>
+                        {capitalizeFirstLetter(pokemon.name)}, #{pokemon.id}
+                    </h1>
+                    <div className={styles.typesContainer}>
+                        {pokemon.types.map((type, index) => (
+                            <p
+                                key={index}
+                                className={styles.type}
+                                style={{
+                                    backgroundColor: colors[type.type.name],
+                                }}
+                            >
+                                {capitalizeFirstLetter(type.type.name)}
+                            </p>
+                        ))}
+                    </div>
                 </div>
             </header>
+
+            <section className={styles.generalInfo}>
+                {/* <h2>General Information</h2> */}
+                <div className={styles.infoContainer}>
+                    <p className={styles.info}>
+                        <strong>ID:</strong> {pokemon.id}
+                    </p>
+                    <p className={styles.info}>
+                        <strong>Height:</strong> {pokemon.height / 10} m
+                    </p>
+                    <p className={styles.info}>
+                        <strong>Weight:</strong> {pokemon.weight / 10} kg
+                    </p>
+                    <p className={styles.info}>
+                        <strong>Base Experience:</strong>{" "}
+                        {pokemon.base_experience}
+                    </p>
+                </div>
+            </section>
 
             <div className={styles.sprites}>
                 <img src={pokemon.sprites.front_default} alt="Front Default" />
@@ -85,48 +123,36 @@ function PokemonInfo() {
                 )}
             </div>
 
-            <section className={styles.dualSection}>
-                <section className={styles.generalInfo}>
-                    <h2>General Information</h2>
-                    <div className={styles.infoContainer}>
-                        <p className={styles.info}>
-                            <strong>ID:</strong> {pokemon.id}
-                        </p>
-                        <p className={styles.info}>
-                            <strong>Height:</strong> {pokemon.height / 10} m
-                        </p>
-                        <p className={styles.info}>
-                            <strong>Weight:</strong> {pokemon.weight / 10} kg
-                        </p>
-                        <p className={styles.info}>
-                            <strong>Base Experience:</strong>{" "}
-                            {pokemon.base_experience}
-                        </p>
-                    </div>
-                </section>
-
-                <section className={styles.statsContainer}>
-                    <h2>Stats</h2>
-                    <div className={styles.flexContainer}>
-                        {pokemon.stats.map((stat) => (
-                            <div
-                                key={stat.stat.name}
-                                className={styles.stats}
-                                style={{
-                                    backgroundColor:
-                                        colors[pokemon.types[0].type.name],
-                                }}
-                            >
-                                <p className={styles.statName}>
-                                    {capitalizeFirstLetter(stat.stat.name)}:
-                                </p>
-                                <p className={styles.statInfo}>
-                                    {stat.base_stat}
-                                </p>
+            <section className={styles.statsContainer}>
+                <h2>Stats</h2>
+                <div className={styles.flexContainer}>
+                    {pokemon.stats.map((stat, index) => (
+                        <div
+                            key={stat.stat.name}
+                            className={styles.stats}
+                            style={{
+                                backgroundColor:
+                                    colors[pokemon.types[0].type.name],
+                            }}
+                        >
+                            <p className={styles.statName}>
+                                {capitalizeFirstLetter(stat.stat.name)}:
+                            </p>
+                            <p className={styles.statInfo}>{stat.base_stat}</p>
+                            <div className={styles.statBarContainer}>
+                                <div
+                                    className={styles.statBar}
+                                    style={{
+                                        width: `${calculateStatBar(
+                                            stat.base_stat,
+                                            maxStats[index]
+                                        )}%`,
+                                    }}
+                                ></div>
                             </div>
-                        ))}
-                    </div>
-                </section>
+                        </div>
+                    ))}
+                </div>
             </section>
 
             <section>
@@ -134,7 +160,7 @@ function PokemonInfo() {
                 <ul className={styles.abilitiesContainer}>
                     {pokemon.abilities.map((ability) => (
                         <li key={ability.ability.name}>
-                            {console.log(ability.ability)}
+                            {/* {console.log(ability.ability)} */}
                             {capitalizeFirstLetter(ability.ability.name)}{" "}
                             {ability.is_hidden ? "(Hidden)" : ""}
                         </li>
@@ -147,7 +173,7 @@ function PokemonInfo() {
                 <ul className={styles.movesContainer}>
                     {pokemon.moves.map((move) => (
                         <li key={move.move.name}>
-                            {console.log(move.move.url)}
+                            {/* {console.log(move.move.url)} */}
                             {capitalizeFirstLetter(move.move.name)}
                         </li>
                     ))}
