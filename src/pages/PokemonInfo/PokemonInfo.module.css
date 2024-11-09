@@ -1,3 +1,7 @@
+:root {
+    --border-color: lightgray;
+}
+
 .pokemon_info {
     padding: 2rem;
     transition: 0.2s;
@@ -6,24 +10,25 @@
     gap: 2rem;
 }
 
+.backButton {
+    text-decoration: none;
+    color: hsl(210, 10%, 60%);
+    border-radius: 5px;
+}
+
+.backButton:hover {
+    text-decoration: underline;
+}
+
 .pokemon_info header {
     display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 1%;
 }
 
-section {
-    border: 1px dashed lightgray;
-    padding: 1.7rem;
-    border-radius: 4px;
-    display: grid;
-    gap: 1.7rem;
-}
-
-.pokemon_info h3 {
-    color: var(--pokemon-name);
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-    border-bottom: 2px solid var(--border);
-    padding-bottom: 0.5rem;
+.pokemon_info header h1 {
+    font-size: 3em;
 }
 
 .typesContainer {
@@ -32,19 +37,21 @@ section {
 }
 
 .typesContainer .type {
-    padding: 0.7rem;
+    padding: 0.4rem;
     border-radius: 3px;
 }
 
-.generalInfo {
-    flex: 1;
+section {
+    display: grid;
+    gap: 1.3rem;
 }
 
-.generalInfo .info {
-    /* background-color: red; */
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+.pokemon_info h3 {
+    color: var(--pokemon-name);
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.5rem;
 }
 
 .sprites {
@@ -65,16 +72,97 @@ section {
     line-height: 1.5;
 }
 
-.pokemon_info ul {
-    list-style: disc;
-    padding: 0;
+.dualSection {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: flex-start; */
 }
 
-.pokemon_info li {
-    margin-left: 1rem;
+.generalInfo {
+    flex: 1;
+    border: 1px dashed var(--border-color);
+    padding: 1.5rem;
+    border-radius: 4px;
 }
 
+.infoContainer {
+    display: grid;
+    gap: 0.7rem;
+}
 
+.generalInfo .info {
+    padding: 0.7rem;
+    background-color: hsl(210, 30%, 95%);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.statsContainer {
+    flex: 1;
+    border: 1px dashed var(--border-color);
+    padding: 1.5rem;
+    border-radius: 4px;
+}
+
+.statsContainer .flexContainer {
+    display: flex;
+    gap: 0.7rem;
+}
+
+.statsContainer .stats {
+    min-width: 10rem;
+    padding: 1rem;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.statsContainer .stats:hover {
+    transform: translateY(-0.2rem);
+    border-color: var(--pokemon-name);
+}
+
+.statsContainer .stats .statName {
+    color: hsla(0, 0%, 0%, 0.6);
+}
+
+.statsContainer .stats .statInfo {
+    font-size: 4em;
+    font-weight: bold;
+    color: hsla(207, 9%, 19%, 0.75);
+}
+
+.abilitiesContainer {
+    display: flex;
+    gap: 0.7rem;
+}
+
+.abilitiesContainer li {
+    list-style: none;
+    padding: 1rem;
+    border-radius: 4px;
+    background-color: hsl(210, 20%, 90%);
+}
+
+.movesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.7rem;
+}
+
+.movesContainer li {
+    list-style: none;
+    padding: 1rem;
+    border: 2px dashed hsl(210, 20%, 95%);
+    border-radius: 3px;
+}
 
 @media (max-width: 768px) {
     .pokemon_info {
@@ -92,7 +180,7 @@ section {
     .pokemon_info img {
         width: 150px;
     }
-    
+
     .mainCard .sprites img {
         width: 60px;
     }

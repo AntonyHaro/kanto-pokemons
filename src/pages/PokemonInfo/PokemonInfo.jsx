@@ -48,8 +48,13 @@ function PokemonInfo() {
 
     return (
         <div className={styles.pokemon_info}>
+            <Link to="/" className={styles.backButton}>
+                {">"} Back to Home
+            </Link>
             <header>
-                <h1>{capitalizeFirstLetter(pokemon.name)}</h1>
+                <h1 style={{ color: colors[pokemon.types[0].type.name] }}>
+                    {capitalizeFirstLetter(pokemon.name)}, #{pokemon.id}
+                </h1>
                 <div className={styles.typesContainer}>
                     {pokemon.types.map((type, index) => (
                         <p
@@ -78,32 +83,58 @@ function PokemonInfo() {
                         />
                     </>
                 )}
-            </div> 
-            
-            <section className={styles.generalInfo}>
-                <div className={styles.info}>
+            </div>
+
+            <section className={styles.dualSection}>
+                <section className={styles.generalInfo}>
                     <h2>General Information</h2>
-                    <p>
-                        <strong>ID:</strong> {pokemon.id}
-                    </p>
-                    <p>
-                        <strong>Height:</strong> {pokemon.height / 10} m
-                    </p>
-                    <p>
-                        <strong>Weight:</strong> {pokemon.weight / 10} kg
-                    </p>
-                    <p>
-                        <strong>Base Experience:</strong>{" "}
-                        {pokemon.base_experience}
-                    </p>
-                </div>
+                    <div className={styles.infoContainer}>
+                        <p className={styles.info}>
+                            <strong>ID:</strong> {pokemon.id}
+                        </p>
+                        <p className={styles.info}>
+                            <strong>Height:</strong> {pokemon.height / 10} m
+                        </p>
+                        <p className={styles.info}>
+                            <strong>Weight:</strong> {pokemon.weight / 10} kg
+                        </p>
+                        <p className={styles.info}>
+                            <strong>Base Experience:</strong>{" "}
+                            {pokemon.base_experience}
+                        </p>
+                    </div>
+                </section>
+
+                <section className={styles.statsContainer}>
+                    <h2>Stats</h2>
+                    <div className={styles.flexContainer}>
+                        {pokemon.stats.map((stat) => (
+                            <div
+                                key={stat.stat.name}
+                                className={styles.stats}
+                                style={{
+                                    backgroundColor:
+                                        colors[pokemon.types[0].type.name],
+                                }}
+                            >
+                                <p className={styles.statName}>
+                                    {capitalizeFirstLetter(stat.stat.name)}:
+                                </p>
+                                <p className={styles.statInfo}>
+                                    {stat.base_stat}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
             </section>
 
             <section>
                 <h2>Abilities</h2>
-                <ul>
+                <ul className={styles.abilitiesContainer}>
                     {pokemon.abilities.map((ability) => (
                         <li key={ability.ability.name}>
+                            {console.log(ability.ability)}
                             {capitalizeFirstLetter(ability.ability.name)}{" "}
                             {ability.is_hidden ? "(Hidden)" : ""}
                         </li>
@@ -111,46 +142,16 @@ function PokemonInfo() {
                 </ul>
             </section>
 
-            <section>
-                <h2>Stats</h2>
-                {pokemon.stats.map((stat) => (
-                    <p key={stat.stat.name}>
-                        <strong>
-                            {capitalizeFirstLetter(stat.stat.name)}:
-                        </strong>{" "}
-                        {stat.base_stat}
-                    </p>
-                ))}
-            </section>
-
-            <section>
+            <section className={styles.movesSection}>
                 <h2>Moves</h2>
-                <ul>
-                    {pokemon.moves.slice(0, 10).map(
-                        (
-                            move // Display the first 10 moves
-                        ) => (
-                            <li key={move.move.name}>
-                                {capitalizeFirstLetter(move.move.name)}
-                            </li>
-                        )
-                    )}
+                <ul className={styles.movesContainer}>
+                    {pokemon.moves.map((move) => (
+                        <li key={move.move.name}>
+                            {console.log(move.move.url)}
+                            {capitalizeFirstLetter(move.move.name)}
+                        </li>
+                    ))}
                 </ul>
-            </section>
-
-            <section>
-                <h2>Forms</h2>
-                {pokemon.forms.length > 1 ? (
-                    <ul>
-                        {pokemon.forms.map((form) => (
-                            <li key={form.name}>
-                                {capitalizeFirstLetter(form.name)}
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>{capitalizeFirstLetter(pokemon.forms[0].name)}</p>
-                )}
             </section>
         </div>
     );
