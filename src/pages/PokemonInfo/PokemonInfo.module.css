@@ -18,8 +18,10 @@
 
 .backButton {
     text-decoration: none;
-    color: hsl(210, 10%, 60%);
+    color:  var(--border);
     border-radius: 5px;
+    display: flex;
+    align-items: center;
 }
 
 .backButton:hover {
@@ -49,28 +51,45 @@
 section {
     display: grid;
     gap: 1.3rem;
+    color: var(--pokemon-name);
 }
 
-.pokemon_info h3 {
+.generalInfo {
+    padding: 1rem;
+    border: 2px dashed var(--border);
+    border-radius: 5px;
+}
+
+/* .pokemon_info h3 {
     color: var(--pokemon-name);
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
     border-bottom: 2px solid var(--border);
     padding-bottom: 0.5rem;
-}
+} */
 
 .infoContainer {
     display: flex;
     gap: 0.7rem;
 }
 
+.infoContainer svg {
+    font-size: 1.8em;
+}
+
 .generalInfo .info {
     width: 100%;
     padding: 0.7rem;
-    background-color: hsl(210, 20%, 90%);
+    border: 2px dashed var(--border);
     border-radius: 4px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.infoRow {
+    display: flex;
+    flex-direction: column;
 }
 
 .sprites {
@@ -156,7 +175,7 @@ section {
     list-style: none;
     padding: 1rem;
     border-radius: 4px;
-    background-color: hsl(210, 20%, 90%);
+    background-color: var(--border);
 }
 
 .movesContainer {
@@ -168,14 +187,14 @@ section {
 .movesContainer li {
     list-style: none;
     padding: 1.5rem;
-    border: 2px dashed hsl(210, 20%, 95%);
+    border: 2px dashed var(--border);
     border-radius: 3px;
     display: grid;
     gap: 0.5rem;
 }
 
 .movesContainer strong {
-    padding: 0.2rem;
+    padding: 0.2rem 0.4rem;
     border-radius: 2px;
 }
 

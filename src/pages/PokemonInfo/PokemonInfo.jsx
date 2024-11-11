@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import colors from "../../constants/colors";
 import styles from "./PokemonInfo.module.css";
+import { IoIosArrowBack } from "react-icons/io";
+import { FaRulerVertical, FaWeight, FaStar } from 'react-icons/fa';
 
 function PokemonInfo() {
     const { id } = useParams();
@@ -104,11 +106,11 @@ function PokemonInfo() {
         <div className={styles.pokemon_info}>
             <header>
                 <Link to="/" className={styles.backButton}>
-                    {">"} Back to Home
+                    <IoIosArrowBack /> Back to Home
                 </Link>
                 <div className={styles.pokemonHeader}>
                     <h1 style={{ color: colors[pokemon.types[0].type.name] }}>
-                        {capitalizeFirstLetter(pokemon.name)}, #{pokemon.id}
+                        {capitalizeFirstLetter(pokemon.name)}, #{String(pokemon.id).padStart(3, '0')}
                     </h1>
                     <div className={styles.typesContainer}>
                         {pokemon.types.map((type, index) => (
@@ -127,22 +129,38 @@ function PokemonInfo() {
             </header>
 
             <section className={styles.generalInfo}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, molestiae dolores consequuntur, dolorum consectetur tenetur maxime corrupti iusto quas sunt fugit autem ipsum nam hic alias. Qui molestias non consectetur.</p>
                 <div className={styles.infoContainer}>
                     <p className={styles.info}>
-                        <strong>ID:</strong> {pokemon.id}
+                        <FaRulerVertical 
+                            style={{ color: colors[pokemon.types[0].type.name] }} 
+                        /> 
+                        <div className={styles.infoRow}>
+                            <strong>Height:</strong> 
+                            {pokemon.height / 10} m
+                        </div>
                     </p>
                     <p className={styles.info}>
-                        <strong>Height:</strong> {pokemon.height / 10} m
+                        <FaWeight
+                            style={{ color: colors[pokemon.types[0].type.name] }}
+                        />
+                        <div className={styles.infoRow}>
+                            <strong>Weight:</strong>
+                            {pokemon.weight / 10} kg
+                        </div>
                     </p>
                     <p className={styles.info}>
-                        <strong>Weight:</strong> {pokemon.weight / 10} kg
-                    </p>
-                    <p className={styles.info}>
-                        <strong>Base Experience:</strong>{" "}
-                        {pokemon.base_experience}
+                        <FaStar 
+                            style={{ color: colors[pokemon.types[0].type.name] }} 
+                        />
+                        <div className={styles.infoRow}>
+                            <strong>Base Experience:</strong> 
+                            {pokemon.base_experience}
+                        </div>
                     </p>
                 </div>
             </section>
+
 
             <div className={styles.sprites}>
                 <img src={pokemon.sprites.front_default} alt="Front Default" />
