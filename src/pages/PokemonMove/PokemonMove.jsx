@@ -63,7 +63,7 @@ function PokemonMove() {
                     <IoIosArrowBack /> Back to Pokémon
                 </Link>
                 <h1>
-                    {moveData.name.toUpperCase()}
+                    {moveData.name}
                 </h1>
             </header>
 
@@ -71,7 +71,7 @@ function PokemonMove() {
                 <p>
                     <strong>Type:</strong>{" "}
                     <span>
-                        {moveData.type.toUpperCase()}
+                        {moveData.type}
                     </span>
                 </p>
                 <p><strong>Power:</strong> {moveData.power || "N/A"}</p>
