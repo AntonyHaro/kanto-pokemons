@@ -18,7 +18,7 @@
 
 .backButton {
     text-decoration: none;
-    color:  var(--border);
+    color: var(--border);
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -30,7 +30,7 @@
 
 .pokemon_info .pokemonHeader {
     display: flex;
-    align-items: center;    
+    align-items: center;
     flex-wrap: wrap;
     gap: 2rem;
 }
@@ -180,10 +180,26 @@ section {
 .movesContainer li {
     list-style: none;
     padding: 1.5rem;
-    border: 2px dashed var(--border);
-    border-radius: 3px;
+    border: 1px solid var(--border);
+    box-shadow: -3px 3px 0px var(--border);
+    /* border-radius: 3px; */
     display: grid;
     gap: 0.5rem;
+    transition: 0.15s;
+}
+
+.movesContainer li:hover {
+    cursor: pointer;
+    border-color: gray;
+    box-shadow: -3px 3px 0px gray;
+    transform: translateY(-3px);
+}
+
+.movesContainer li:active {
+    box-shadow: -3px 3px 0px gray;
+    transform: translateY(3px);
+    transform: translateX(-3px);
+    box-shadow: none;
 }
 
 .movesContainer strong {
