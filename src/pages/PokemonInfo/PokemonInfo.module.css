@@ -108,57 +108,6 @@ section {
     justify-content: space-between;
 }
 
-/* .statsContainer {
-} */
-
-.statsContainer .flexContainer {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 0.7rem;
-}
-
-.statsContainer .stats {
-    min-width: 9rem;
-    padding: 1rem;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    display: grid;
-    gap: 0.6rem;
-    text-align: center;
-    transition: 0.2s;
-}
-
-.statsContainer .stats:hover {
-    transform: translateY(-0.2rem);
-    border-color: hsla(0, 0%, 0%, 0.6);
-}
-
-.statsContainer .stats .statName {
-    color: hsla(0, 0%, 0%, 0.6);
-}
-
-.statsContainer .stats .statInfo {
-    font-size: 4em;
-    font-weight: bold;
-    color: hsla(207, 9%, 19%, 0.75);
-}
-
-.statsContainer .stats .statBarContainer {
-    height: 5px;
-    width: 100%;
-    background-color: hsla(0, 0%, 0%, 0.2);
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.statsContainer .stats .statBar {
-    height: 100%;
-    background-color: hsla(0, 0%, 0%, 0.6);
-}
-
-/* .generalInfo {
-} */
-
 .abilitiesContainer {
     display: flex;
     gap: 0.7rem;
@@ -191,10 +140,6 @@ section {
 @media (max-width: 640px) {
     .pokemon_info header h1 {
         font-size: 2.5em;
-    }
-
-    .statsContainer .flexContainer {
-        grid-template-columns: repeat(2, 1fr);
     }
 
     .infoContainer {

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Move from "../../components/Move/Move";
-import colors from "../../constants/colors";
-import maxStats from "../../constants/maxStats.js"
-import styles from "./PokemonInfo.module.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaRulerVertical, FaWeight, FaStar } from "react-icons/fa";
+
+import colors from "../../constants/colors";
+import { capitalizeFirstLetter } from "../../utils/utils";
+
+import StatsContainer from "../../components/StatsContainer/StatsContainer";
+import Move from "../../components/Move/Move";
+import styles from "./PokemonInfo.module.css";
 
 function PokemonInfo() {
     const { id } = useParams();
@@ -15,14 +18,6 @@ function PokemonInfo() {
     const [pokemonMoves, setPokemonMoves] = useState(null);
     const [loadingMoves, setLoadingMoves] = useState(true);
     const [errorMoves, setErrorMoves] = useState(null);
-
-    const capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
-
-    const calculateStatBar = (stat, maxStat) => {
-        return (stat / maxStat) * 100;
-    };
 
     useEffect(() => {
         // Função para buscar os detalhes do Pokémon
@@ -183,37 +178,7 @@ function PokemonInfo() {
                 )}
             </div>
 
-            <section className={styles.statsContainer}>
-                <h2>Stats</h2>
-                <div className={styles.flexContainer}>
-                    {pokemon.stats.map((stat, index) => (
-                        <div
-                            key={stat.stat.name}
-                            className={styles.stats}
-                            style={{
-                                backgroundColor:
-                                    colors[pokemon.types[0].type.name],
-                            }}
-                        >
-                            <p className={styles.statName}>
-                                {capitalizeFirstLetter(stat.stat.name)}:
-                            </p>
-                            <p className={styles.statInfo}>{stat.base_stat}</p>
-                            <div className={styles.statBarContainer}>
-                                <div
-                                    className={styles.statBar}
-                                    style={{
-                                        width: `${calculateStatBar(
-                                            stat.base_stat,
-                                            maxStats[index]
-                                        )}%`,
-                                    }}
-                                ></div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
+            <StatsContainer pokemon={pokemon} />
 
             <section>
                 <h2>Abilities</h2>
