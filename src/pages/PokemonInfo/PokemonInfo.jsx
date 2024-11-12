@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import Move from "../../components/Move/Move";
 import colors from "../../constants/colors";
+import maxStats from "../../constants/maxStats.js"
 import styles from "./PokemonInfo.module.css";
 import { IoIosArrowBack } from "react-icons/io";
-import { FaRulerVertical, FaWeight, FaStar } from 'react-icons/fa';
+import { FaRulerVertical, FaWeight, FaStar } from "react-icons/fa";
 
 function PokemonInfo() {
     const { id } = useParams();
@@ -21,15 +23,6 @@ function PokemonInfo() {
     const calculateStatBar = (stat, maxStat) => {
         return (stat / maxStat) * 100;
     };
-
-    const maxStats = [
-        255, // HP
-        190, // Attack
-        250, // Defense
-        194, // Special Attack
-        250, // Special Defense
-        200, // Speed
-    ];
 
     useEffect(() => {
         // Função para buscar os detalhes do Pokémon
@@ -110,7 +103,8 @@ function PokemonInfo() {
                 </Link>
                 <div className={styles.pokemonHeader}>
                     <h1 style={{ color: colors[pokemon.types[0].type.name] }}>
-                        {capitalizeFirstLetter(pokemon.name)}, #{String(pokemon.id).padStart(3, '0')}
+                        {capitalizeFirstLetter(pokemon.name)}, #
+                        {String(pokemon.id).padStart(3, "0")}
                     </h1>
                     <div className={styles.typesContainer}>
                         {pokemon.types.map((type, index) => (
@@ -129,38 +123,48 @@ function PokemonInfo() {
             </header>
 
             <section className={styles.generalInfo}>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, molestiae dolores consequuntur, dolorum consectetur tenetur maxime corrupti iusto quas sunt fugit autem ipsum nam hic alias. Qui molestias non consectetur.</p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Expedita, molestiae dolores consequuntur, dolorum
+                    consectetur tenetur maxime corrupti iusto quas sunt fugit
+                    autem ipsum nam hic alias. Qui molestias non consectetur.
+                </p>
                 <div className={styles.infoContainer}>
-                    <p className={styles.info}>
-                        <FaRulerVertical 
-                            style={{ color: colors[pokemon.types[0].type.name] }} 
-                        /> 
+                    <div className={styles.info}>
+                        <FaRulerVertical
+                            style={{
+                                color: colors[pokemon.types[0].type.name],
+                            }}
+                        />
                         <div className={styles.infoRow}>
-                            <strong>Height:</strong> 
+                            <strong>Height:</strong>
                             {pokemon.height / 10} m
                         </div>
-                    </p>
-                    <p className={styles.info}>
+                    </div>
+                    <div className={styles.info}>
                         <FaWeight
-                            style={{ color: colors[pokemon.types[0].type.name] }}
+                            style={{
+                                color: colors[pokemon.types[0].type.name],
+                            }}
                         />
                         <div className={styles.infoRow}>
                             <strong>Weight:</strong>
                             {pokemon.weight / 10} kg
                         </div>
-                    </p>
-                    <p className={styles.info}>
-                        <FaStar 
-                            style={{ color: colors[pokemon.types[0].type.name] }} 
+                    </div>
+                    <div className={styles.info}>
+                        <FaStar
+                            style={{
+                                color: colors[pokemon.types[0].type.name],
+                            }}
                         />
                         <div className={styles.infoRow}>
-                            <strong>Base Experience:</strong> 
+                            <strong>Base Experience:</strong>
                             {pokemon.base_experience}
                         </div>
-                    </p>
+                    </div>
                 </div>
             </section>
-
 
             <div className={styles.sprites}>
                 <img src={pokemon.sprites.front_default} alt="Front Default" />
@@ -223,7 +227,6 @@ function PokemonInfo() {
                 </ul>
             </section>
 
-            {/* Detalhes dos Movimentos */}
             <section className={styles.movesSection}>
                 <h2>Moves</h2>
                 <ul className={styles.movesContainer}>
@@ -234,25 +237,7 @@ function PokemonInfo() {
                     ) : (
                         pokemonMoves &&
                         pokemonMoves.map((move, index) => (
-                            <li key={index}>
-                                <p>
-                                    <strong
-                                        style={{
-                                            backgroundColor: colors[move.type],
-                                        }}
-                                    >
-                                        {capitalizeFirstLetter(move.name)}
-                                    </strong>
-                                </p>
-
-                                <p>Type: {capitalizeFirstLetter(move.type)}</p>
-                                <p>Power: {move.power ? move.power : "N/A"}</p>
-                                <p>
-                                    Accuracy:{" "}
-                                    {move.accuracy ? move.accuracy : "N/A"}
-                                </p>
-                                <p>PP: {move.pp}</p>
-                            </li>
+                            <Move key={index} move={move} />
                         ))
                     )}
                 </ul>

@@ -177,36 +177,6 @@ section {
     gap: 0.7rem;
 }
 
-.movesContainer li {
-    list-style: none;
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    box-shadow: -3px 3px 0px var(--border);
-    /* border-radius: 3px; */
-    display: grid;
-    gap: 0.5rem;
-    transition: 0.15s;
-}
-
-.movesContainer li:hover {
-    cursor: pointer;
-    border-color: gray;
-    box-shadow: -3px 3px 0px gray;
-    transform: translateY(-3px);
-}
-
-.movesContainer li:active {
-    box-shadow: -3px 3px 0px gray;
-    transform: translateY(3px);
-    transform: translateX(-3px);
-    box-shadow: none;
-}
-
-.movesContainer strong {
-    padding: 0.2rem 0.4rem;
-    border-radius: 2px;
-}
-
 @media (max-width: 1075px) {
     .statsContainer .flexContainer {
         grid-template-columns: repeat(3, 1fr);
