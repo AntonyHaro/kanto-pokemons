@@ -30,7 +30,8 @@
 
 .pokemon_info .pokemonHeader {
     display: flex;
-    align-items: center;
+    align-items: center;    
+    flex-wrap: wrap;
     gap: 2rem;
 }
 
@@ -54,18 +55,10 @@ section {
     color: var(--pokemon-name);
 }
 
-.generalInfo {
+/* .generalInfo {
     padding: 1rem;
     border: 2px dashed var(--border);
     border-radius: 5px;
-}
-
-/* .pokemon_info h3 {
-    color: var(--pokemon-name);
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-    border-bottom: 2px solid var(--border);
-    padding-bottom: 0.5rem;
 } */
 
 .infoContainer {
@@ -198,24 +191,27 @@ section {
     border-radius: 2px;
 }
 
-@media (max-width: 768px) {
-    .pokemon_info {
-        padding: 1rem;
+@media (max-width: 1075px) {
+    .statsContainer .flexContainer {
+        grid-template-columns: repeat(3, 1fr);
     }
 
-    .pokemon_info h2 {
-        font-size: 1.5rem;
+    .sprites img {
+        width: 20%;
+        height: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    .pokemon_info header h1 {
+        font-size: 2.5em;
     }
 
-    .pokemon_info h3 {
-        font-size: 1.25rem;
+    .statsContainer .flexContainer {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .pokemon_info img {
-        width: 150px;
-    }
-
-    .mainCard .sprites img {
-        width: 60px;
+    .infoContainer {
+        flex-direction: column;
     }
 }
