@@ -202,7 +202,13 @@ function PokemonInfo() {
                     ) : (
                         pokemonMoves &&
                         pokemonMoves.map((move, index) => (
-                            <Move key={index} move={move} />
+                            <Move
+                                key={index}
+                                move={{
+                                    ...move,
+                                    pokemonId: pokemon.id
+                                }} 
+                            />
                         ))
                     )}
                 </ul>

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import colors from "../../constants/colors";
 import styles from "./Move.module.css";
 
@@ -6,8 +7,10 @@ function Move({ move }) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
+    const navigate = useNavigate()
+
     return (
-        <li className={styles.move}>
+        <li className={styles.move} onClick={() => navigate(`/pokemon/${move.pokemonId}/${move.name}`)}>
             <p>
                 <strong
                     style={{
