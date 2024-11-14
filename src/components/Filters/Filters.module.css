@@ -7,9 +7,9 @@
 
 .filter_container button {
     background-color: transparent;
-    padding: 0.5rem;
+    padding: 0.3rem;
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: 3px;
     color: var(--pokemon-name);
     cursor: pointer;
     transition: 0.2s;

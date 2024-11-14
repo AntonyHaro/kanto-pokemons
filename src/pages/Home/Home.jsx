@@ -13,28 +13,6 @@ function Home() {
     const [searchTerm, setSearchTerm] = useState("");
     const [isFilterOpen, setIsFilterOpen] = useState(true);
 
-    const toggleTheme = (themeToggleButton) => {
-        const isDarkMode = document.body.classList.toggle("dark-mode");
-        themeToggleButton.textContent = isDarkMode ? "🌞" : "🌙";
-        localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-    };
-
-    useEffect(() => {
-        const savedTheme = localStorage.getItem("theme") || "light";
-        const isDarkMode = savedTheme === "dark";
-        document.body.classList.toggle("dark-mode", isDarkMode);
-
-        const themeToggleButton = document.getElementById("theme-toggle");
-        themeToggleButton.textContent = isDarkMode ? "🌞" : "🌙";
-
-        const handleToggleClick = () => toggleTheme(themeToggleButton);
-        themeToggleButton.addEventListener("click", handleToggleClick);
-
-        return () => {
-            themeToggleButton.removeEventListener("click", handleToggleClick);
-        };
-    }, []);
-
     useEffect(() => {
         const fetchTypes = async () => {
             try {

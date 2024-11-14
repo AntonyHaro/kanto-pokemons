@@ -4,9 +4,9 @@
     --body-bgc: white;
     --pokemon-name: hsl(204, 20%, 25%);
     --pokemon-name-hover: hsl(205, 50%, 15%);
-    --pokemon-type: hsl(212, 8%, 30%);
+    --pokemon-type: hsl(213, 7%, 26%);
     --border: hsl(212, 5%, 75%);
-    --title: hsl(0, 78%, 55%);
+    --title: hsl(5, 60%, 55%);
     --error-message: hsl(0, 100%, 76%);
 }
 
@@ -20,22 +20,12 @@
 body {
     background-color: var(--body-bgc);
     min-height: 100vh;
-    padding: 4rem;
+    padding: 5rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     font-size: 16px;
     transition: 0.2s;
-}
-
-body.dark-mode {
-    --body-bgc: hsl(240, 3%, 7%);
-    --pokemon-name: hsl(200, 6%, 80%);
-    --pokemon-name-hover: hsl(0, 0%, 100%);
-    --pokemon-type: hsl(212, 5%, 60%);
-    --border: hsl(212, 7%, 15%);
-    --title: hsl(0, 100%, 73%);
-    --error-message: hsl(0, 29%, 61%);
 }
 
 #loader {

@@ -39,14 +39,25 @@ function Pokemon({ pokemon }) {
         <li
             style={{
                 backgroundColor: colors[primaryType],
-                // backgroundImage: `linear-gradient(to bottom right, ${colors[primaryType]}, ${colors[secondaryType]})`,
             }}
             onClick={handleClick}
             className={styles.pokemonCard}
         >
             <p className={styles.name}>{capitalizeFirstLetter(pokemon.name)}</p>
             <img src={pokemon.sprites["front_default"]} alt={pokemon.name} />
-            <p className={styles.types}>{types}</p>
+            <div className={styles.typesContainer}>
+                {pokemon.types.map((type, index) => (
+                    <p
+                        key={index}
+                        className={styles.type}
+                        style={{
+                            backgroundColor: colors[type.type.name],
+                        }}
+                    >
+                        {capitalizeFirstLetter(type.type.name)}
+                    </p>
+                ))}
+            </div>
         </li>
     );
 }

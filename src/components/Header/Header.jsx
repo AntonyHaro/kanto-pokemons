@@ -1,5 +1,6 @@
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import styles from "./Header.module.css";
+import pokeball from "../../assets/pokeball.svg";
 
 function Header({ searchTerm, setSearchTerm, isFilterOpen, setIsFilterOpen }) {
     const handleInputChange = (event) => {
@@ -10,7 +11,8 @@ function Header({ searchTerm, setSearchTerm, isFilterOpen, setIsFilterOpen }) {
         <header>
             <div className={styles.flexContainer}>
                 <h1>
-                    Kanto Pokémons <button id="theme-toggle"></button>
+                    <img src={pokeball} alt="" />
+                    Kanto Pokémons
                 </h1>
 
                 <input

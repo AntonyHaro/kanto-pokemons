@@ -13,25 +13,16 @@ header {
 }
 
 .flexContainer h1 {
-    color: var(--title);
+    font-size: 2.5em;
+    color: #132939;
     transition: 0.2s;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
-.flexContainer h1 button {
-    background-color: var(--border);
-    padding: 0.5rem;
-    border-radius: 50%;
-    border: 0;
-    transition: 0.2s;
-}
-
-.flexContainer h1 button:hover {
-    transform: translateY(-0.2rem);
-    background-color: var(--pokemon-type);
-    cursor: pointer;
+.flexContainer h1 img {
+    height: 50px;
 }
 
 input {

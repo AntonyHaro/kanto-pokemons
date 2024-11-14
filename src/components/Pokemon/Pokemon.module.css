@@ -6,19 +6,18 @@
     transition: 0.2s;
     display: grid;
     place-items: center;
-    gap: 0.5rem;
-}
-
-.pokemonCard .types {
-    color: var(--pokemon-type);
-    font-size: 0.9em;
+    gap: 1rem;
 }
 
 .name {
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.2em;
     color: var(--pokemon-name);
     transition: 0.2s;
+}
+
+.pokemonCard:hover .name {
+    color: var(--pokemon-name-hover);
 }
 
 .pokemonCard img {
@@ -31,8 +30,18 @@
     transform: translateY(-0.2rem);
 }
 
-.pokemonCard:hover .name {
-    color: var(--pokemon-name-hover);
+.pokemonCard .typesContainer {
+    display: flex;
+    gap: 0.4rem;
+    color: var(--pokemon-type);
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.pokemonCard .typesContainer .type {
+    padding: 0.3rem;
+    border-radius: 3px;
+    border: 1px dashed gray;
 }
 
 @media (max-width: 576px) {

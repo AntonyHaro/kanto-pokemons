@@ -13,28 +13,33 @@ function PokemonMove() {
     useEffect(() => {
         const fetchMoveData = async () => {
             const url = `https://pokeapi.co/api/v2/move/${move}`;
-
             try {
                 const response = await fetch(url);
-                if (!response.ok) throw new Error("Failed to fetch move details");
+                if (!response.ok)
+                    throw new Error("Failed to fetch move details");
 
                 const data = await response.json();
-                
                 setMoveData({
                     name: data.name,
-                    type: data.type.name,
-                    power: data.power,
-                    accuracy: data.accuracy,
+                    type: data.type.name || "Unknown",
+                    power: data.power || "N/A",
+                    accuracy: data.accuracy || "N/A",
                     pp: data.pp,
                     priority: data.priority,
                     effectChance: data.effect_chance || "N/A",
-                    damageClass: data.damage_class.name,
-                    target: data.target.name,
-                    effect: data.effect_entries[0]?.effect || "No effect description available",
-                    shortEffect: data.effect_entries[0]?.short_effect || "No short effect description available",
+                    damageClass: data.damage_class.name || "N/A",
+                    target: data.target.name || "N/A",
+                    effect:
+                        data.effect_entries[0]?.effect ||
+                        "No effect description available",
+                    shortEffect:
+                        data.effect_entries[0]?.short_effect ||
+                        "No short effect description available",
                 });
             } catch (error) {
-                setError("Failed to fetch move details. Please try again later.");
+                setError(
+                    "Failed to fetch move details. Please try again later."
+                );
                 console.error("Error fetching move details:", error);
             } finally {
                 setLoading(false);
@@ -44,17 +49,8 @@ function PokemonMove() {
         fetchMoveData();
     }, [move]);
 
-    if (loading) {
-        return <p>Loading move details...</p>;
-    }
-
-    if (error) {
-        return <p>{error}</p>;
-    }
-
-    if (!moveData) {
-        return <p>No move data found</p>;
-    }
+    if (loading) return <p>Loading move details...</p>;
+    if (error) return <p>{error}</p>;
 
     return (
         <div className={styles.moveDetail}>
@@ -62,27 +58,40 @@ function PokemonMove() {
                 <Link to={`/pokemon/${id}`} className={styles.backButton}>
                     <IoIosArrowBack /> Back to Pokémon
                 </Link>
-                <h1>
-                    {moveData.name}
-                </h1>
+                <h1>{moveData.name}</h1>
             </header>
 
             <section className={styles.moveInfo}>
                 <p>
-                    <strong>Type:</strong>{" "}
-                    <span>
-                        {moveData.type}
-                    </span>
+                    <strong>Type:</strong> {moveData.type}
                 </p>
-                <p><strong>Power:</strong> {moveData.power || "N/A"}</p>
-                <p><strong>Accuracy:</strong> {moveData.accuracy || "N/A"}</p>
-                <p><strong>PP:</strong> {moveData.pp}</p>
-                <p><strong>Priority:</strong> {moveData.priority}</p>
-                <p><strong>Effect Chance:</strong> {moveData.effectChance}</p>
-                <p><strong>Damage Class:</strong> {moveData.damageClass}</p>
-                <p><strong>Target:</strong> {moveData.target}</p>
-                <p><strong>Effect:</strong> {moveData.effect}</p>
-                <p><strong>Short Effect:</strong> {moveData.shortEffect}</p>
+                <p>
+                    <strong>Power:</strong> {moveData.power}
+                </p>
+                <p>
+                    <strong>Accuracy:</strong> {moveData.accuracy}
+                </p>
+                <p>
+                    <strong>PP:</strong> {moveData.pp}
+                </p>
+                <p>
+                    <strong>Priority:</strong> {moveData.priority}
+                </p>
+                <p>
+                    <strong>Effect Chance:</strong> {moveData.effectChance}
+                </p>
+                <p>
+                    <strong>Damage Class:</strong> {moveData.damageClass}
+                </p>
+                <p>
+                    <strong>Target:</strong> {moveData.target}
+                </p>
+                <p>
+                    <strong>Effect:</strong> {moveData.effect}
+                </p>
+                <p>
+                    <strong>Short Effect:</strong> {moveData.shortEffect}
+                </p>
             </section>
         </div>
     );
