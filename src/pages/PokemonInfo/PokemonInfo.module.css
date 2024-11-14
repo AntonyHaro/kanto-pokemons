@@ -55,12 +55,6 @@ section {
     color: var(--pokemon-name);
 }
 
-/* .generalInfo {
-    padding: 1rem;
-    border: 2px dashed var(--border);
-    border-radius: 5px;
-} */
-
 .infoContainer {
     display: flex;
     gap: 0.7rem;
@@ -95,6 +89,34 @@ section {
 .sprites img {
     width: 160px;
     height: auto;
+    transition: 0.3s;
+}
+
+.sprites img:hover {
+    animation: balanco 0.2s ease-in-out; /* Aumentei a duração para 1s para suavizar mais */
+}
+
+/* Definir a animação de balanço */
+@keyframes balanco {
+    0% {
+        transform: rotate(0deg); /* Posição inicial */
+    }
+    25% {
+        transform: rotate(
+            -5deg
+        ); /* Menos inclinação para um balanço mais suave */
+    }
+    50% {
+        transform: rotate(0deg); /* Volta para o centro */
+    }
+    75% {
+        transform: rotate(
+            5deg
+        ); /* Menos inclinação para um balanço mais suave */
+    }
+    100% {
+        transform: rotate(0deg); /* Volta para o centro */
+    }
 }
 
 .pokemon_info ul {
