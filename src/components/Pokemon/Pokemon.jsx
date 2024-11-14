@@ -43,8 +43,15 @@ function Pokemon({ pokemon }) {
             onClick={handleClick}
             className={styles.pokemonCard}
         >
-            <p className={styles.name}>{capitalizeFirstLetter(pokemon.name)}</p>
-            <img src={pokemon.sprites["front_default"]} alt={pokemon.name} />
+            <div className={styles.pokemon}>
+                <p className={styles.name}>
+                    {capitalizeFirstLetter(pokemon.name)}
+                </p>
+                <img
+                    src={pokemon.sprites["front_default"]}
+                    alt={pokemon.name}
+                />
+            </div>
             <div className={styles.typesContainer}>
                 {pokemon.types.map((type, index) => (
                     <p

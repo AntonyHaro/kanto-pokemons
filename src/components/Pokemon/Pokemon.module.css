@@ -1,6 +1,6 @@
 .pokemonCard {
     list-style: none;
-    padding: 1rem;
+    padding: 1.5rem;
     border: 1px solid var(--border);
     border-radius: 4px;
     transition: 0.2s;
@@ -9,7 +9,14 @@
     gap: 1rem;
 }
 
-.name {
+.pokemonCard .pokemon {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+}
+
+.pokemonCard .name {
     font-weight: bold;
     font-size: 1.2em;
     color: var(--pokemon-name);
@@ -50,9 +57,15 @@
     .pokemonCard {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0;
+    }
+
+    .pokemonCard .pokemon {
+        display: flex;
     }
 
     .pokemonCard img {
-        height: 60px;
+        height: 80px;
     }
 }

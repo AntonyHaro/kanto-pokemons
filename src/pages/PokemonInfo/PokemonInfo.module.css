@@ -89,33 +89,27 @@ section {
 .sprites img {
     width: 160px;
     height: auto;
-    transition: 0.3s;
 }
 
 .sprites img:hover {
-    animation: balanco 0.2s ease-in-out; /* Aumentei a duração para 1s para suavizar mais */
+    animation: balanco 0.2s ease-in-out;
 }
 
-/* Definir a animação de balanço */
 @keyframes balanco {
     0% {
-        transform: rotate(0deg); /* Posição inicial */
+        transform: rotate(0deg);
     }
     25% {
-        transform: rotate(
-            -5deg
-        ); /* Menos inclinação para um balanço mais suave */
+        transform: rotate(-5deg);
     }
     50% {
-        transform: rotate(0deg); /* Volta para o centro */
+        transform: rotate(0deg);
     }
     75% {
-        transform: rotate(
-            5deg
-        ); /* Menos inclinação para um balanço mais suave */
+        transform: rotate(5deg);
     }
     100% {
-        transform: rotate(0deg); /* Volta para o centro */
+        transform: rotate(0deg);
     }
 }
 
