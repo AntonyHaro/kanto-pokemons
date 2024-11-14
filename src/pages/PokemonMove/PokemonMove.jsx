@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { capitalizeFirstLetter } from "../../utils/utils";
@@ -21,53 +21,37 @@ function PokemonMove() {
                     throw new Error("Failed to fetch move details");
 
                 const data = await response.json();
-                const {
-                    name,
-                    type,
-                    power,
-                    accuracy,
-                    pp,
-                    priority,
-                    effect_chance,
-                    damage_class,
-                    target,
-                    effect_entries,
-                    stat_changes,
-                    contest_type,
-                    contest_effect,
-                    learned_by_pokemon,
-                } = data;
-
+                console.log(data);
                 setMoveData({
-                    name: capitalizeFirstLetter(name),
-                    type: type.name || "Unknown",
-                    power: power || "N/A",
-                    accuracy: accuracy || "N/A",
-                    pp,
-                    priority,
-                    effectChance: effect_chance || "N/A",
+                    name: capitalizeFirstLetter(data.name),
+                    type: data.type.name || "Unknown",
+                    power: data.power || "N/A",
+                    accuracy: data.accuracy || "N/A",
+                    pp: data.pp,
+                    priority: data.priority,
+                    effectChance: data.effect_chance || "N/A",
                     damageClass:
-                        capitalizeFirstLetter(damage_class.name) || "N/A",
-                    target: capitalizeFirstLetter(target.name) || "N/A",
+                        capitalizeFirstLetter(data.damage_class.name) || "N/A",
+                    target: capitalizeFirstLetter(data.target.name) || "N/A",
                     effect:
-                        effect_entries[0]?.effect ||
+                        data.effect_entries[0]?.effect ||
                         "No effect description available",
                     shortEffect:
-                        effect_entries[0]?.short_effect ||
+                        data.effect_entries[0]?.short_effect ||
                         "No short effect description available",
-                    statChanges: stat_changes.map(
+                    statChanges: data.stat_changes.map(
                         (change) =>
                             `${capitalizeFirstLetter(change.stat.name)}: ${
                                 change.change > 0 ? "+" : ""
                             }${change.change}`
                     ) || ["N/A"],
-                    contestType: contest_type?.name
-                        ? capitalizeFirstLetter(contest_type.name)
+                    contestType: data.contest_type?.name
+                        ? capitalizeFirstLetter(data.contest_type.name)
                         : "N/A",
-                    contestEffect: contest_effect?.url
-                        ? `See more: ${contest_effect.url}`
+                    contestEffect: data.contest_effect?.url
+                        ? `See more: ${data.contest_effect.url}`
                         : "N/A",
-                    learnedByPokemon: learned_by_pokemon,
+                    learnedByPokemon: data.learned_by_pokemon,
                 });
             } catch (error) {
                 setError(
@@ -108,29 +92,59 @@ function PokemonMove() {
             </header>
 
             <section className={styles.moveInfo}>
-                {renderMoveInfo(
-                    [
-                        { label: "Type", value: moveData.type },
-                        { label: "PP", value: moveData.pp },
-                        { label: "Accuracy", value: moveData.accuracy },
-                        { label: "Damage Class", value: moveData.damageClass },
-                        { label: "Power", value: moveData.power },
-                        { label: "Priority", value: moveData.priority },
-                        {
-                            label: "Effect Chance",
-                            value: moveData.effectChance,
-                        },
-                        { label: "Target", value: moveData.target },
-                        { label: "Effect", value: moveData.effect },
-                        { label: "Short Effect", value: moveData.shortEffect },
-                        {
-                            label: "Stat Changes",
-                            value: moveData.statChanges.join(", "),
-                        },
-                        { label: "Contest Type", value: moveData.contestType },
-                    ],
-                    moveData.type
-                )}
+                <div className={styles.multipleSection}>
+                    <div className={styles.moveInfoItem} style={borderColor}>
+                        <strong>Type:</strong>
+                        <p>{capitalizeFirstLetter(moveData.type)}</p>
+                    </div>
+
+                    <div className={styles.moveInfoItem} style={borderColor}>
+                        <strong>PP:</strong> <p>{moveData.pp}</p>
+                    </div>
+                    <div className={styles.moveInfoItem} style={borderColor}>
+                        <strong>Accuracy:</strong> <p>{moveData.accuracy}</p>
+                    </div>
+                    <div className={styles.moveInfoItem} style={borderColor}>
+                        <strong>Damage Class:</strong>{" "}
+                        <p>{moveData.damageClass}</p>
+                    </div>
+                </div>
+
+                <div className={styles.multipleSection}>
+                    <div className={styles.moveInfoItem} style={borderColor}>
+                        <strong>Power:</strong> <p>{moveData.power}</p>
+                    </div>
+
+                    <div className={styles.moveInfoItem} style={borderColor}>
+                        <strong>Priority:</strong> <p>{moveData.priority}</p>
+                    </div>
+
+                    <div className={styles.moveInfoItem} style={borderColor}>
+                        <strong>Effect Chance:</strong>
+                        <p>{moveData.effectChance}</p>
+                    </div>
+
+                    <div className={styles.moveInfoItem} style={borderColor}>
+                        <strong>Target:</strong> <p>{moveData.target}</p>
+                    </div>
+                </div>
+
+                <div className={styles.moveInfoItem} style={borderColor}>
+                    <strong>Effect:</strong> <p>{moveData.effect}</p>
+                </div>
+
+                <div className={styles.moveInfoItem} style={borderColor}>
+                    <strong>Short Effect:</strong> <p>{moveData.shortEffect}</p>
+                </div>
+
+                <div className={styles.moveInfoItem} style={borderColor}>
+                    <strong>Stat Changes:</strong>
+                    <p>{moveData.statChanges.join(", ")}</p>
+                </div>
+
+                <div className={styles.moveInfoItem} style={borderColor}>
+                    <strong>Contest Type:</strong> <p>{moveData.contestType}</p>
+                </div>
             </section>
 
             <section>
@@ -143,38 +157,28 @@ function PokemonMove() {
 
 export default PokemonMove;
 
-function renderMoveInfo(infoArray, moveType) {
-    const hoverStyle = { "--hover-bg-color": colors[moveType] };
-
-    return infoArray.map(({ label, value }) => (
-        <div className={styles.moveInfoItem} key={label} style={hoverStyle}>
-            <strong>{label}:</strong> <p>{value}</p>
-        </div>
-    ));
-}
-
 function LearnedByPokemon({ pokemons }) {
     const [pokemonDetailsList, setPokemonDetailsList] = useState(null);
 
-    const fetchPokemonDetails = useCallback(async () => {
-        try {
-            const pokemonDetails = await Promise.all(
-                pokemons.map(async (pokemon) => {
-                    const response = await fetch(pokemon.url);
-                    return response.json();
-                })
-            );
-            setPokemonDetailsList(pokemonDetails);
-        } catch (error) {
-            console.error("Error fetching Pokémon details:", error);
-        }
-    }, [pokemons]);
-
     useEffect(() => {
+        const fetchPokemonDetails = async () => {
+            try {
+                const pokemonDetails = await Promise.all(
+                    pokemons.map(async (pokemon) => {
+                        const response = await fetch(pokemon.url);
+                        return response.json();
+                    })
+                );
+                setPokemonDetailsList(pokemonDetails); // Properly update the state
+            } catch (error) {
+                console.error("Error fetching Pokémon details:", error);
+            }
+        };
+
         if (pokemons && pokemons.length > 0) {
             fetchPokemonDetails();
         }
-    }, [pokemons, fetchPokemonDetails]);
+    }, [pokemons]);
 
     if (!pokemonDetailsList) {
         return <p>Loading Pokémon details...</p>;

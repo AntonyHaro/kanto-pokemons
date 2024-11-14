@@ -1,5 +1,5 @@
 :root {
-    border-color: lightgray;
+    --hover-bg-color: lightgray;
 }
 
 .pokemonMove {
@@ -44,7 +44,7 @@
     flex: 1;
     height: 100%;
     padding: 1rem;
-    border: 1px solid lightgray;
+    border: 1px dashed lightgray;
     border-radius: 4px;
     display: flex;
     align-items: center;
