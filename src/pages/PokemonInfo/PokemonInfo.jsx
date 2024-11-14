@@ -194,6 +194,7 @@ function PokemonInfo() {
 
             <section className={styles.movesSection}>
                 <h2>Moves</h2>
+                <p>Click in one move to see more details.</p>
                 <ul className={styles.movesContainer}>
                     {loadingMoves ? (
                         <p>Loading moves...</p>

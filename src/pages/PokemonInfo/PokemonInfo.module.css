@@ -3,17 +3,10 @@
 }
 
 .pokemon_info {
-    /* padding: 2rem; */
     transition: 0.2s;
     display: flex;
     flex-direction: column;
     gap: 3rem;
-}
-
-.pokemon_info header {
-    display: grid;
-    gap: 0.7rem;
-    /* margin-bottom: 1%; */
 }
 
 .backButton {
@@ -26,6 +19,11 @@
 
 .backButton:hover {
     text-decoration: underline;
+}
+
+.pokemon_info header {
+    display: grid;
+    gap: 0.7rem;
 }
 
 .pokemon_info .pokemonHeader {

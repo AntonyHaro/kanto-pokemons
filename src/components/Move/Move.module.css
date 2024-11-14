@@ -2,8 +2,8 @@
     list-style: none;
     padding: 1.5rem;
     border: 1px solid var(--border);
-    box-shadow: -3px 3px 0px var(--border);
-    /* border-radius: 3px; */
+    box-shadow: -4px 4px 0px var(--border);
+    /* border-radius: 4px; */
     display: grid;
     gap: 0.5rem;
     transition: 0.15s;
@@ -12,14 +12,14 @@
 .move:hover {
     cursor: pointer;
     border-color: gray;
-    box-shadow: -3px 3px 0px gray;
-    transform: translateY(-3px);
+    box-shadow: -4px 4px 0px gray;
+    transform: translateY(-4px);
 }
 
 .move:active {
-    box-shadow: -3px 3px 0px gray;
-    transform: translateY(3px);
-    transform: translateX(-3px);
+    box-shadow: -4px 4px 0px gray;
+    transform: translateY(4px);
+    transform: translateX(-4px);
     box-shadow: none;
 }
 

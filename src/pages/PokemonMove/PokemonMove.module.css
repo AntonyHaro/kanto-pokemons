@@ -1,0 +1,119 @@
+:root {
+    border-color: lightgray;
+}
+
+.pokemonMove {
+    display: grid;
+    gap: 2.8rem;
+}
+
+.pokemonMove header {
+    display: grid;
+    gap: 1rem;
+}
+
+.pokemonMove h1 {
+    font-size: 2.5em;
+}
+
+.backButton {
+    text-decoration: none;
+    color: var(--border);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.backButton:hover {
+    text-decoration: underline;
+}
+
+.moveInfo {
+    display: grid;
+    gap: 1rem;
+}
+
+.multipleSection {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.moveInfoItem {
+    flex: 1;
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.moveInfoItem:hover {
+    transform: translateY(-0.2rem);
+    background-color: lightgray;
+}
+
+.moveInfoItem strong {
+    margin-right: 0.5rem;
+    color: #333;
+}
+
+.moveInfoItem p {
+    margin: 0;
+}
+
+.pokemonsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.7rem;
+}
+
+.pokemonCard {
+    list-style: none;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: 0.2s;
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+}
+
+.pokemonCard .pokemon {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+}
+
+.pokemonCard .name {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--pokemon-name);
+    transition: 0.2s;
+}
+
+.pokemonCard:hover .name {
+    color: var(--pokemon-name-hover);
+}
+
+.pokemonCard img {
+    height: 100px;
+}
+
+@media (max-width: 640px) {
+    .moveDetail header h1 {
+        font-size: 2em;
+    }
+
+    .moveInfo {
+        gap: 0.8rem;
+    }
+
+    .moveInfoItem {
+        padding: 0.5rem;
+    }
+}
