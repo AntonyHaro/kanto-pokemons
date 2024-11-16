@@ -150,19 +150,22 @@ function PokemonInfo() {
                         ))}
                     </div>
                 </div>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#stats">Stats</a>
+                        </li>
+                        <li>
+                            <a href="#abilities">Abilities</a>
+                        </li>
+                        <li>
+                            <a href="#moves">Moves</a>
+                        </li>
+                    </ul>
+                </nav>
             </header>
 
             <section className={styles.generalInfo}>
-                {/* {pokemon.species ? (
-                    <p>
-                        {pokemon.species.flavor_text_entries.find(
-                            (entry) => entry.language.name === "en"
-                        )?.flavor_text ||
-                            "Description not available in English."}
-                    </p>
-                ) : (
-                    <p>Loading description...</p>
-                )} */}
                 <div className={styles.infoContainer}>
                     <div className={styles.info}>
                         <FaRulerVertical
@@ -217,9 +220,9 @@ function PokemonInfo() {
                 )}
             </div>
 
-            <StatsContainer pokemon={pokemon} />
+            <StatsContainer pokemon={pokemon}/>
 
-            <section>
+            <section id="abilities">
                 <h2>Abilities</h2>
                 {loadingAbilities ? (
                     <p>Loading abilities...</p>
@@ -252,7 +255,7 @@ function PokemonInfo() {
                 )}
             </section>
 
-            <section className={styles.movesSection}>
+            <section className={styles.movesSection} id="moves">
                 <h2>Moves</h2>
                 <p>Click in one move to see more details.</p>
                 <ul className={styles.movesContainer}>

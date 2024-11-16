@@ -9,7 +9,7 @@ function StatsContainer({ pokemon }) {
     };
 
     return (
-        <section className={styles.statsContainer}>
+        <section className={styles.statsContainer} id="stats">
             <h2>Stats</h2>
             <div className={styles.flexContainer}>
                 {pokemon.stats.map((stat, index) => (

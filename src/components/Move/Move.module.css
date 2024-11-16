@@ -1,9 +1,8 @@
 .move {
     list-style: none;
-    padding: 1.5rem;
+    padding: 1.3rem;
     border: 1px solid var(--border);
     box-shadow: -4px 4px 0px var(--border);
-    /* border-radius: 4px; */
     display: grid;
     gap: 0.5rem;
     transition: 0.15s;
