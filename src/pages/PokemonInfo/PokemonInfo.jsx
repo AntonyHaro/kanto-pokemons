@@ -15,12 +15,16 @@ function PokemonInfo() {
     const [pokemon, setPokemon] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
     const [pokemonMoves, setPokemonMoves] = useState(null);
     const [loadingMoves, setLoadingMoves] = useState(true);
     const [errorMoves, setErrorMoves] = useState(null);
 
+    const [pokemonAbilities, setPokemonAbilities] = useState(null);
+    const [errorAbilities, setErrorAbilities] = useState(null);
+    const [loadingAbilities, setLoadingAbilities] = useState(true);
+
     useEffect(() => {
-        // Função para buscar os detalhes do Pokémon
         const fetchPokemon = async () => {
             const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
 
@@ -74,9 +78,38 @@ function PokemonInfo() {
                 }
             };
 
+            const fetchAbilities = async () => {
+                try {
+                    const abilityDetails = await Promise.all(
+                        pokemon.abilities.map(async (ability) => {
+                            const abilityResponse = await fetch(
+                                ability.ability.url
+                            );
+                            if (!abilityResponse.ok) {
+                                throw new Error(
+                                    `Failed to fetch ability details for ${ability.ability.name}`
+                                );
+                            }
+                            const abilityData = await abilityResponse.json();
+                            return abilityData || null;
+                        })
+                    );
+
+                    setPokemonAbilities(abilityDetails);
+                } catch (error) {
+                    setErrorAbilities(
+                        "Failed to fetch ability details. Please try again later."
+                    );
+                    console.error("Error fetching ability details:", error);
+                } finally {
+                    setLoadingAbilities(false);
+                }
+            };
+
+            fetchAbilities();
             fetchMoves();
         }
-    }, [pokemon]); // O useEffect só será chamado quando o estado `pokemon` estiver disponível.
+    }, [pokemon]);
 
     if (loading) {
         return <p id="loader">Loading Pokémon...</p>;
@@ -89,6 +122,8 @@ function PokemonInfo() {
     if (!pokemon) {
         return <p id="error-message">No Pokémon found</p>;
     }
+
+    // console.log(pokemon);
 
     return (
         <div className={styles.pokemon_info}>
@@ -118,12 +153,16 @@ function PokemonInfo() {
             </header>
 
             <section className={styles.generalInfo}>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Expedita, molestiae dolores consequuntur, dolorum
-                    consectetur tenetur maxime corrupti iusto quas sunt fugit
-                    autem ipsum nam hic alias. Qui molestias non consectetur.
-                </p>
+                {/* {pokemon.species ? (
+                    <p>
+                        {pokemon.species.flavor_text_entries.find(
+                            (entry) => entry.language.name === "en"
+                        )?.flavor_text ||
+                            "Description not available in English."}
+                    </p>
+                ) : (
+                    <p>Loading description...</p>
+                )} */}
                 <div className={styles.infoContainer}>
                     <div className={styles.info}>
                         <FaRulerVertical
@@ -182,14 +221,35 @@ function PokemonInfo() {
 
             <section>
                 <h2>Abilities</h2>
-                <ul className={styles.abilitiesContainer}>
-                    {pokemon.abilities.map((ability) => (
-                        <li key={ability.ability.name}>
-                            {capitalizeFirstLetter(ability.ability.name)}{" "}
-                            {ability.is_hidden ? "(Hidden)" : ""}
-                        </li>
-                    ))}
-                </ul>
+                {loadingAbilities ? (
+                    <p>Loading abilities...</p>
+                ) : errorAbilities ? (
+                    <p>{errorAbilities}</p>
+                ) : pokemonAbilities && pokemonAbilities.length > 0 ? (
+                    <ul className={styles.abilitiesContainer}>
+                        {console.log(pokemonAbilities)}
+                        {pokemonAbilities.map((ability, index) => (
+                            <li key={index}>
+                                <strong>
+                                    {capitalizeFirstLetter(ability.name)}
+                                    {pokemon.abilities[index].is_hidden ? (
+                                        <span> (hidden)</span>
+                                    ) : (
+                                        ""
+                                    )}
+                                </strong>
+                                <p>
+                                    {ability.effect_entries.find(
+                                        (entry) => entry.language.name === "en"
+                                    )?.effect ||
+                                        "Effect not available in English."}
+                                </p>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No abilities found.</p>
+                )}
             </section>
 
             <section className={styles.movesSection}>
@@ -207,8 +267,8 @@ function PokemonInfo() {
                                 key={index}
                                 move={{
                                     ...move,
-                                    pokemonId: pokemon.id
-                                }} 
+                                    pokemonId: pokemon.id,
+                                }}
                             />
                         ))
                     )}

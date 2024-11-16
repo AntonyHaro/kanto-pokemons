@@ -123,15 +123,27 @@ section {
 }
 
 .abilitiesContainer {
-    display: flex;
-    gap: 0.7rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
 }
 
 .abilitiesContainer li {
+    width: 100%;
     list-style: none;
     padding: 1rem;
-    border-radius: 4px;
-    background-color: var(--border);
+    border: 1px solid hsl(200, 10%, 70%);
+    border-radius: 3px;
+    display: grid;
+    gap: 0.7rem;
+}
+
+.abilitiesContainer strong span {
+    color: hsl(210, 10%, 53%);
+}
+
+.abilitiesContainer p {
+    color: hsl(0, 0%, 38%);
 }
 
 .movesContainer {

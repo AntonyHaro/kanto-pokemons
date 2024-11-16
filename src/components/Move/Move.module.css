@@ -23,7 +23,7 @@
     box-shadow: none;
 }
 
-strong {
+.move strong {
     padding: 0.2rem 0.4rem;
     border-radius: 2px;
 }
