@@ -10,7 +10,7 @@
 
 .pokemonCard {
     list-style: none;
-    padding: 1.5rem;
+    padding: 1rem;
     border: 1px solid var(--border);
     border-radius: 4px;
     transition: 0.2s;
@@ -60,7 +60,7 @@
     text-align: center;
     padding: 0.3rem;
     border-radius: 3px;
-    border: 1px dashed gray;
+    border: 1px solid hsla(210, 20%, 30%, 0.4);
 }
 
 @media (max-width: 576px) {
