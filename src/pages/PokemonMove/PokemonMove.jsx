@@ -78,7 +78,10 @@ function PokemonMove() {
             </div>
         );
 
-    const borderColor = { borderColor: colors[moveData.type] };
+    const borderColor = {
+        borderColor: colors[moveData.type],
+        // backgroundColor: colors[moveData.type],
+    };
 
     return (
         <div className={styles.pokemonMove}>
@@ -110,7 +113,10 @@ function PokemonMove() {
                     </div>
                 </div>
 
-                <div className={styles.multipleSection}>
+                <div
+                    className={styles.multipleSection}
+                    style={{ marginBottom: "1%" }}
+                >
                     <div className={styles.moveInfoItem} style={borderColor}>
                         <strong>Power:</strong> <p>{moveData.power}</p>
                     </div>
@@ -139,15 +145,11 @@ function PokemonMove() {
 
                 <div className={styles.moveInfoItem} style={borderColor}>
                     <strong>Stat Changes:</strong>
-                    <p>{moveData.statChanges.join(", ")}</p>
-                </div>
-
-                <div className={styles.moveInfoItem} style={borderColor}>
-                    <strong>Contest Type:</strong> <p>{moveData.contestType}</p>
+                    <p>{moveData.statChanges.join(", ") || "None"}</p>
                 </div>
             </section>
 
-            <section>
+            <section className={styles.learnedByPokemon}>
                 <h2>Learned By Pokémons:</h2>
                 <LearnedByPokemon pokemons={moveData.learnedByPokemon} />
             </section>
