@@ -147,11 +147,12 @@ section {
 
 .abilitiesContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
     gap: 1rem;
 }
 
-.abilitiesContainer li {
+ 
+/* .abilitiesContainer li {
     width: 100%;
     list-style: none;
     padding: 1rem;
@@ -159,6 +160,22 @@ section {
     border-radius: 3px;
     display: grid;
     gap: 0.7rem;
+    transition: 0.2s;
+} */
+
+.abilitiesContainer li {
+    width: 100%;
+    list-style: none;
+    padding: 0.5rem 1rem;
+    border-left: 4px solid hsl(200, 10%, 70%);
+    display: grid;
+    gap: 0.7rem;
+    transition: 0.2s;
+}
+
+.abilitiesContainer li:hover {
+    border-color: var(--pokemon-name-hover);
+    transform: translateX(0.2rem);
 }
 
 .abilitiesContainer strong span {
