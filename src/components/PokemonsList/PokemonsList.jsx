@@ -49,46 +49,9 @@ function Pokemon({ pokemon }) {
         pokemon.types && pokemon.types[0] ? pokemon.types[0].type.name : null;
 
     return (
-        // <li
-            // style={{
-            //     backgroundColor: firstType ? colors[firstType] : "",
-            // }}
-        //     onClick={handleClick}
-        //     className={styles.pokemonCard}
-        // >
-        //     <div className={styles.pokemon}>
-        //         <p className={styles.name}>
-        //             {capitalizeFirstLetter(pokemon.name)}
-        //         </p>
-        // <img
-        //     src={pokemon.sprites["front_default"]}
-        //     alt={pokemon.name}
-        // />
-        //     </div>
-        //     <div className={styles.typesContainer}>
-        //         {pokemon.types && pokemon.types.length > 0 ? (
-        //             pokemon.types.map((type, index) => (
-        //                 <p
-        //                     key={index}
-        //                     className={styles.type}
-        //                     style={{
-        //                         backgroundColor: colors[type.type.name] || "",
-        //                     }}
-        //                 >
-        //                     {capitalizeFirstLetter(type.type.name)}
-        //                 </p>
-        //             ))
-        //         ) : (
-        //             <p className={styles.type}>No types available</p>
-        //         )}
-        //     </div>
-        // </li>
-
         <li className={styles.pokemonCard} onClick={handleClick}>
             <div className={styles.textContainer}>
-                <p>
-                    #{String(pokemon.id).padStart(3, "0")}
-                </p>
+                <p>#{String(pokemon.id).padStart(3, "0")}</p>
                 <p className={styles.name}>
                     {capitalizeFirstLetter(pokemon.name)}
                 </p>
@@ -99,7 +62,8 @@ function Pokemon({ pokemon }) {
                                 key={index}
                                 className={styles.type}
                                 style={{
-                                    backgroundColor: colors[type.type.name] || "",
+                                    backgroundColor:
+                                        colors[type.type.name] || "",
                                 }}
                             >
                                 {capitalizeFirstLetter(type.type.name)}
@@ -110,7 +74,7 @@ function Pokemon({ pokemon }) {
                     )}
                 </div>
             </div>
-            <div 
+            <div
                 className={styles.imgContainer}
                 style={{
                     backgroundColor: firstType ? colors[firstType] : "",
