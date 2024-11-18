@@ -220,7 +220,7 @@ function PokemonInfo() {
                 )}
             </div>
 
-            <StatsContainer pokemon={pokemon}/>
+            <StatsContainer pokemon={pokemon} />
 
             <section id="abilities">
                 <h2>Abilities</h2>

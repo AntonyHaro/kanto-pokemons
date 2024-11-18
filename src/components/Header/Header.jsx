@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import styles from "./Header.module.css";
 import pokeball from "../../assets/pokeball.svg";
@@ -14,6 +15,10 @@ function Header({ searchTerm, setSearchTerm, isFilterOpen, setIsFilterOpen }) {
                     <img src={pokeball} alt="" />
                     Kanto Pokémons
                 </h1>
+
+                <nav>
+                    <Link to="/favorites">Favorites</Link>
+                </nav>
 
                 <input
                     type="text"

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { IoHeart } from "react-icons/io5";
 import colors from "../../constants/colors";
 import styles from "./PokemonsList.module.css";
 
@@ -51,10 +52,17 @@ function Pokemon({ pokemon }) {
     return (
         <li className={styles.pokemonCard} onClick={handleClick}>
             <div className={styles.textContainer}>
-                <p>#{String(pokemon.id).padStart(3, "0")}</p>
-                <p className={styles.name}>
-                    {capitalizeFirstLetter(pokemon.name)}
+                <p className={styles.id}>
+                    #{String(pokemon.id).padStart(3, "0")}
                 </p>
+                <div className={styles.nameContainer}>
+                    <p className={styles.name}>
+                        {capitalizeFirstLetter(pokemon.name)}
+                    </p>
+                    <button className={styles.favoriteBtn}>
+                        <IoHeart />
+                    </button>
+                </div>
                 <div className={styles.typesContainer}>
                     {pokemon.types && pokemon.types.length > 0 ? (
                         pokemon.types.map((type, index) => (
