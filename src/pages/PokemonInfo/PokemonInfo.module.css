@@ -88,6 +88,7 @@
     transform: translateY(-0.2rem);
     color: white;
     background-color: gray;
+    transform: rotate(360deg);
 }
 
 .favorite {
