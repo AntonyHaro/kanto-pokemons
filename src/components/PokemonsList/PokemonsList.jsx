@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { IoHeart } from "react-icons/io5";
 import colors from "../../constants/colors";
 import styles from "./PokemonsList.module.css";
 
@@ -59,9 +58,6 @@ function Pokemon({ pokemon }) {
                     <p className={styles.name}>
                         {capitalizeFirstLetter(pokemon.name)}
                     </p>
-                    <button className={styles.favoriteBtn}>
-                        <IoHeart />
-                    </button>
                 </div>
                 <div className={styles.typesContainer}>
                     {pokemon.types && pokemon.types.length > 0 ? (

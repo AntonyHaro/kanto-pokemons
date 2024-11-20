@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
-import { FaRulerVertical, FaWeight, FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa6";
+import { FaRulerVertical, FaWeight } from "react-icons/fa";
 
 import colors from "../../constants/colors";
 import { capitalizeFirstLetter } from "../../utils/utils";
@@ -111,6 +112,10 @@ function PokemonInfo() {
         }
     }, [pokemon]);
 
+    const handleFavorite = () => {
+        console.log("fav");
+    };
+
     if (loading) {
         return <p id="loader">Loading Pokémon...</p>;
     }
@@ -149,6 +154,12 @@ function PokemonInfo() {
                             </p>
                         ))}
                     </div>
+                    <button
+                        onClick={() => handleFavorite()}
+                        className={styles.starButton}
+                    >
+                        <FaStar />
+                    </button>
                 </div>
                 <nav>
                     <ul>
@@ -230,7 +241,6 @@ function PokemonInfo() {
                     <p>{errorAbilities}</p>
                 ) : pokemonAbilities && pokemonAbilities.length > 0 ? (
                     <ul className={styles.abilitiesContainer}>
-                        {console.log(pokemonAbilities)}
                         {pokemonAbilities.map((ability, index) => (
                             <li key={index}>
                                 <strong>

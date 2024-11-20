@@ -70,6 +70,26 @@
     border-radius: 3px;
 }
 
+.starButton {
+    border: 2px solid ;
+    font-size: 1.4em;
+    padding: 0.5rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--star);
+    opacity: 0.7;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.starButton:hover {
+    opacity: 1;
+    transform: translateY(-0.2rem);
+    color: white;
+    background-color: var(--star);
+}
+
 section {
     display: grid;
     gap: 1.3rem;
@@ -149,18 +169,6 @@ section {
     display: grid;
     gap: 1rem;
 }
-
- 
-/* .abilitiesContainer li {
-    width: 100%;
-    list-style: none;
-    padding: 1rem;
-    border: 1px solid hsl(200, 10%, 70%);
-    border-radius: 3px;
-    display: grid;
-    gap: 0.7rem;
-    transition: 0.2s;
-} */
 
 .abilitiesContainer li {
     width: 100%;

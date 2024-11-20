@@ -30,17 +30,8 @@
         transform: translateX(0.2rem);
     }
 
-    /* .imgContainer {
-        border-radius: 3px;
-    } */
-
     img {
         animation: balanco 0.2s ease-in-out;
-    }
-
-    .favoriteBtn {
-        opacity: 1;
-        pointer-events: all;
     }
 }
 
@@ -92,22 +83,6 @@
 .imgContainer img {
     height: 140px;
     /* filter: drop-shadow(0 0 2rem white); */
-}
-
-.favoriteBtn {
-    background-color: transparent;
-    border: none;
-    font-size: 2em;
-    padding: 0.2em;
-    color: hsl(0, 80%, 60%);
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.5s;
-    cursor: pointer;
-}
-
-.favoriteBtn:hover {
-    color: hsl(0, 100%, 50%);
 }
 
 @keyframes balanco {
