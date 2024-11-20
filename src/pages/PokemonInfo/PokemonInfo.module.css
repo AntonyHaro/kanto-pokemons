@@ -77,17 +77,23 @@
     display: grid;
     place-items: center;
     border-radius: 50%;
-    color: var(--star);
+    color: gray;
     opacity: 0.7;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.starButton:hover {
+.starButton:hover:not(.favorite) {
     opacity: 1;
     transform: translateY(-0.2rem);
     color: white;
+    background-color: gray;
+}
+
+.favorite {
+    opacity: 1;
     background-color: var(--star);
+    color: white;
 }
 
 section {

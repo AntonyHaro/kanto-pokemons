@@ -25,6 +25,8 @@ function PokemonInfo() {
     const [errorAbilities, setErrorAbilities] = useState(null);
     const [loadingAbilities, setLoadingAbilities] = useState(true);
 
+    const [favorite, setFavorite] = useState(false);
+
     useEffect(() => {
         const fetchPokemon = async () => {
             const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -43,7 +45,20 @@ function PokemonInfo() {
             }
         };
 
+        // Verifica se o Pokémon está marcado como favorito ao carregar a página
+        const checkFavoriteStatus = () => {
+            const favoritePokemons =
+                JSON.parse(localStorage.getItem("favoritePokemons")) || [];
+
+            const isFavorite = favoritePokemons.some(
+                (fav) => fav.id === Number(id)
+            );
+
+            setFavorite(isFavorite);
+        };
+
         fetchPokemon();
+        checkFavoriteStatus();
     }, [id]);
 
     useEffect(() => {
@@ -112,8 +127,43 @@ function PokemonInfo() {
         }
     }, [pokemon]);
 
-    const handleFavorite = () => {
-        console.log("fav");
+    const handleFavorite = (pokemon) => {
+        if (!pokemon || typeof pokemon !== "object") {
+            console.error("O argumento precisa ser um objeto válido.");
+            return;
+        }
+
+        const favoritePokemons =
+            JSON.parse(localStorage.getItem("favoritePokemons")) || [];
+
+        // Verifica se o Pokémon já está nos favoritos
+        const isAlreadyFavorite = favoritePokemons.some(
+            (fav) => fav.id === pokemon.id
+        );
+
+        if (isAlreadyFavorite) {
+            // Remove o Pokémon dos favoritos
+            const updatedFavoritePokemons = favoritePokemons.filter(
+                (fav) => fav.id !== pokemon.id
+            );
+
+            localStorage.setItem(
+                "favoritePokemons",
+                JSON.stringify(updatedFavoritePokemons)
+            );
+
+            setFavorite(false);
+        } else {
+            // Adiciona o Pokémon aos favoritos
+            const updatedFavoritePokemons = [...favoritePokemons, pokemon];
+
+            localStorage.setItem(
+                "favoritePokemons",
+                JSON.stringify(updatedFavoritePokemons)
+            );
+
+            setFavorite(true);
+        }
     };
 
     if (loading) {
@@ -127,8 +177,6 @@ function PokemonInfo() {
     if (!pokemon) {
         return <p id="error-message">No Pokémon found</p>;
     }
-
-    // console.log(pokemon);
 
     return (
         <div className={styles.pokemon_info}>
@@ -155,8 +203,10 @@ function PokemonInfo() {
                         ))}
                     </div>
                     <button
-                        onClick={() => handleFavorite()}
-                        className={styles.starButton}
+                        onClick={() => handleFavorite(pokemon)}
+                        className={`${styles.starButton} ${
+                            favorite ? styles.favorite : ""
+                        }`}
                     >
                         <FaStar />
                     </button>
