@@ -4,6 +4,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { FaStar } from "react-icons/fa6";
 import { FaRulerVertical, FaWeight } from "react-icons/fa";
 
+import titleColors from "../../constants/titleColors";
 import colors from "../../constants/colors";
 import { capitalizeFirstLetter } from "../../utils/utils";
 
@@ -185,7 +186,7 @@ function PokemonInfo() {
                     <IoIosArrowBack /> Back to Home
                 </Link>
                 <div className={styles.pokemonHeader}>
-                    <h1 style={{ color: colors[pokemon.types[0].type.name] }}>
+                    <h1 style={{ color: titleColors[pokemon.types[0].type.name] }}>
                         {capitalizeFirstLetter(pokemon.name)}, #
                         {String(pokemon.id).padStart(3, "0")}
                     </h1>
@@ -231,7 +232,7 @@ function PokemonInfo() {
                     <div className={styles.info}>
                         <FaRulerVertical
                             style={{
-                                color: colors[pokemon.types[0].type.name],
+                                color: titleColors[pokemon.types[0].type.name],
                             }}
                         />
                         <div className={styles.infoRow}>
@@ -242,7 +243,7 @@ function PokemonInfo() {
                     <div className={styles.info}>
                         <FaWeight
                             style={{
-                                color: colors[pokemon.types[0].type.name],
+                                color: titleColors[pokemon.types[0].type.name],
                             }}
                         />
                         <div className={styles.infoRow}>
@@ -253,7 +254,7 @@ function PokemonInfo() {
                     <div className={styles.info}>
                         <FaStar
                             style={{
-                                color: colors[pokemon.types[0].type.name],
+                                color: titleColors[pokemon.types[0].type.name],
                             }}
                         />
                         <div className={styles.infoRow}>

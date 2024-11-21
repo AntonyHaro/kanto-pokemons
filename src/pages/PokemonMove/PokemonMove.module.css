@@ -26,15 +26,25 @@
 
 .moveInfo {
     display: grid;
-    gap: 0.7rem;
+    gap: 0.9rem;
+}
+
+.effect {
+    border-left: 3px solid var(--border);
+    padding: 0.5rem 1rem;
+    transition: 0.2s;
+}
+
+.effect:hover {
+    border-color: var(--pokemon-name);
+    transform: translateX(0.2rem);
 }
 
 .multipleSection {
     width: 100%;
     display: grid;
-    /* align-items: center; */
     grid-template-columns: repeat(4, 1fr);
-    gap: 0.7rem;
+    gap: 0.9rem;
 }
 
 .moveInfoItem {

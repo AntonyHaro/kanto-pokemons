@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { capitalizeFirstLetter } from "../../utils/utils";
 import PokemonList from "../../components/PokemonsList/PokemonsList";
+import titleColors from "../../constants/titleColors";
 import colors from "../../constants/colors";
 import styles from "./PokemonMove.module.css";
 
@@ -80,7 +81,6 @@ function PokemonMove() {
 
     const borderColor = {
         borderColor: colors[moveData.type],
-        // backgroundColor: colors[moveData.type],
     };
 
     return (
@@ -89,7 +89,7 @@ function PokemonMove() {
                 <Link to={`/pokemon/${id}`} className={styles.backButton}>
                     <IoIosArrowBack /> Back to Pokémon
                 </Link>
-                <h1 style={{ color: colors[moveData.type] }}>
+                <h1 style={{ color: titleColors[moveData.type] }}>
                     {moveData.name}
                 </h1>
             </header>
@@ -134,16 +134,13 @@ function PokemonMove() {
                         <strong>Target:</strong> <p>{moveData.target}</p>
                     </div>
                 </div>
-
-                <div className={styles.moveInfoItem} style={borderColor}>
+                <div className={styles.effect}>
                     <strong>Effect:</strong> <p>{moveData.effect}</p>
                 </div>
-
-                <div className={styles.moveInfoItem} style={borderColor}>
+                <div className={styles.effect}>
                     <strong>Short Effect:</strong> <p>{moveData.shortEffect}</p>
                 </div>
-
-                <div className={styles.moveInfoItem} style={borderColor}>
+                <div className={styles.effect} style={{ marginBottom: "1%" }}>
                     <strong>Stat Changes:</strong>
                     <p>{moveData.statChanges.join(", ") || "None"}</p>
                 </div>
@@ -183,7 +180,7 @@ function LearnedByPokemon({ pokemons }) {
     }, [pokemons]);
 
     if (!pokemonDetailsList) {
-        return <p>Loading Pokémon details...</p>;
+        return <p>Loading Pokémons...</p>;
     }
 
     return <PokemonList pokemons={pokemonDetailsList} />;

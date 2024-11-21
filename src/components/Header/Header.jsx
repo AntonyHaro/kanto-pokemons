@@ -13,7 +13,7 @@ function Header({ searchTerm, setSearchTerm, isFilterOpen, setIsFilterOpen }) {
             <div className={styles.flexContainer}>
                 <h1>
                     <img src={pokeball} alt="" />
-                    Kanto Pokémons
+                    PokéMates
                 </h1>
 
                 <nav>
