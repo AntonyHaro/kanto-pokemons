@@ -9,7 +9,7 @@ function Header({ searchTerm, setSearchTerm, isFilterOpen, setIsFilterOpen }) {
     };
 
     return (
-        <header>
+        <header className={styles.header}>
             <div className={styles.flexContainer}>
                 <h1>
                     <img src={pokeball} alt="" />
@@ -17,7 +17,16 @@ function Header({ searchTerm, setSearchTerm, isFilterOpen, setIsFilterOpen }) {
                 </h1>
 
                 <nav>
-                    <Link to="/favorites">Favorites</Link>
+                    <a>
+                        <Link to="/favorites" className={styles.link}>
+                            Favorites
+                        </Link>
+                    </a>
+                    <a>
+                        <Link to="/favorites" className={styles.link}>
+                            Teams
+                        </Link>
+                    </a>
                 </nav>
 
                 <input

@@ -1,4 +1,4 @@
-header {
+.header {
     width: 100%;
     display: grid;
     gap: 2rem;
@@ -23,6 +23,25 @@ header {
 
 .flexContainer h1 img {
     height: 50px;
+}
+
+.header nav {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.link {
+    text-decoration: none;
+    color: gray;
+    border: 1px solid gray;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    transition: 0.2s;
+}
+
+.link:hover {
+    color: black;
+    border-color: black;
 }
 
 input {
@@ -64,7 +83,7 @@ input {
 }
 
 @media (max-width: 792px) {
-    header {
+    .header {
         width: 100%;
     }
 
