@@ -1,7 +1,11 @@
+import { useState } from "react";
 import colors from "../../constants/colors";
 import styles from "./Filters.module.css";
+import { IoMdMenu, IoMdClose } from "react-icons/io";
 
-function Filters({ selectedTypes, handleTypeSelection, types, isFilterOpen }) {
+function Filters({ selectedTypes, handleTypeSelection, types }) {
+    const [isFilterOpen, setIsFilterOpen] = useState(true);
+
     const capitalizeFirstLetter = (string) =>
         string.charAt(0).toUpperCase() + string.slice(1);
 
@@ -10,12 +14,31 @@ function Filters({ selectedTypes, handleTypeSelection, types, isFilterOpen }) {
     }
 
     return (
-        <>
+        <div className={styles.filterContainer}>
+            <button
+                onClick={() => setIsFilterOpen(!isFilterOpen)}
+                className={styles.toggleButton}
+            >
+                {isFilterOpen ? (
+                    <>
+                        <IoMdClose /> Hide Filters
+                    </>
+                ) : (
+                    <>
+                        <IoMdMenu /> Show Filters
+                    </>
+                )}
+            </button>
+
             {isFilterOpen && (
-                <div className={styles.filter_container}>
+                <div className={styles.filter}>
                     <button
                         onClick={() => handleTypeSelection("all")}
-                        className={selectedTypes.length === 0 ? styles.active : undefined}
+                        className={
+                            selectedTypes.length === 0
+                                ? styles.active
+                                : undefined
+                        }
                     >
                         All
                     </button>
@@ -25,7 +48,8 @@ function Filters({ selectedTypes, handleTypeSelection, types, isFilterOpen }) {
                             key={type.name}
                             onClick={() => handleTypeSelection(type.name)}
                             style={{
-                                backgroundColor: colors[type.name] || "lightgray",
+                                backgroundColor:
+                                    colors[type.name] || "lightgray",
                             }}
                             className={
                                 selectedTypes.includes(type.name)
@@ -38,7 +62,7 @@ function Filters({ selectedTypes, handleTypeSelection, types, isFilterOpen }) {
                     ))}
                 </div>
             )}
-        </>
+        </div>
     );
 }
 

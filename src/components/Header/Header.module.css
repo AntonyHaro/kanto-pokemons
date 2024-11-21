@@ -56,21 +56,6 @@ input {
     color: var(--pokemon-name);
 }
 
-.rowContainer {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-}
-
-.rowContainer hr {
-    height: 2px;
-    width: 100%;
-    border: 0;
-    background-color: var(--border);
-}
-
 .filterBtn {
     padding: 0.8rem;
     border-radius: 50%;

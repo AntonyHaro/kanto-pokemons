@@ -39,15 +39,6 @@ function Header({ searchTerm, setSearchTerm, isFilterOpen, setIsFilterOpen }) {
                     onChange={handleInputChange}
                 />
             </div>
-
-            <div className={styles.rowContainer}>
-                <button
-                    className={styles.filterBtn}
-                    onClick={() => setIsFilterOpen(!isFilterOpen)}
-                >
-                    {isFilterOpen ? <IoMdClose /> : <IoMdMenu />}
-                </button>
-            </div>
         </header>
     );
 }

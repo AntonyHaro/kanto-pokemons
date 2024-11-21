@@ -1,11 +1,36 @@
-.filter_container {
+.filterContainer {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.filterContainer .toggleButton {
+    width: 7rem;
+    background-color: transparent;
+    padding: 0.3rem;
+    border: 1px solid gray;
+    border-radius: 3px;
+    color: gray;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.toggleButton:hover {
+    transform: translateY(-0.2rem);
+    color: black;
+    border-color: black;
+}
+
+.filter {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
     gap: 0.4rem;
 }
 
-.filter_container button {
+.filter button {
     background-color: transparent;
     padding: 0.3rem;
     border: 1px solid var(--border);
@@ -15,17 +40,17 @@
     transition: 0.2s;
 }
 
-.filter_container button:hover {
+.filter button:hover {
     transform: translateY(-0.2rem);
 }
 
-.filter_container button.active {
+.filter button.active {
     border-color: var(--pokemon-name);
     transform: translateY(-0.2rem);
 }
 
 @media (max-width: 792px) {
-    .filter_container {
+    .filter {
         display: flex;
         flex-direction: column;
     }
