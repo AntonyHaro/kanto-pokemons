@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Filters from "../../components/Filters/Filters";
 import { Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaStar } from "react-icons/fa6";
+import Filters from "../../components/Filters/Filters";
 import PokemonList from "../../components/PokemonsList/PokemonsList";
 import styles from "./Favorites.module.css";
 

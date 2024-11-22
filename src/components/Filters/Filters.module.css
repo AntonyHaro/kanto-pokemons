@@ -23,6 +23,53 @@
     border-color: black;
 }
 
+.buttonsContainer {
+    display: flex;
+    align-items: stretch;
+    gap: 0.8rem;
+}
+
+.buttonsContainer nav {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.link {
+    text-decoration: none;
+    background-color: transparent;
+    padding: 0.3rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--pokemon-name);
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.link svg {
+    color: var(--border);
+    transition: 0.2s;
+}
+
+.link:hover {
+    transform: translateY(-0.2rem);
+}
+
+.link:hover .star {
+    color: var(--star);
+}
+
+.link:hover .teams {
+    color: var(--teams);
+}
+
+.link:active {
+    border-color: var(--pokemon-name);
+    transform: translateY(-0.2rem);
+}
+
 .filter {
     width: 100%;
     display: grid;
@@ -38,6 +85,10 @@
     color: var(--pokemon-name);
     cursor: pointer;
     transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
 }
 
 .filter button:hover {
@@ -47,11 +98,4 @@
 .filter button.active {
     border-color: var(--pokemon-name);
     transform: translateY(-0.2rem);
-}
-
-@media (max-width: 792px) {
-    .filter {
-        display: flex;
-        flex-direction: column;
-    }
 }

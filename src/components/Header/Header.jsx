@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import { IoMdMenu, IoMdClose } from "react-icons/io";
 import styles from "./Header.module.css";
 import pokeball from "../../assets/pokeball.svg";
 
@@ -15,19 +13,6 @@ function Header({ searchTerm, setSearchTerm, isFilterOpen, setIsFilterOpen }) {
                     <img src={pokeball} alt="" />
                     PokéMates
                 </h1>
-
-                <nav>
-                    <a>
-                        <Link to="/favorites" className={styles.link}>
-                            Favorites
-                        </Link>
-                    </a>
-                    <a>
-                        <Link to="/favorites" className={styles.link}>
-                            Teams
-                        </Link>
-                    </a>
-                </nav>
 
                 <input
                     type="text"

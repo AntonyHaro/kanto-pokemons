@@ -16,24 +16,27 @@ function StatsContainer({ pokemon }) {
                     <div
                         key={index}
                         className={styles.stats}
-                        style={{
-                            backgroundColor: colors[pokemon.types[0].type.name],
-                        }}
+
                     >
-                        <p className={styles.statName}>
+                        <strong className={styles.statName}>
                             {capitalizeFirstLetter(stat.stat.name)}:
-                        </p>
-                        <p className={styles.statInfo}>{stat.base_stat}</p>
+                        </strong>
+                        {/* <p className={styles.statInfo}>{stat.base_stat}</p> */}
                         <div className={styles.statBarContainer}>
-                            <div
-                                className={styles.statBar}
-                                style={{
-                                    width: `${calculateStatBar(
-                                        stat.base_stat,
-                                        maxStats[index]
-                                    )}%`,
-                                }}
-                            ></div>
+                            <div className={styles.statBar}>
+                             <div
+                                    className={styles.statBarColored}
+                                    style={{
+                                        height: '100%',
+                                        width: `${calculateStatBar(
+                                            stat.base_stat,
+                                            maxStats[index]
+                                        )}%`,
+                                        backgroundColor: colors[pokemon.types[0].type.name],
+                                    }}
+                                ></div>
+                            </div>
+                            <span>{stat.base_stat} / {maxStats[index]}</span>
                         </div>
                     </div>
                 ))}

@@ -1,28 +1,28 @@
 .statsContainer .flexContainer {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
+    flex-direction: column;
 }
 
 .statsContainer .stats {
-    /* width: 100%; */
-    flex: 1;
-    padding: 1.7rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding: 1.7rem 0;
     border-radius: 4px;
     border: 1px solid transparent;
-    display: grid;
-    gap: 0.6rem;
-    text-align: center;
     transition: 0.2s;
 }
 
-.statsContainer .stats:hover {
+/* .statsContainer .stats:hover {
     transform: translateY(-0.2rem);
     border-color: hsla(0, 0%, 0%, 0.6);
-}
+} */
 
 .statsContainer .stats .statName {
     color: hsla(0, 0%, 0%, 0.6);
+    width: 15%;
 }
 
 .statsContainer .stats .statInfo {
@@ -31,21 +31,43 @@
     color: hsla(207, 9%, 19%, 0.75);
 }
 
-.statsContainer .stats .statBarContainer {
-    height: 5px;
+.statBarContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.statsContainer .stats .statBar {
+    height: 1.6rem;
     width: 100%;
     background-color: hsla(0, 0%, 0%, 0.2);
     border-radius: 3px;
     overflow: hidden;
 }
 
-.statsContainer .stats .statBar {
-    height: 100%;
-    background-color: hsla(0, 0%, 0%, 0.6);
+.statBarContainer span {
+    font-weight: bold;
+    color: hsla(0, 0%, 0%, 0.4);
+    white-space: nowrap;
 }
 
-@media (max-width: 769px) {
-    .statsContainer .flexContainer {
-        grid-template-columns: repeat(2, 1fr);
+@media (max-width: 1200px) {
+    .statsContainer .stats {
+        flex-direction: column;
+        align-items: start;
+        padding: 0.4rem 0;
+    }
+
+    .statsContainer .stats .statName {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1050px) {
+    .statBarContainer {
+        flex-direction: column;
+        align-items: end;
     }
 }

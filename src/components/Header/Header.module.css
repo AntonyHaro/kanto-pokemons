@@ -25,27 +25,15 @@
     height: 50px;
 }
 
-.header nav {
+.inputContainer {
     display: flex;
-    gap: 0.6rem;
-}
-
-.link {
-    text-decoration: none;
-    color: gray;
-    border: 1px solid gray;
-    padding: 0.2rem 0.5rem;
-    border-radius: 3px;
-    transition: 0.2s;
-}
-
-.link:hover {
-    color: black;
-    border-color: black;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
 }
 
 input {
-    width: 40%;
+    width: 30vw;
     background-color: transparent;
     padding: 0.5rem 1rem;
     border: 1px solid var(--border);

@@ -9,6 +9,7 @@
     --title: hsl(205, 51%, 18%);
     --error-message: hsl(0, 100%, 76%);
     --star: hsl(50, 100%, 50%);
+    --teams: dodgerblue;
 }
 
 * {
@@ -36,4 +37,18 @@ body {
 
 #error-message {
     color: var(--error-message);
+}
+
+@media (max-width: 990px) {
+    body {
+        padding: 3rem;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 560px) {
+    body {
+        padding: 2rem;
+        font-size: 12px;
+    }
 }
