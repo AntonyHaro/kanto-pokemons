@@ -1,0 +1,20 @@
+.teamsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.team {
+    border: 1px solid lightgray;
+    padding: 1rem;
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+}
+
+.team .pokemon {
+    width: 100%;
+    padding: 1rem;
+    background-color: hsl(210, 10%, 90%);
+}

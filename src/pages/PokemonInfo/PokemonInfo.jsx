@@ -174,35 +174,31 @@ function PokemonInfo() {
             return;
         }
 
-        const team =
-            JSON.parse(localStorage.getItem("team")) || [];
+        const storedTeam = JSON.parse(localStorage.getItem("team")) || [];
 
-        // Verifica se o Pokémon já está nos favoritos
-        const isAlreadyOnTeam = team.some(
-            (fav) => fav.id === pokemon.id
+        // Verifica se o Pokémon já está no time
+        const isAlreadyOnTeam = storedTeam.some(
+            (member) => member.id === pokemon.id
         );
 
         if (isAlreadyOnTeam) {
-            // Remove o Pokémon dos favoritos
-            const updatedTeam = team.filter(
-                (fav) => fav.id !== pokemon.id
+            // Remove o Pokémon do time
+            const updatedTeam = storedTeam.filter(
+                (member) => member.id !== pokemon.id
             );
 
-            localStorage.setItem(
-                "team",
-                JSON.stringify(updatedTeam)
-            );
-
+            localStorage.setItem("team", JSON.stringify(updatedTeam));
             setTeam(false);
         } else {
-            // Adiciona o Pokémon aos favoritos
-            const updatedTeam = [...team, pokemon];
+            // Adiciona o Pokémon ao time (limitando o tamanho, por exemplo, a 6 Pokémons)
+            if (storedTeam.length >= 6) {
+                alert("Você só pode ter até 6 Pokémons no time!");
+                return;
+            }
 
-            localStorage.setItem(
-                "team",
-                JSON.stringify(updatedTeam)
-            );
+            const updatedTeam = [...storedTeam, pokemon];
 
+            localStorage.setItem("team", JSON.stringify(updatedTeam));
             setTeam(true);
         }
     };
@@ -247,23 +243,25 @@ function PokemonInfo() {
                             </p>
                         ))}
                     </div>
-                    <button
-                        onClick={() => handleFavorite(pokemon)}
-                        className={`${styles.button} ${
-                            favorite ? styles.favorite : ""
-                        }`}
-                    >
-                        <FaStar />
-                    </button>
 
-                    <button
-                        onClick={() => handleTeam(pokemon)}
-                        className={`${styles.button} ${
-                            team ? styles.team : ""
-                        }`}
-                    >
-                        <FaUsers />
-                    </button>
+                    <div className={styles.btnsContainer}>
+                        <button
+                            onClick={() => handleFavorite(pokemon)}
+                            className={`${styles.button} ${
+                                favorite ? styles.favorite : ""
+                            }`}
+                        >
+                            <FaStar />
+                        </button>
+                        <button
+                            onClick={() => handleTeam(pokemon)}
+                            className={`${styles.button} ${
+                                team ? styles.team : ""
+                            }`}
+                        >
+                            <FaUsers />
+                        </button>
+                    </div>
                 </div>
                 <nav>
                     <ul>

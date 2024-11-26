@@ -74,6 +74,12 @@ html {
     border-radius: 3px;
 }
 
+.btnsContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
 .button {
     border: 2px solid ;
     font-size: 1.4em;

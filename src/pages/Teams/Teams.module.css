@@ -1,3 +1,7 @@
+:root {
+    --add: hsl(120, 34%, 45%);
+}
+
 .team {
     display: flex;
     flex-direction: column;
@@ -36,6 +40,31 @@
     border-radius: 50%;
     background-color: var(--teams);
     color: white;
+}
+
+.addButton {
+    padding: 0.7rem;
+    background-color: transparent;
+    border: 1px solid gray;
+    border-radius: 4px;
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.addButton svg {
+    font-size: 1.4em;
+}
+
+.addButton:hover {
+    color: var(--add);
+    border-color: var(--add);
+    transform: translateY(-0.2rem);
+    cursor: pointer;
+    svg {
+        color: var(--add);
+    }
 }
 
 section {
