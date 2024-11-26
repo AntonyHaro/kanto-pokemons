@@ -9,19 +9,14 @@
     align-items: center;
     justify-content: space-between;
     gap: 0.6rem;
-    padding: 1.7rem 0;
+    padding: 0.9rem 0;
     border-radius: 4px;
     border: 1px solid transparent;
     transition: 0.2s;
 }
 
-/* .statsContainer .stats:hover {
-    transform: translateY(-0.2rem);
-    border-color: hsla(0, 0%, 0%, 0.6);
-} */
-
 .statsContainer .stats .statName {
-    color: hsla(0, 0%, 0%, 0.6);
+    color: hsla(210, 20%, 10%, 0.6);
     width: 15%;
 }
 
@@ -32,17 +27,23 @@
 }
 
 .statBarContainer {
+    opacity: 0.8;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    transition: 0.2s;
+}
+
+.statBarContainer:hover {
+    opacity: 1;
 }
 
 .statsContainer .stats .statBar {
     height: 1.6rem;
     width: 100%;
-    background-color: hsla(0, 0%, 0%, 0.2);
+    background-color: hsla(210, 10%, 50%, 0.1);
     border-radius: 3px;
     overflow: hidden;
 }

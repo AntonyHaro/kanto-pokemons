@@ -9,7 +9,9 @@ import colors from "../../constants/colors";
 import { capitalizeFirstLetter } from "../../utils/utils";
 
 import StatsContainer from "../../components/StatsContainer/StatsContainer";
+import TeamsContainer from "../../components/TeamsContainer/TeamsContainer";
 import Move from "../../components/Move/Move";
+import Modal from "../../components/Modal/Modal";
 import styles from "./PokemonInfo.module.css";
 
 function PokemonInfo() {
@@ -28,6 +30,8 @@ function PokemonInfo() {
 
     const [favorite, setFavorite] = useState(false);
     const [team, setTeam] = useState(false);
+
+    const [isModalOpen, setIsModalOpen] = useState(true);
 
     useEffect(() => {
         const fetchPokemon = async () => {
@@ -217,6 +221,34 @@ function PokemonInfo() {
 
     return (
         <div className={styles.pokemon_info}>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+                <h1>dfdfdfdf</h1>
+            </Modal>
             <header>
                 <Link to="/" className={styles.backButton}>
                     <IoIosArrowBack /> Back to Home

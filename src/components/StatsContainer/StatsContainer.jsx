@@ -13,30 +13,29 @@ function StatsContainer({ pokemon }) {
             <h2>Stats</h2>
             <div className={styles.flexContainer}>
                 {pokemon.stats.map((stat, index) => (
-                    <div
-                        key={index}
-                        className={styles.stats}
-
-                    >
+                    <div key={index} className={styles.stats}>
                         <strong className={styles.statName}>
                             {capitalizeFirstLetter(stat.stat.name)}:
                         </strong>
                         {/* <p className={styles.statInfo}>{stat.base_stat}</p> */}
                         <div className={styles.statBarContainer}>
                             <div className={styles.statBar}>
-                             <div
+                                <div
                                     className={styles.statBarColored}
                                     style={{
-                                        height: '100%',
+                                        height: "100%",
                                         width: `${calculateStatBar(
                                             stat.base_stat,
                                             maxStats[index]
                                         )}%`,
-                                        backgroundColor: colors[pokemon.types[0].type.name],
+                                        backgroundColor:
+                                            colors[pokemon.types[0].type.name],
                                     }}
                                 ></div>
                             </div>
-                            <span>{stat.base_stat} / {maxStats[index]}</span>
+                            <span>
+                                {stat.base_stat} / {maxStats[index]}
+                            </span>
                         </div>
                     </div>
                 ))}

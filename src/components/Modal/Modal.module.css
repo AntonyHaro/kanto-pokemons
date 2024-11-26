@@ -1,0 +1,46 @@
+.modalContent::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor de fundo do trilho */
+}
+
+/* Para Firefox */
+.modalContent {
+    scrollbar-width: thin; /* Define a largura como fina */
+    scrollbar-color: #888 #f1f1f1; /* Cor da barra e do trilho */
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: auto; /* Adicionado para permitir rolagem caso o modal seja maior que a tela */
+    padding: 20px; /* Evita que o conteúdo fique encostado nas bordas em telas pequenas */
+}
+
+.modalContent {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    /* max-width: 500px; */
+    width: 80vw;
+    max-height: 80vh; /* Limita a altura máxima do modal */
+    overflow-y: auto; /* Permite rolagem interna do conteúdo */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adiciona um leve sombreamento */
+}
+
+.modalClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}

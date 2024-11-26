@@ -6,8 +6,55 @@
 
 .team {
     border: 1px solid lightgray;
+    display: grid;
+    gap: 2rem;
     padding: 1rem;
     border-radius: 4px;
+    transition: 0.2s;
+}
+
+.titleContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.team h2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.2s;
+}
+
+.deleteBtn {
+    color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+.team:hover {
+    transform: translateX(0.2rem);
+    border-color: gray;
+
+    h2 {
+        padding-left: 0.4rem;
+    }
+
+    .deleteBtn {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+.pokemonContainer {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 1rem;
