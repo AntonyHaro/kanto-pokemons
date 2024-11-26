@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
-import { FaStar } from "react-icons/fa6";
+import { FaUsers } from "react-icons/fa6";
 import Filters from "../../components/Filters/Filters";
 import PokemonList from "../../components/PokemonsList/PokemonsList";
-import styles from "./Favorites.module.css";
+import styles from "./Team.module.css";
 
-function Favorites() {
+function Team() {
     const [pokemons, setPokemons] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,9 +15,8 @@ function Favorites() {
     const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
-        const favoritePokemons =
-            JSON.parse(localStorage.getItem("favoritePokemons")) || [];
-        setPokemons(favoritePokemons);
+        const team = JSON.parse(localStorage.getItem("team")) || [];
+        setPokemons(team);
         setLoading(false);
     }, []);
 
@@ -61,7 +60,7 @@ function Favorites() {
     });
 
     if (loading) {
-        return <p id="loader">Loading...</p>;
+        return <p id="loader">Loading...</p>;   
     }
 
     if (error) {
@@ -69,14 +68,14 @@ function Favorites() {
     }
 
     return (
-        <div className={styles.favorites}>
+        <div className={styles.team}>
             <header className={styles.header}>
                 <Link to={`/`} className={styles.backButton}>
                     <IoIosArrowBack /> Back to Home
                 </Link>
                 <div className={styles.flexContainer}>
                     <h1>
-                        Favorite Pokémons <FaStar />
+                        Your Team <FaUsers />
                     </h1>
                     <div className={styles.search}>
                         <input
@@ -98,4 +97,4 @@ function Favorites() {
     );
 }
 
-export default Favorites;
+export default Team;

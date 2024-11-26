@@ -67,7 +67,7 @@ function PokemonMove() {
         fetchMoveData();
     }, [move]);
 
-    if (loading) return <p>Loading move details...</p>;
+    if (loading) return <p id="loader">Loading move details...</p>;
 
     if (error)
         return (
@@ -180,7 +180,7 @@ function LearnedByPokemon({ pokemons }) {
     }, [pokemons]);
 
     if (!pokemonDetailsList) {
-        return <p>Loading Pokémons...</p>;
+        return <p id="loader">Loading Pokémons...</p>;
     }
 
     return <PokemonList pokemons={pokemonDetailsList} />;

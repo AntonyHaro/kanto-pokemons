@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
-import { FaStar } from "react-icons/fa6";
+import { FaStar, FaUsers } from "react-icons/fa6";
 import { FaRulerVertical, FaWeight } from "react-icons/fa";
 
 import titleColors from "../../constants/titleColors";
@@ -27,6 +27,7 @@ function PokemonInfo() {
     const [loadingAbilities, setLoadingAbilities] = useState(true);
 
     const [favorite, setFavorite] = useState(false);
+    const [team, setTeam] = useState(false);
 
     useEffect(() => {
         const fetchPokemon = async () => {
@@ -167,6 +168,45 @@ function PokemonInfo() {
         }
     };
 
+    const handleTeam = (pokemon) => {
+        if (!pokemon || typeof pokemon !== "object") {
+            console.error("O argumento precisa ser um objeto válido.");
+            return;
+        }
+
+        const team =
+            JSON.parse(localStorage.getItem("team")) || [];
+
+        // Verifica se o Pokémon já está nos favoritos
+        const isAlreadyOnTeam = team.some(
+            (fav) => fav.id === pokemon.id
+        );
+
+        if (isAlreadyOnTeam) {
+            // Remove o Pokémon dos favoritos
+            const updatedTeam = team.filter(
+                (fav) => fav.id !== pokemon.id
+            );
+
+            localStorage.setItem(
+                "team",
+                JSON.stringify(updatedTeam)
+            );
+
+            setTeam(false);
+        } else {
+            // Adiciona o Pokémon aos favoritos
+            const updatedTeam = [...team, pokemon];
+
+            localStorage.setItem(
+                "team",
+                JSON.stringify(updatedTeam)
+            );
+
+            setTeam(true);
+        }
+    };
+
     if (loading) {
         return <p id="loader">Loading Pokémon...</p>;
     }
@@ -186,7 +226,11 @@ function PokemonInfo() {
                     <IoIosArrowBack /> Back to Home
                 </Link>
                 <div className={styles.pokemonHeader}>
-                    <h1 style={{ color: titleColors[pokemon.types[0].type.name] }}>
+                    <h1
+                        style={{
+                            color: titleColors[pokemon.types[0].type.name],
+                        }}
+                    >
                         {capitalizeFirstLetter(pokemon.name)}, #
                         {String(pokemon.id).padStart(3, "0")}
                     </h1>
@@ -205,11 +249,20 @@ function PokemonInfo() {
                     </div>
                     <button
                         onClick={() => handleFavorite(pokemon)}
-                        className={`${styles.starButton} ${
+                        className={`${styles.button} ${
                             favorite ? styles.favorite : ""
                         }`}
                     >
                         <FaStar />
+                    </button>
+
+                    <button
+                        onClick={() => handleTeam(pokemon)}
+                        className={`${styles.button} ${
+                            team ? styles.team : ""
+                        }`}
+                    >
+                        <FaUsers />
                     </button>
                 </div>
                 <nav>
@@ -312,7 +365,7 @@ function PokemonInfo() {
                         ))}
                     </ul>
                 ) : (
-                    <p>No abilities found.</p>
+                    <p id="loader">No abilities found.</p>
                 )}
             </section>
 
@@ -321,7 +374,7 @@ function PokemonInfo() {
                 <p>Click in one move to see more details.</p>
                 <ul className={styles.movesContainer}>
                     {loadingMoves ? (
-                        <p>Loading moves...</p>
+                        <p id="loader">Loading moves...</p>
                     ) : errorMoves ? (
                         <p>{errorMoves}</p>
                     ) : (

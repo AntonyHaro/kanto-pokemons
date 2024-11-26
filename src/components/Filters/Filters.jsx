@@ -37,7 +37,7 @@ function Filters({ selectedTypes, handleTypeSelection, types }) {
                         Favorites <FaStar className={styles.star} />
                     </Link>
 
-                    <Link to="/favorites" className={styles.link}>
+                    <Link to="/team" className={styles.link}>
                         Teams <FaUsers className={styles.teams} />
                     </Link>
                 </nav>

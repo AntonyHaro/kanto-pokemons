@@ -74,7 +74,7 @@ html {
     border-radius: 3px;
 }
 
-.starButton {
+.button {
     border: 2px solid ;
     font-size: 1.4em;
     padding: 0.5rem;
@@ -87,7 +87,7 @@ html {
     transition: 0.3s;
 }
 
-.starButton:hover:not(.favorite) {
+.button:hover:not(.favorite, .team) {
     opacity: 1;
     transform: translateY(-0.2rem);
     color: white;
@@ -98,6 +98,12 @@ html {
 .favorite {
     opacity: 1;
     background-color: var(--star);
+    color: white;
+}
+
+.team {
+    opacity: 1;
+    background-color: var(--teams);
     color: white;
 }
 

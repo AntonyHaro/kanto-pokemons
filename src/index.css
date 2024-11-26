@@ -9,7 +9,7 @@
     --title: hsl(205, 51%, 18%);
     --error-message: hsl(0, 100%, 76%);
     --star: hsl(50, 100%, 50%);
-    --teams: dodgerblue;
+    --teams: hsl(210, 100%, 56%);
 }
 
 * {
@@ -31,12 +31,26 @@ body {
     color: var(--pokemon-name);
 }
 
-#loader {
-    color: gray;
-}
-
 #error-message {
     color: var(--error-message);
+}
+
+#loader {
+    font-weight: bold;
+    color: gray;
+    animation: colorChange 2s infinite ease-in-out;
+}
+
+@keyframes colorChange {
+    0% {
+        color: lightgray;
+    }
+    50% {
+        color: gray;
+    }
+    100% {
+        color: lightgray;
+    }
 }
 
 @media (max-width: 990px) {

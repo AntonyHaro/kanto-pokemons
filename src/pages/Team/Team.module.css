@@ -1,0 +1,74 @@
+.team {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    gap: 2.2rem;
+}
+
+.team header {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 1.3rem;
+}
+
+.flexContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+}
+
+.team h1 {
+    font-size: 2.5em;
+    color: var(--title);
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.team h1 svg {
+    font-size: 0.9em;
+    padding: 0.5rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background-color: var(--teams);
+    color: white;
+}
+
+section {
+    display: grid;
+    gap: 1.3rem;
+    color: var(--pokemon-name);
+}
+
+.backButton {
+    text-decoration: none;
+    color: var(--border);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.backButton:hover {
+    text-decoration: underline;
+}
+
+.filterBtn {
+    padding: 0.3rem;
+    border-radius: 5px;
+    border: none;
+    background: var(--title);
+    color: var(--body-bgc);
+    font-size: 1.2em;
+    /* display: none; */
+    place-items: center;
+}
+
+@media (max-width: 792px) {
+    .filterBtn {
+        display: grid;
+    }
+}
