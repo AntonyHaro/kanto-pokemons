@@ -1,11 +1,20 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaStar, FaUsers } from "react-icons/fa6";
 import colors from "../../constants/colors";
 import styles from "./Filters.module.css";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 
-function Filters({ selectedTypes, handleTypeSelection, types }) {
+function Filters({
+    selectedTypes,
+    handleTypeSelection,
+    types,
+    searchTerm,
+    setSearchTerm,
+}) {
+    const handleInputChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
     const [isFilterOpen, setIsFilterOpen] = useState(true);
 
     const capitalizeFirstLetter = (string) =>
@@ -32,15 +41,15 @@ function Filters({ selectedTypes, handleTypeSelection, types }) {
                         </>
                     )}
                 </button>
-                <nav>
-                    <Link to="/favorites" className={styles.link}>
-                        Favorites <FaStar className={styles.star} />
-                    </Link>
-
-                    <Link to="/team" className={styles.link}>
-                        Teams <FaUsers className={styles.teams} />
-                    </Link>
-                </nav>
+                <input
+                    type="text"
+                    name="pokemon"
+                    id="pokemon"
+                    placeholder="Search Pokémon:"
+                    autoComplete="off"
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                />
             </div>
 
             {isFilterOpen && (

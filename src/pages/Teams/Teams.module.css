@@ -9,7 +9,7 @@
     gap: 2.2rem;
 }
 
-.team header {
+.team .header {
     display: grid;
     gap: 1.5rem;
     margin-bottom: 1.3rem;
@@ -23,7 +23,7 @@
     gap: 3rem;
 }
 
-.team h1 {
+.team .header h1 {
     font-size: 2.5em;
     color: var(--title);
     transition: 0.2s;
@@ -32,7 +32,7 @@
     gap: 1rem;
 }
 
-.team h1 svg {
+.team .header h1 svg {
     font-size: 0.9em;
     padding: 0.5rem;
     display: grid;

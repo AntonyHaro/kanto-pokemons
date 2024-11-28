@@ -1,0 +1,55 @@
+.berries {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.berriesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.9rem;
+}
+
+.berry {
+    list-style: none;
+    padding: 1.3rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: grid;
+    gap: 0.5rem;
+    transition: 0.15s;
+}
+
+.berry img {
+    height: 55px;
+}
+
+.berry h2 {
+    transition: 0.15s ease-out;
+    margin-bottom: 2%;
+}
+
+.berry:hover {
+    background-color: var(--berries);
+    color: white;
+    cursor: pointer;
+    border-color: gray;
+    transform: translateY(-4px);
+    border-color: var(--berries);
+
+    h2 {
+        padding-left: 0.5rem;
+    }
+}
+
+.berry:active {
+    box-shadow: -4px 4px 0px gray;
+    transform: translateY(4px);
+    transform: translateX(-4px);
+    box-shadow: none;
+}
+
+.berry strong {
+    padding: 0.2rem 0.4rem;
+    border-radius: 2px;
+}

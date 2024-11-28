@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaStar } from "react-icons/fa6";
+import Header from "../../components/Header/Header";
 import Filters from "../../components/Filters/Filters";
 import PokemonList from "../../components/PokemonsList/PokemonsList";
 import styles from "./Favorites.module.css";
@@ -70,28 +71,20 @@ function Favorites() {
 
     return (
         <div className={styles.favorites}>
+            <Header />
             <header className={styles.header}>
-                <Link to={`/`} className={styles.backButton}>
-                    <IoIosArrowBack /> Back to Home
-                </Link>
                 <div className={styles.flexContainer}>
                     <h1>
                         Favorite Pokémons <FaStar />
                     </h1>
-                    <div className={styles.search}>
-                        <input
-                            type="text"
-                            placeholder="Search Pokémon:"
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                    </div>
                 </div>
             </header>
             <Filters
                 selectedTypes={selectedTypes}
                 handleTypeSelection={handleTypeSelection}
                 types={types}
+                setSearchTerm={setSearchTerm}
+                searchTerm={searchTerm}
             />
             <PokemonList pokemons={filteredPokemons} />
         </div>

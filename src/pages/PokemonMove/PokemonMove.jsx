@@ -86,9 +86,16 @@ function PokemonMove() {
     return (
         <div className={styles.pokemonMove}>
             <header>
-                <Link to={`/pokemon/${id}`} className={styles.backButton}>
-                    <IoIosArrowBack /> Back to Pokémon
-                </Link>
+                {id != "null" ? (
+                    <Link to={`/pokemon/${id}`} className={styles.backButton}>
+                        <IoIosArrowBack /> Back to Pokémon
+                    </Link>
+                ) : (
+                    <Link to={`/`} className={styles.backButton}>
+                        <IoIosArrowBack /> Back to Home
+                    </Link>
+                )}
+
                 <h1 style={{ color: titleColors[moveData.type] }}>
                     {moveData.name}
                 </h1>

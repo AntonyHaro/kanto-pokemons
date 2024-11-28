@@ -96,6 +96,8 @@ function Home() {
                 types={types}
                 pokemons={pokemons}
                 isFilterOpen={isFilterOpen}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
             />
             {loading ? (
                 <p id="loader">Loading Pokémons...</p>

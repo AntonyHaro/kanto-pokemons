@@ -15,14 +15,31 @@
 .flexContainer h1 {
     font-size: 2.5em;
     color: var(--title);
-    transition: 0.2s;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
+    transition: 0.2s;
 }
 
-.flexContainer h1 img {
-    height: 50px;
+.flexContainer h1 svg {
+    font-size: 1em;
+    color: red;
+    transition: 0.2s;
+    animation: rotate360 20s infinite linear;
+}
+
+@keyframes rotate360 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.flexContainer h1:hover {
+    cursor: pointer;
+    color: hsl(210, 30%, 38%);
 }
 
 .inputContainer {
@@ -53,6 +70,60 @@ input {
     font-size: 1.2em;
     display: none;
     place-items: center;
+}
+.header nav {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.link {
+    min-width: 6rem;
+    text-decoration: none;
+    background-color: transparent;
+    padding: 0.3rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--pokemon-name);
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.link svg {
+    color: var(--border);
+    transition: 0.2s;
+}
+
+.link:hover {
+    transform: translateY(-0.2rem);
+}
+
+.link:hover .home {
+    color: var(--teams);
+}
+
+.link:hover .star {
+    color: var(--star);
+}
+
+.link:hover .teams {
+    color: var(--teams);
+}
+
+.link:hover .moves {
+    color: var(--moves);
+}
+
+.link:hover .berries {
+    color: var(--berries);
+}
+
+.link:active {
+    border-color: var(--pokemon-name);
+    transform: translateY(-0.2rem);
 }
 
 @media (max-width: 792px) {

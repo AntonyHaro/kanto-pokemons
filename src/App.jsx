@@ -4,6 +4,8 @@ import PokemonInfo from "./pages/PokemonInfo/PokemonInfo";
 import PokemonMove from "./pages/PokemonMove/PokemonMove";
 import Favorites from "./pages/Favorites/Favorites";
 import Teams from "./pages/Teams/Teams";
+import Moves from "./pages/Moves/Moves";
+import Berries from "./pages/Berries/Berries";
 import "./index.css";
 
 function App() {
@@ -14,7 +16,8 @@ function App() {
                 <Route path="/pokemon/:id" element={<PokemonInfo />} />
                 <Route path="/pokemon/:id/:move" element={<PokemonMove />} />
                 <Route path="/favorites" element={<Favorites />} />
-                <Route path="/team" element={<Teams />} />
+                <Route path="/moves" element={<Moves />} />
+                <Route path="/berries" element={<Berries />} />
             </Routes>
         </Router>
     );

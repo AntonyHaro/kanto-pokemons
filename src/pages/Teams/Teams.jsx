@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { IoIosArrowBack } from "react-icons/io";
+import Header from "../../components/Header/Header";
 import { FaUsers } from "react-icons/fa6";
 import { IoAddCircleOutline } from "react-icons/io5";
 import TeamsContainer from "../../components/TeamsContainer/TeamsContainer";
@@ -27,10 +26,8 @@ function Teams() {
 
     return (
         <div className={styles.team}>
+            <Header />
             <header className={styles.header}>
-                <Link to={`/`} className={styles.backButton}>
-                    <IoIosArrowBack /> Back to Home
-                </Link>
                 <div className={styles.flexContainer}>
                     <h1>
                         Your Teams <FaUsers />

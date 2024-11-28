@@ -7,10 +7,15 @@ function Move({ move }) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     return (
-        <li className={styles.move} onClick={() => navigate(`/pokemon/${move.pokemonId}/${move.name}`)}>
+        <li
+            className={styles.move}
+            onClick={() =>
+                navigate(`/pokemon/${move.pokemonId || null}/${move.name}`)
+            }
+        >
             <p>
                 <strong
                     style={{

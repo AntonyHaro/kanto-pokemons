@@ -172,41 +172,6 @@ function PokemonInfo() {
         }
     };
 
-    const handleTeam = (pokemon) => {
-        if (!pokemon || typeof pokemon !== "object") {
-            console.error("O argumento precisa ser um objeto válido.");
-            return;
-        }
-
-        const storedTeam = JSON.parse(localStorage.getItem("team")) || [];
-
-        // Verifica se o Pokémon já está no time
-        const isAlreadyOnTeam = storedTeam.some(
-            (member) => member.id === pokemon.id
-        );
-
-        if (isAlreadyOnTeam) {
-            // Remove o Pokémon do time
-            const updatedTeam = storedTeam.filter(
-                (member) => member.id !== pokemon.id
-            );
-
-            localStorage.setItem("team", JSON.stringify(updatedTeam));
-            setTeam(false);
-        } else {
-            // Adiciona o Pokémon ao time (limitando o tamanho, por exemplo, a 6 Pokémons)
-            if (storedTeam.length >= 6) {
-                alert("Você só pode ter até 6 Pokémons no time!");
-                return;
-            }
-
-            const updatedTeam = [...storedTeam, pokemon];
-
-            localStorage.setItem("team", JSON.stringify(updatedTeam));
-            setTeam(true);
-        }
-    };
-
     if (loading) {
         return <p id="loader">Loading Pokémon...</p>;
     }
@@ -221,34 +186,6 @@ function PokemonInfo() {
 
     return (
         <div className={styles.pokemon_info}>
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-                <h1>dfdfdfdf</h1>
-            </Modal>
             <header>
                 <Link to="/" className={styles.backButton}>
                     <IoIosArrowBack /> Back to Home
@@ -284,14 +221,6 @@ function PokemonInfo() {
                             }`}
                         >
                             <FaStar />
-                        </button>
-                        <button
-                            onClick={() => handleTeam(pokemon)}
-                            className={`${styles.button} ${
-                                team ? styles.team : ""
-                            }`}
-                        >
-                            <FaUsers />
                         </button>
                     </div>
                 </div>

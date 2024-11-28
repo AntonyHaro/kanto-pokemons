@@ -1,0 +1,11 @@
+.moves {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.movesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.9rem;
+}
