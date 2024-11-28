@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 import Header from "../../components/Header/Header";
 import Filters from "../../components/Filters/Filters";
 import PokemonsList from "../../components/PokemonsList/PokemonsList";
+import { capitalizeFirstLetter } from "../../utils/utils";
 import styles from "./Home.module.css";
 
 function Home() {
@@ -12,6 +15,57 @@ function Home() {
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [isFilterOpen, setIsFilterOpen] = useState(true);
+    const [isComparatorOpen, setIsComparatorOpen] = useState(false);
+    const [selectedPokemons, setSelectedPokemons] = useState([]);
+
+    const navigate = useNavigate();
+
+    const Card = ({ id, content, onSelect, isSelected }) => {
+        return (
+            <div
+                style={{
+                    padding: "20px",
+                    margin: "10px",
+                    border: isSelected ? "2px solid blue" : "2px solid gray",
+                    cursor: "pointer",
+                    display: "inline-block",
+                }}
+                onClick={() => onSelect(id)}
+            >
+                <h3>{content}</h3>
+            </div>
+        );
+    };
+
+    // Estado para armazenar os cards selecionados
+
+    // Função para lidar com a seleção de um card
+    const handleSelectPokemon = (pokemon) => {
+        setSelectedPokemons((prevSelected) => {
+            console.log(selectedPokemons);
+            // Se o card já estiver selecionado, removê-lo
+            if (prevSelected.includes(pokemon)) {
+                return prevSelected.filter(
+                    (cardPokemon) => cardPokemon !== pokemon
+                );
+            }
+
+            // Se menos de 2 cards estão selecionados, adicioná-lo
+            if (prevSelected.length < 2) {
+                return [...prevSelected, pokemon];
+            }
+
+            // Se já houver 2 cards selecionados, não adicionar mais
+            return prevSelected;
+        });
+    };
+
+    // esse vai ficar no header, que mostra os pokemons selecionados rs
+    const handleRemovePokemon = (pokemon) => {
+        setSelectedPokemons((prevSelected) => {
+            return prevSelected.filter((item) => item !== pokemon);
+        });
+    };
 
     useEffect(() => {
         const fetchTypes = async () => {
@@ -98,13 +152,64 @@ function Home() {
                 isFilterOpen={isFilterOpen}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
+                isComparatorOpen={isComparatorOpen}
+                setIsComparatorOpen={setIsComparatorOpen}
             />
+            {isComparatorOpen ? (
+                <section className={styles.comparator}>
+                    <h3>Pokémons to compare (max 2 pokémons):</h3>
+                    <ul className={styles.pokemonsToCompareContainer}>
+                        {selectedPokemons.map((pokemon) => (
+                            <li
+                                key={pokemon.id}
+                                className={styles.pokemonToCompare}
+                                onClick={() => handleRemovePokemon(pokemon)}
+                            >
+                                <strong>
+                                    {capitalizeFirstLetter(pokemon.name)}
+                                </strong>
+                                <RiDeleteBin5Fill />
+                            </li>
+                        ))}
+
+                        {/* Adicionar slots "empty" para preencher até 2 */}
+                        {Array.from({
+                            length: 2 - selectedPokemons.length,
+                        }).map((_, index) => (
+                            <li
+                                key={`empty-${index}`}
+                                className={styles.pokemonToCompare}
+                            >
+                                Empty
+                            </li>
+                        ))}
+                        <button
+                            className={styles.compareButton}
+                            disabled={selectedPokemons.length < 2}
+                            onClick={() =>
+                                navigate(
+                                    `/pokemon/${selectedPokemons[0].id}/${selectedPokemons[1].id}`
+                                )
+                            }
+                        >
+                            Compare
+                        </button>
+                    </ul>
+                </section>
+            ) : (
+                <></>
+            )}
             {loading ? (
                 <p id="loader">Loading Pokémons...</p>
             ) : error ? (
                 <p id="error-message">{error}</p>
             ) : (
-                <PokemonsList pokemons={filteredPokemons} />
+                <PokemonsList
+                    pokemons={filteredPokemons}
+                    isComparatorOpen={isComparatorOpen}
+                    onSelect={handleSelectPokemon}
+                    selectedPokemons={selectedPokemons}
+                />
             )}
         </div>
     );

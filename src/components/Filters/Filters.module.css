@@ -17,17 +17,31 @@
 }
 
 .buttonsContainer button:hover {
-    /* width: 7rem; */
     transform: translateY(-0.2rem);
-    color: black;
-    border-color: black;
+    /* color: var(--pokemon-name); */
+    /* border-color: var(--pokemon-name); */
 }
 
 .buttonsContainer {
     display: flex;
-    /* justify-content: space-between; */
     align-items: stretch;
     gap: 0.8rem;
+}
+
+.comparator svg {
+    font-size: 1.2em;
+    transition: 0.1s;
+}
+
+.comparator.activeComparator {
+    border-color: var(--comparator);
+    background-color: var(--comparator);
+    /* color: var(--comparator); */
+    color: white;
+}
+
+.comparator.closedComparator:hover svg {
+    color: var(--comparator);
 }
 
 .filter {

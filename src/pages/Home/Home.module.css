@@ -5,6 +5,58 @@
     gap: 2.8rem;
 }
 
+.comparator {
+    margin-top: 2%;
+    display: grid;
+    /* place-items: center; */
+    gap: 1.4rem;
+}
+
+.pokemonsToCompareContainer {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+}
+
+.pokemonToCompare {
+    padding: 0.4rem;
+    border-bottom: 1px solid gray;
+    /* border-radius: 4px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: 0.1s;
+}
+
+.pokemonToCompare:hover {
+    border-color: var(--moves);
+    cursor: pointer;
+    transform: translateY(-0.1rem);
+
+    svg {
+        color: var(--moves);
+    }
+}
+
+.compareButton {
+    margin-left: 1%;
+    padding: 0.6rem 1.4rem;
+    background-color: transparent;
+    color: var(--comparator);
+    border: 1px solid var(--comparator);
+    font-weight: bold;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.compareButton:hover {
+    cursor: pointer;
+    transform: translateY(-0.2rem);
+    background-color: var(--comparator);
+    color: white;
+}
+
 /* mobile */
 @media (max-width: 576px) {
     body {

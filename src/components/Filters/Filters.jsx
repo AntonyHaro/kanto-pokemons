@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import colors from "../../constants/colors";
 import styles from "./Filters.module.css";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
+import { TbAbacus } from "react-icons/tb";
 
 function Filters({
     selectedTypes,
@@ -10,6 +11,8 @@ function Filters({
     types,
     searchTerm,
     setSearchTerm,
+    isComparatorOpen,
+    setIsComparatorOpen,
 }) {
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
@@ -50,7 +53,20 @@ function Filters({
                         </>
                     )}
                 </button>
-                <button>Compare Pokémons</button>
+                <button
+                    className={`${styles.comparator} ${
+                        isComparatorOpen
+                            ? styles.activeComparator
+                            : styles.closedComparator
+                    }`}
+                    onClick={() => {
+                        isComparatorOpen
+                            ? setIsComparatorOpen(false)
+                            : setIsComparatorOpen(true);
+                    }}
+                >
+                    Compare Pokémons <TbAbacus />
+                </button>
             </div>
 
             {isFilterOpen && (

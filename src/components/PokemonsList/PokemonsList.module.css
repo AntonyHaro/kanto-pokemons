@@ -84,6 +84,11 @@
     /* filter: drop-shadow(0 0 2rem white); */
 }
 
+.selected {
+    background-color: hsl(210, 50%, 80%);
+    border-color: var(--pokemon-name);
+}
+
 @keyframes balanco {
     0% {
         transform: rotate(0deg);

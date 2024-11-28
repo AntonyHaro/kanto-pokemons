@@ -1,14 +1,24 @@
 import { useNavigate } from "react-router-dom";
+import { capitalizeFirstLetter } from "../../utils/utils";
 import colors from "../../constants/colors";
 import styles from "./PokemonsList.module.css";
 
-function PokemonsList({ pokemons }) {
-    console.log(pokemons);
-
+function PokemonsList({
+    pokemons,
+    isComparatorOpen,
+    onSelect,
+    selectedPokemons,
+}) {
     return (
         <ul id={styles.pokemonsContainer}>
             {pokemons.map((pokemon) => (
-                <Pokemon key={pokemon.id} pokemon={pokemon} />
+                <Pokemon
+                    key={pokemon.id}
+                    pokemon={pokemon}
+                    isComparatorOpen={isComparatorOpen}
+                    onSelect={onSelect}
+                    selectedPokemons={selectedPokemons}
+                />
             ))}
             {pokemons.length == 0 && (
                 <p className={styles.noPokemons}>
@@ -21,35 +31,42 @@ function PokemonsList({ pokemons }) {
 
 export default PokemonsList;
 
-function Pokemon({ pokemon }) {
+function Pokemon({ pokemon, isComparatorOpen, onSelect, selectedPokemons }) {
     const navigate = useNavigate();
 
-    const capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
+    const isSelected = selectedPokemons.some(
+        (selected) => selected.id === pokemon.id
+    );
 
     const playSound = async (id) => {
         const soundUrl = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`;
         try {
             const audio = new Audio(soundUrl);
-            await audio
-                .play()
-                .catch((err) => console.error("Playback failed:", err));
+            await audio.play();
         } catch (error) {
             console.error("Error playing audio:", error);
         }
     };
 
     const handleClick = () => {
-        playSound(pokemon.id);
-        navigate(`/pokemon/${pokemon.id}`);
+        if (!isComparatorOpen) {
+            playSound(pokemon.id);
+            navigate(`/pokemon/${pokemon.id}`);
+        } else {
+            onSelect(pokemon);
+        }
     };
 
     const firstType =
         pokemon.types && pokemon.types[0] ? pokemon.types[0].type.name : null;
 
     return (
-        <li className={styles.pokemonCard} onClick={handleClick}>
+        <li
+            className={`${styles.pokemonCard} ${
+                isSelected ? styles.selected : ""
+            }`}
+            onClick={handleClick}
+        >
             <div className={styles.textContainer}>
                 <p className={styles.id}>
                     #{String(pokemon.id).padStart(3, "0")}
@@ -60,22 +77,17 @@ function Pokemon({ pokemon }) {
                     </p>
                 </div>
                 <div className={styles.typesContainer}>
-                    {pokemon.types && pokemon.types.length > 0 ? (
-                        pokemon.types.map((type, index) => (
-                            <p
-                                key={index}
-                                className={styles.type}
-                                style={{
-                                    backgroundColor:
-                                        colors[type.type.name] || "",
-                                }}
-                            >
-                                {capitalizeFirstLetter(type.type.name)}
-                            </p>
-                        ))
-                    ) : (
-                        <p className={styles.type}>No types available</p>
-                    )}
+                    {pokemon.types.map((type, index) => (
+                        <p
+                            key={index}
+                            className={styles.type}
+                            style={{
+                                backgroundColor: colors[type.type.name] || "",
+                            }}
+                        >
+                            {capitalizeFirstLetter(type.type.name)}
+                        </p>
+                    ))}
                 </div>
             </div>
             <div
