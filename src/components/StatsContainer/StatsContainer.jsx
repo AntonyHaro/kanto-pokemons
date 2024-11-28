@@ -1,5 +1,6 @@
 import maxStats from "../../constants/maxStats.js";
 import colors from "../../constants/colors.js";
+import titleColors from "../../constants/titleColors.js";
 import { capitalizeFirstLetter } from "../../utils/utils.js";
 import styles from "./StatsContainer.module.css";
 
@@ -29,7 +30,9 @@ function StatsContainer({ pokemon }) {
                                             maxStats[index]
                                         )}%`,
                                         backgroundColor:
-                                            colors[pokemon.types[0].type.name],
+                                            titleColors[
+                                                pokemon.types[0].type.name
+                                            ],
                                     }}
                                 ></div>
                             </div>

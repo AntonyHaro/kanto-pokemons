@@ -36,8 +36,11 @@
 }
 
 .effect:hover {
-    border-color: var(--pokemon-name);
+    border-color: var(--hover-color);
     transform: translateX(0.2rem);
+    strong {
+        color: var(--hover-color);
+    }
 }
 
 .multipleSection {
@@ -51,7 +54,7 @@
     flex: 1;
     height: 100%;
     padding: 1rem;
-    border: 1px solid transparent;
+    border: 1px solid var(--border);
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -60,11 +63,19 @@
 
 .moveInfoItem:hover {
     transform: translateY(-0.15rem);
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+    color: white;
+
+    strong {
+        color: white;
+    }
 }
 
 .moveInfoItem strong {
     margin-right: 0.5rem;
     color: #333;
+    transition: 0.2s;
 }
 
 .moveInfoItem p {

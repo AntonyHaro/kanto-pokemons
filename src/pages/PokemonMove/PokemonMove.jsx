@@ -79,8 +79,8 @@ function PokemonMove() {
             </div>
         );
 
-    const borderColor = {
-        borderColor: colors[moveData.type],
+    const hoverColor = {
+        "--hover-color": titleColors[moveData.type],
     };
 
     return (
@@ -91,8 +91,8 @@ function PokemonMove() {
                         <IoIosArrowBack /> Back to Pokémon
                     </Link>
                 ) : (
-                    <Link to={`/`} className={styles.backButton}>
-                        <IoIosArrowBack /> Back to Home
+                    <Link to={`/moves`} className={styles.backButton}>
+                        <IoIosArrowBack /> Back to Moves
                     </Link>
                 )}
 
@@ -103,18 +103,18 @@ function PokemonMove() {
 
             <section className={styles.moveInfo}>
                 <div className={styles.multipleSection}>
-                    <div className={styles.moveInfoItem} style={borderColor}>
+                    <div className={styles.moveInfoItem} style={hoverColor}>
                         <strong>Type:</strong>
                         <p>{capitalizeFirstLetter(moveData.type)}</p>
                     </div>
 
-                    <div className={styles.moveInfoItem} style={borderColor}>
+                    <div className={styles.moveInfoItem} style={hoverColor}>
                         <strong>PP:</strong> <p>{moveData.pp}</p>
                     </div>
-                    <div className={styles.moveInfoItem} style={borderColor}>
+                    <div className={styles.moveInfoItem} style={hoverColor}>
                         <strong>Accuracy:</strong> <p>{moveData.accuracy}</p>
                     </div>
-                    <div className={styles.moveInfoItem} style={borderColor}>
+                    <div className={styles.moveInfoItem} style={hoverColor}>
                         <strong>Damage Class:</strong>{" "}
                         <p>{moveData.damageClass}</p>
                     </div>
@@ -124,30 +124,31 @@ function PokemonMove() {
                     className={styles.multipleSection}
                     style={{ marginBottom: "1%" }}
                 >
-                    <div className={styles.moveInfoItem} style={borderColor}>
+                    <div className={styles.moveInfoItem} style={hoverColor}>
                         <strong>Power:</strong> <p>{moveData.power}</p>
                     </div>
 
-                    <div className={styles.moveInfoItem} style={borderColor}>
+                    <div className={styles.moveInfoItem} style={hoverColor}>
                         <strong>Priority:</strong> <p>{moveData.priority}</p>
                     </div>
 
-                    <div className={styles.moveInfoItem} style={borderColor}>
+                    <div className={styles.moveInfoItem} style={hoverColor}>
                         <strong>Effect Chance:</strong>
                         <p>{moveData.effectChance}</p>
                     </div>
 
-                    <div className={styles.moveInfoItem} style={borderColor}>
+                    <div className={styles.moveInfoItem} style={hoverColor}>
                         <strong>Target:</strong> <p>{moveData.target}</p>
                     </div>
                 </div>
-                <div className={styles.effect}>
+                <div className={styles.effect} style={hoverColor}>
                     <strong>Effect:</strong> <p>{moveData.effect}</p>
                 </div>
-                <div className={styles.effect}>
+                <div className={styles.effect} style={hoverColor}>
                     <strong>Short Effect:</strong> <p>{moveData.shortEffect}</p>
                 </div>
-                <div className={styles.effect} style={{ marginBottom: "1%" }}>
+                {/* oq esta errado aq */}
+                <div className={styles.effect} style={hoverColor}>
                     <strong>Stat Changes:</strong>
                     <p>{moveData.statChanges.join(", ") || "None"}</p>
                 </div>

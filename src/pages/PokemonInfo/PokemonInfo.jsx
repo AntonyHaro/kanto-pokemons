@@ -172,6 +172,10 @@ function PokemonInfo() {
         }
     };
 
+    const hoverColor = {
+        "--hover-color": titleColors[moveData.type],
+    };
+
     if (loading) {
         return <p id="loader">Loading Pokémon...</p>;
     }
