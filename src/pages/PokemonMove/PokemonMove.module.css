@@ -35,6 +35,10 @@
     transition: 0.2s;
 }
 
+.effect strong {
+    transition: 0.2s;
+}
+
 .effect:hover {
     border-color: var(--hover-color);
     transform: translateX(0.2rem);
@@ -58,13 +62,13 @@
     border-radius: 4px;
     display: flex;
     align-items: center;
-    transition: 0.2s;
+    transition: 0.2s ease-out;
 }
 
 .moveInfoItem:hover {
     transform: translateY(-0.15rem);
     background-color: var(--hover-color);
-    border-color: var(--hover-color);
+    border-color: transparent;
     color: white;
 
     strong {

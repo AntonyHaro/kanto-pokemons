@@ -27,6 +27,15 @@ function Filters({
     return (
         <div className={styles.filterContainer}>
             <div className={styles.buttonsContainer}>
+                <input
+                    type="text"
+                    name="pokemon"
+                    id="pokemon"
+                    placeholder="Search Pokémon:"
+                    autoComplete="off"
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                />
                 <button
                     onClick={() => setIsFilterOpen(!isFilterOpen)}
                     className={styles.toggleButton}
@@ -41,15 +50,7 @@ function Filters({
                         </>
                     )}
                 </button>
-                <input
-                    type="text"
-                    name="pokemon"
-                    id="pokemon"
-                    placeholder="Search Pokémon:"
-                    autoComplete="off"
-                    value={searchTerm}
-                    onChange={handleInputChange}
-                />
+                <button>Compare Pokémons</button>
             </div>
 
             {isFilterOpen && (

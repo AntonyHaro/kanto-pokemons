@@ -3,10 +3,9 @@
     gap: 1.5rem;
 }
 
-.filterContainer .toggleButton {
-    width: 7rem;
+.buttonsContainer button {
     background-color: transparent;
-    padding: 0.3rem;
+    padding: 0.2rem 0.7rem;
     border: 1px solid gray;
     border-radius: 3px;
     color: gray;
@@ -17,7 +16,8 @@
     gap: 0.4rem;
 }
 
-.toggleButton:hover {
+.buttonsContainer button:hover {
+    /* width: 7rem; */
     transform: translateY(-0.2rem);
     color: black;
     border-color: black;
@@ -25,7 +25,7 @@
 
 .buttonsContainer {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: stretch;
     gap: 0.8rem;
 }

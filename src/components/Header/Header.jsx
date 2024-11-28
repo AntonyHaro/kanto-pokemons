@@ -1,6 +1,6 @@
 import { FaStar } from "react-icons/fa6";
 import { GiPunchBlast, GiPokecog } from "react-icons/gi";
-import { LuApple } from "react-icons/lu";
+import { FaAppleAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import { FaHome } from "react-icons/fa";
@@ -26,7 +26,7 @@ function Header({ searchTerm, setSearchTerm}) {
                     </Link>
 
                     <Link to="/berries" className={styles.link}>
-                        Berries <LuApple className={styles.berries} />
+                        Berries <FaAppleAlt className={styles.berries} />
                     </Link>
 
                     <Link to="/favorites" className={styles.link}>
