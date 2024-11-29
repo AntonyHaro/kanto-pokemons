@@ -1,5 +1,4 @@
 import maxStats from "../../constants/maxStats.js";
-import colors from "../../constants/colors.js";
 import titleColors from "../../constants/titleColors.js";
 import { capitalizeFirstLetter } from "../../utils/utils.js";
 import styles from "./StatsContainer.module.css";
@@ -18,7 +17,6 @@ function StatsContainer({ pokemon }) {
                         <strong className={styles.statName}>
                             {capitalizeFirstLetter(stat.stat.name)}:
                         </strong>
-                        {/* <p className={styles.statInfo}>{stat.base_stat}</p> */}
                         <div className={styles.statBarContainer}>
                             <div className={styles.statBar}>
                                 <div
