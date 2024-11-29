@@ -38,6 +38,7 @@ function Filters({
                     autoComplete="off"
                     value={searchTerm}
                     onChange={handleInputChange}
+                    style={{ marginLeft: "1%" }}
                 />
                 <button
                     onClick={() => setIsFilterOpen(!isFilterOpen)}
