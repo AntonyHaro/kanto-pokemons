@@ -191,5 +191,12 @@ function LearnedByPokemon({ pokemons }) {
         return <p id="loader">Loading Pokémons...</p>;
     }
 
-    return <PokemonList pokemons={pokemonDetailsList} />;
+    return (
+        <PokemonList
+            pokemons={pokemonDetailsList}
+            isComparatorOpen={null}
+            onSelect={null}
+            selectedPokemons={null}
+        />
+    );
 }

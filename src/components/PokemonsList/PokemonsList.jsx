@@ -34,9 +34,13 @@ export default PokemonsList;
 function Pokemon({ pokemon, isComparatorOpen, onSelect, selectedPokemons }) {
     const navigate = useNavigate();
 
-    const isSelected = selectedPokemons.some(
-        (selected) => selected.id === pokemon.id
-    );
+    let isSelected;
+
+    selectedPokemons
+        ? (isSelected = selectedPokemons.some(
+              (selected) => selected.id === pokemon.id
+          ))
+        : "";
 
     const playSound = async (id) => {
         const soundUrl = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`;
@@ -52,9 +56,9 @@ function Pokemon({ pokemon, isComparatorOpen, onSelect, selectedPokemons }) {
         if (!isComparatorOpen) {
             playSound(pokemon.id);
             navigate(`/pokemon/${pokemon.id}`);
-        } else {
-            onSelect(pokemon);
+            return;
         }
+        onSelect(pokemon);
     };
 
     const firstType =

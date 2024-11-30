@@ -1,0 +1,59 @@
+.statsComparator {
+    width: 100%;
+    margin-top: 2%;
+    display: grid;
+    place-items: center;
+    gap: 2rem;
+}
+
+.statsComparator h2 {
+    text-align: center;
+}
+
+.statsComparator hr {
+    border: 0;
+    background-color: lightgray;
+    height: 2px;
+    width: 75%;
+    margin-bottom: 2%;
+}
+
+.statsContainer {
+    width: 100%;
+    display: grid;
+    gap: 2rem;
+}
+
+.statRow {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: red; */
+}
+
+.statName {
+    flex: 0.7;
+    font-weight: bold;
+}
+
+.statBars {
+    flex: 3;
+    display: flex;
+    position: relative;
+    height: 20px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.statBar {
+    height: 100%;
+}
+
+.statValues {
+    flex: 0.7;
+    text-align: right;
+    font-size: 14px;
+    color: #555;
+}

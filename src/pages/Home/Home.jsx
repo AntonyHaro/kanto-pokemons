@@ -188,7 +188,7 @@ function Home() {
                             disabled={selectedPokemons.length < 2}
                             onClick={() =>
                                 navigate(
-                                    `/pokemon/${selectedPokemons[0].id}/${selectedPokemons[1].id}`
+                                    `/${selectedPokemons[0].id}/${selectedPokemons[1].id}`
                                 )
                             }
                         >

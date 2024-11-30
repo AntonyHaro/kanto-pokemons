@@ -15,7 +15,7 @@ function App() {
             <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route path="/pokemon/:id" element={<PokemonInfo />} />
-                <Route path="/pokemon/:id1/:id2" element={<Comparator />} />
+                <Route path="/:id1/:id2" element={<Comparator />} />
                 <Route path="/pokemon/:id/:move" element={<PokemonMove />} />
                 <Route path="/favorites" element={<Favorites />} />
                 <Route path="/moves" element={<Moves />} />

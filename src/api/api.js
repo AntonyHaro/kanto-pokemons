@@ -42,14 +42,19 @@ export const gemini = async (pokemon1, pokemon2) => {
     - The analysis must focus solely on the given context and remain on the topic of comparing Pokémon.
     - Do not include any markdown formatting or additional text. Provide an objective response only.
     - Consider the usefulness of the Pokémon for a team.
+    Paragraph 1.
+    (blank line)
+    Paragraph 2.
+
+    - Generate the response at max 60 words.
+
+    ---
 
     Pokémon 1:
     ${pokemon1Data}
 
     Pokémon 2:
     ${pokemon2Data}
-
-    Generate a response in 80 words.
     `;
 
     const result = await model.generateContent(prompt);
