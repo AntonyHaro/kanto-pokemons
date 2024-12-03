@@ -57,3 +57,22 @@
     font-size: 14px;
     color: #555;
 }
+
+.statsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.statChart {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.statChart h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
