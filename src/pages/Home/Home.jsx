@@ -79,7 +79,7 @@ function Home() {
         };
 
         const fetchPokemons = async () => {
-            const url = "https://pokeapi.co/api/v2/pokemon?limit=1100";
+            const url = "https://pokeapi.co/api/v2/pokemon?limit=700";
 
             try {
                 const response = await fetch(url);
