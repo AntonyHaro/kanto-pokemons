@@ -222,6 +222,53 @@ section {
     gap: 0.9rem;
 }
 
+.evolutionContainer {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-around; */
+    gap: 2.4rem;
+}
+
+.evolutionItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.imgContainer {
+    padding: 1rem;
+    background-color: var(--border);
+    display: grid;
+    place-items: center;
+    border-radius: 50% 0;
+}
+
+.imgContainer img {
+    height: 160px;
+    filter: drop-shadow(0 0 2rem white);
+}
+
+.imgContainer img:hover {
+    animation: balanco 0.2s ease-in-out;
+}
+
+.evolutionItem strong {
+    font-size: 1.4em;
+}
+
+.evolutionArrow {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.2em;
+}
+
+.evolutionArrow span {
+    font-weight: bold;
+}
+
 @media (max-width: 1075px) {
     .statsContainer .flexContainer {
         grid-template-columns: repeat(3, 1fr);

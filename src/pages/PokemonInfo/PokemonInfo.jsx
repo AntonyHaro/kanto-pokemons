@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaStar, FaUsers } from "react-icons/fa6";
-import { FaRulerVertical, FaWeight } from "react-icons/fa";
+import { FaRulerVertical, FaWeight, FaArrowRight } from "react-icons/fa";
 
 import titleColors from "../../constants/titleColors";
 import colors from "../../constants/colors";
@@ -32,6 +32,10 @@ function PokemonInfo() {
     const [team, setTeam] = useState(false);
 
     const [isModalOpen, setIsModalOpen] = useState(true);
+
+    const [evolutionChain, setEvolutionChain] = useState(null);
+    const [loadingEvolution, setLoadingEvolution] = useState(true);
+    const [errorEvolution, setErrorEvolution] = useState(null);
 
     useEffect(() => {
         const fetchPokemon = async () => {
@@ -133,6 +137,50 @@ function PokemonInfo() {
         }
     }, [pokemon]);
 
+    useEffect(() => {
+        const fetchEvolutionChain = async () => {
+            try {
+                // Buscar dados de espécie
+                const speciesResponse = await fetch(
+                    `https://pokeapi.co/api/v2/pokemon-species/${id}`
+                );
+                if (!speciesResponse.ok)
+                    throw new Error("Failed to fetch Pokémon species");
+                const speciesData = await speciesResponse.json();
+
+                // Buscar dados da cadeia de evolução
+                const evolutionResponse = await fetch(
+                    speciesData.evolution_chain.url
+                );
+                if (!evolutionResponse.ok)
+                    throw new Error("Failed to fetch evolution chain");
+                const evolutionData = await evolutionResponse.json();
+
+                // Processar dados para uma estrutura mais amigável
+                const chain = [];
+                let current = evolutionData.chain;
+                while (current) {
+                    chain.push({
+                        name: current.species.name,
+                        url: current.species.url,
+                    });
+                    current = current.evolves_to[0] || null;
+                }
+
+                setEvolutionChain(chain);
+            } catch (error) {
+                setErrorEvolution(
+                    "Failed to fetch evolution chain. Please try again later."
+                );
+                console.error("Error fetching evolution chain:", error);
+            } finally {
+                setLoadingEvolution(false);
+            }
+        };
+
+        fetchEvolutionChain();
+    }, [id]);
+
     const handleFavorite = (pokemon) => {
         if (!pokemon || typeof pokemon !== "object") {
             console.error("O argumento precisa ser um objeto válido.");
@@ -233,6 +281,9 @@ function PokemonInfo() {
                             <a href="#abilities">Abilities</a>
                         </li>
                         <li>
+                            <a href="#evolution">Evolution</a>
+                        </li>
+                        <li>
                             <a href="#moves">Moves</a>
                         </li>
                     </ul>
@@ -325,6 +376,71 @@ function PokemonInfo() {
                     </ul>
                 ) : (
                     <p id="loader">No abilities found.</p>
+                )}
+            </section>
+
+            <section id="evolution" className={styles.evolutionSection}>
+                <h2>Evolution Chain</h2>
+                {loadingEvolution ? (
+                    <p id="loader">Loading evolution chain...</p>
+                ) : errorEvolution ? (
+                    <p>{errorEvolution}</p>
+                ) : evolutionChain && evolutionChain.length > 0 ? (
+                    <ul className={styles.evolutionContainer}>
+                        {evolutionChain.map((evolution, index) => {
+                            const nextEvolution =
+                                evolutionChain[index + 1] || null;
+
+                            return (
+                                <>
+                                    <li
+                                        key={index}
+                                        className={styles.evolutionItem}
+                                    >
+                                        <div
+                                            className={styles.imgContainer}
+                                            style={{
+                                                backgroundColor: titleColors[pokemon.types[0].type.name],
+                                            }}
+                                        >
+                                            <img
+                                                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${evolution.url
+                                                    .split("/")
+                                                    .filter(Boolean)
+                                                    .pop()}.png`}
+                                                alt={evolution.name}
+                                                className={
+                                                    styles.evolutionSprite
+                                                }
+                                            />
+                                        </div>
+                                        <strong>
+                                            {capitalizeFirstLetter(
+                                                evolution.name
+                                            )}
+                                        </strong>
+                                    </li>
+
+                                    {/* Verifica se existe uma próxima evolução */}
+                                    {nextEvolution && (
+                                        <div 
+                                            className={styles.evolutionArrow}
+                                            style={{
+                                                color: titleColors[pokemon.types[0].type.name],
+                                            }}
+                                        >
+                                            <span>
+                                                Level {nextEvolution.level} 
+                                            </span>
+                                            <FaArrowRight />
+                                        </div>
+                                    )}
+                                </>
+                            );
+                        })}
+                    </ul>
+                ) : (
+                    <p>No evolution chain found.</p>
                 )}
             </section>
 
