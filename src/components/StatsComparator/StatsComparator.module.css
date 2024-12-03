@@ -24,12 +24,16 @@
 
 .statsContainer {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
+    place-items: center;
+    justify-content: center;
     gap: 1.5rem;
 }
 
 .statChart {
+    width: 270px;
     height: max-content;
     text-align: center;
     padding: 1.7rem;
