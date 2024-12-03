@@ -72,6 +72,7 @@ function Compare() {
     const [pokemon2, setPokemon2] = useState(null);
     const [comparisonResult, setComparisonResult] = useState("");
     const [loading, setLoading] = useState(true);
+    const [errorComparasion, setErrorComparasion] = useState(false);
 
     const fetchGemini = async (pokemon1, pokemon2) => {
         const pokemons = [pokemon1, pokemon2];
@@ -127,6 +128,7 @@ function Compare() {
                 setComparisonResult(result);
                 console.log(comparisonResult);
             } catch (error) {
+                setErrorComparasion(true);
                 console.error("Error generating comparison:", error);
             } finally {
                 setLoading(false);
@@ -180,36 +182,54 @@ function Compare() {
                     <StatsComparator pokemon1={pokemon1} pokemon2={pokemon2} />
                     <section className={styles.comparasion}>
                         <h2>Comparison Powered By Google Gemini AI:</h2>
-                        <div className={styles.resultsContainer}>
-                            <div className={styles.pros}>
-                                <h3>
-                                    <FaChevronCircleUp />
-                                    {capitalizeFirstLetter(pokemon1.name)} Pros:
-                                </h3>
-                                {comparisonResult.pokemon1.pros}
+                        {errorComparasion ? (
+                            <p style={{ color: "red" }}>
+                                Error fetching gemini... Try again later.
+                            </p>
+                        ) : (
+                            <div className={styles.resultsContainer}>
+                                <div className={styles.pros}>
+                                    <h3>
+                                        <FaChevronCircleUp />
+                                        {capitalizeFirstLetter(
+                                            pokemon1.name
+                                        )}{" "}
+                                        Pros:
+                                    </h3>
+                                    {comparisonResult.pokemon1.pros}
+                                </div>
+                                <div className={styles.cons}>
+                                    <h3>
+                                        <FaChevronCircleDown />
+                                        {capitalizeFirstLetter(
+                                            pokemon1.name
+                                        )}{" "}
+                                        Cons:
+                                    </h3>
+                                    {comparisonResult.pokemon1.cons}
+                                </div>
+                                <div className={styles.pros}>
+                                    <h3>
+                                        <FaChevronCircleUp />
+                                        {capitalizeFirstLetter(
+                                            pokemon2.name
+                                        )}{" "}
+                                        Pros:
+                                    </h3>
+                                    {comparisonResult.pokemon2.pros}
+                                </div>
+                                <div className={styles.cons}>
+                                    <h3>
+                                        <FaChevronCircleDown />
+                                        {capitalizeFirstLetter(
+                                            pokemon2.name
+                                        )}{" "}
+                                        Cons:
+                                    </h3>
+                                    {comparisonResult.pokemon2.cons}
+                                </div>
                             </div>
-                            <div className={styles.cons}>
-                                <h3>
-                                    <FaChevronCircleDown />
-                                    {capitalizeFirstLetter(pokemon1.name)} Cons:
-                                </h3>
-                                {comparisonResult.pokemon1.cons}
-                            </div>
-                            <div className={styles.pros}>
-                                <h3>
-                                    <FaChevronCircleUp />
-                                    {capitalizeFirstLetter(pokemon2.name)} Pros:
-                                </h3>
-                                {comparisonResult.pokemon2.pros}
-                            </div>
-                            <div className={styles.cons}>
-                                <h3>
-                                    <FaChevronCircleDown />
-                                    {capitalizeFirstLetter(pokemon2.name)} Cons:
-                                </h3>
-                                {comparisonResult.pokemon2.cons}
-                            </div>
-                        </div>
+                        )}
                     </section>
                 </>
             )}
