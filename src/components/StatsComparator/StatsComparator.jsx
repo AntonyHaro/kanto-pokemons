@@ -23,7 +23,7 @@ function StatsComparator({ pokemon1, pokemon2 }) {
                                 ? "gray"
                                 : "lightgray", // Apply color based on comparison
                         }}
-                        title={`P1: ${stat1}`}
+                        title={`${pokemon1.name}: ${stat1}`}
                     ></div>
                     <div
                         className={styles.statBar}
@@ -33,7 +33,7 @@ function StatsComparator({ pokemon1, pokemon2 }) {
                                 ? "lightgray"
                                 : "gray", // Apply color based on comparison
                         }}
-                        title={`P2: ${stat2}`}
+                        title={`${pokemon2.name}: ${stat2}`}
                     ></div>
                 </div>
                 <div className={styles.statValues}>

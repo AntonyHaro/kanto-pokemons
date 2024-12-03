@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { gemini } from "../../api/api";
 import { capitalizeFirstLetter } from "../../utils/utils";
+import { FaChevronCircleUp, FaChevronCircleDown } from "react-icons/fa";
 import StatsContainer from "../../components/StatsContainer/StatsContainer";
 import StatsComparator from "../../components/StatsComparator/StatsComparator";
 import Header from "../../components/Header/Header";
@@ -72,11 +73,59 @@ function Compare() {
     const [comparisonResult, setComparisonResult] = useState("");
     const [loading, setLoading] = useState(true);
 
+    const fetchGemini = async (pokemon1, pokemon2) => {
+        const pokemons = [pokemon1, pokemon2];
+
+        try {
+            const tasks = [
+                {
+                    content: `Pros using ${capitalizeFirstLetter(
+                        pokemons[0].name
+                    )} instead of ${capitalizeFirstLetter(pokemons[1].name)}`,
+                },
+                {
+                    content: `Cons using ${capitalizeFirstLetter(
+                        pokemons[0].name
+                    )} instead of ${capitalizeFirstLetter(pokemons[1].name)}`,
+                },
+                {
+                    content: `Pros using ${capitalizeFirstLetter(
+                        pokemons[1].name
+                    )} instead of ${capitalizeFirstLetter(pokemons[0].name)}`,
+                },
+                {
+                    content: `Cons using ${capitalizeFirstLetter(
+                        pokemons[1].name
+                    )} instead of ${capitalizeFirstLetter(pokemons[0].name)}`,
+                },
+            ];
+
+            const responses = await Promise.all(
+                tasks.map((task) => gemini(task.content, pokemons))
+            );
+
+            return {
+                pokemon1: {
+                    pros: responses[0],
+                    cons: responses[1],
+                },
+                pokemon2: {
+                    pros: responses[2],
+                    cons: responses[3],
+                },
+            };
+        } catch (error) {
+            console.error("Erro ao buscar dados do Gemini:", error);
+            throw error;
+        }
+    };
+
     const fetchComparison = async () => {
         if (pokemon1 && pokemon2) {
             try {
-                const result = await gemini(pokemon1, pokemon2);
+                const result = await fetchGemini(pokemon1, pokemon2);
                 setComparisonResult(result);
+                console.log(comparisonResult);
             } catch (error) {
                 console.error("Error generating comparison:", error);
             } finally {
@@ -103,22 +152,18 @@ function Compare() {
     }, [id1, id2]);
 
     useEffect(() => {
-        fetchComparison();
+        if (pokemon1 && pokemon2) fetchComparison();
     }, [pokemon1, pokemon2]);
-
-    // if (loading) {
-    //     return;
-    // }
 
     return (
         <div className={styles.comparator}>
             <Header />
-            <h1>Pokémon Comparator</h1>
+            {/* <h1>Pokémon Comparator</h1> */}
             {loading ? (
                 <p>Loading Pokémon data and comparison...</p>
             ) : (
                 <>
-                    <h2>
+                    <h2 className={styles.title}>
                         {capitalizeFirstLetter(pokemon1.name)} vs{" "}
                         {capitalizeFirstLetter(pokemon2.name)}
                     </h2>
@@ -127,16 +172,44 @@ function Compare() {
                             <Pokemon pokemon={pokemon1} />
                             <StatsContainer pokemon={pokemon1} />
                         </div>
-                        <hr />
                         <div className={styles.pokemonContainer}>
                             <Pokemon pokemon={pokemon2} />
                             <StatsContainer pokemon={pokemon2} />
                         </div>
                     </section>
                     <StatsComparator pokemon1={pokemon1} pokemon2={pokemon2} />
-                    <section className={styles.result}>
-                        <h2>Comparison Result:</h2>
-                        <p>{comparisonResult}</p>
+                    <section className={styles.comparasion}>
+                        <h2>Comparison Powered By Google Gemini AI:</h2>
+                        <div className={styles.resultsContainer}>
+                            <div className={styles.pros}>
+                                <h3>
+                                    <FaChevronCircleUp />
+                                    {capitalizeFirstLetter(pokemon1.name)} Pros:
+                                </h3>
+                                {comparisonResult.pokemon1.pros}
+                            </div>
+                            <div className={styles.cons}>
+                                <h3>
+                                    <FaChevronCircleDown />
+                                    {capitalizeFirstLetter(pokemon1.name)} Cons:
+                                </h3>
+                                {comparisonResult.pokemon1.cons}
+                            </div>
+                            <div className={styles.pros}>
+                                <h3>
+                                    <FaChevronCircleUp />
+                                    {capitalizeFirstLetter(pokemon2.name)} Pros:
+                                </h3>
+                                {comparisonResult.pokemon2.pros}
+                            </div>
+                            <div className={styles.cons}>
+                                <h3>
+                                    <FaChevronCircleDown />
+                                    {capitalizeFirstLetter(pokemon2.name)} Cons:
+                                </h3>
+                                {comparisonResult.pokemon2.cons}
+                            </div>
+                        </div>
                     </section>
                 </>
             )}

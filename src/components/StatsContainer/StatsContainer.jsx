@@ -10,7 +10,7 @@ function StatsContainer({ pokemon }) {
 
     return (
         <section className={styles.statsContainer} id="stats">
-            <h2>Stats</h2>
+            {/* <h2>Stats</h2> */}
             <div className={styles.flexContainer}>
                 {pokemon.stats.map((stat, index) => (
                     <div key={index} className={styles.stats}>
