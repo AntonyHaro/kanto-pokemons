@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { capitalizeFirstLetter } from "../../utils/utils";
-import colors from "../../constants/colors";
 import styles from "./PokemonsList.module.css";
 
 function PokemonsList({
@@ -64,11 +63,43 @@ function Pokemon({ pokemon, isComparatorOpen, onSelect, selectedPokemons }) {
     const firstType =
         pokemon.types && pokemon.types[0] ? pokemon.types[0].type.name : null;
 
+    const colors = {
+        normal: "0, 0%, 70%",
+        fire: "20, 85%, 55%",
+        water: "200, 75%, 50%",
+        electric: "50, 95%, 60%",
+        grass: "120, 60%, 45%",
+        ice: "190, 100%, 85%",
+        fighting: "0, 75%, 45%",
+        poison: "280, 60%, 55%",
+        ground: "30, 40%, 45%",
+        flying: "220, 80%, 80%",
+        psychic: "300, 70%, 60%",
+        bug: "90, 55%, 40%",
+        rock: "35, 30%, 35%",
+        ghost: "260, 55%, 40%",
+        dragon: "270, 65%, 50%",
+        dark: "240, 20%, 20%",
+        steel: "210, 20%, 70%",
+        fairy: "330, 80%, 85%",
+        unknown: "0, 0%, 50%",
+        stellar: "240, 80%, 50%",
+    };
+
+    const getItemColor = (type, alpha) => {
+        return `hsla(${colors[type]}, ${alpha})`;
+    };
+
     return (
         <li
             className={`${styles.pokemonCard} ${
                 isSelected ? styles.selected : ""
             }`}
+            style={{
+                backgroundImage: firstType
+                    ? `linear-gradient(to right, ${getItemColor(firstType, 0.7)} 0%, ${getItemColor(firstType, 0.3)} 100%)`
+                    : "",
+            }}
             onClick={handleClick}
         >
             <div className={styles.textContainer}>
@@ -86,7 +117,7 @@ function Pokemon({ pokemon, isComparatorOpen, onSelect, selectedPokemons }) {
                             key={index}
                             className={styles.type}
                             style={{
-                                backgroundColor: colors[type.type.name] || "",
+                                backgroundColor: getItemColor(type.type.name, 1) || "",
                             }}
                         >
                             {capitalizeFirstLetter(type.type.name)}
@@ -94,14 +125,9 @@ function Pokemon({ pokemon, isComparatorOpen, onSelect, selectedPokemons }) {
                     ))}
                 </div>
             </div>
-            <div
-                className={styles.imgContainer}
-                style={{
-                    backgroundColor: firstType ? colors[firstType] : "",
-                }}
-            >
+            <div className={styles.imgContainer}>
                 <img
-                    src={pokemon.sprites["front_default"]}
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
                     alt={pokemon.name}
                 />
             </div>

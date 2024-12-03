@@ -400,7 +400,7 @@ function PokemonInfo() {
                                         <div
                                             className={styles.imgContainer}
                                             style={{
-                                                backgroundColor: titleColors[pokemon.types[0].type.name],
+                                                backgroundColor: colors[pokemon.types[0].type.name],
                                             }}
                                         >
                                             <img
