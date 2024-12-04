@@ -243,7 +243,7 @@ section {
 }
 
 .imgContainer {
-    padding: 1rem;
+    padding: 0.4rem;
     background-color: var(--border);
     display: grid;
     place-items: center;
