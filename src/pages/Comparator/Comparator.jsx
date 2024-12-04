@@ -162,7 +162,7 @@ function Compare() {
             <Header />
             {/* <h1>Pokémon Comparator</h1> */}
             {loading ? (
-                <p>Loading Pokémon data and comparison...</p>
+                <p id="loader">Loading Pokémon data and comparison...</p>
             ) : (
                 <>
                     <h2 className={styles.title}>

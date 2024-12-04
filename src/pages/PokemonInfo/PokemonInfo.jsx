@@ -37,6 +37,56 @@ function PokemonInfo() {
     const [loadingEvolution, setLoadingEvolution] = useState(true);
     const [errorEvolution, setErrorEvolution] = useState(null);
 
+    const [weaknesses, setWeaknesses] = useState([]);
+
+    async function fetchWeaknesses(types) {
+        try {
+            const typeDataPromises = types.map((type) =>
+                fetch(type.type.url).then((response) => response.json())
+            );
+
+            const typeDataArray = await Promise.all(typeDataPromises);
+
+            const weaknesses = new Set();
+
+            typeDataArray.forEach((typeData) => {
+                typeData.damage_relations.double_damage_from.forEach((type) =>
+                    weaknesses.add(type.name)
+                );
+            });
+
+            // Remova tipos que também são resistentes (se o Pokémon tiver múltiplos tipos)
+            const resistances = new Set();
+            typeDataArray.forEach((typeData) => {
+                typeData.damage_relations.half_damage_from.forEach((type) =>
+                    resistances.add(type.name)
+                );
+                typeData.damage_relations.no_damage_from.forEach((type) =>
+                    resistances.add(type.name)
+                );
+            });
+
+            // Finaliza removendo resistências das fraquezas
+            resistances.forEach((type) => weaknesses.delete(type));
+
+            return Array.from(weaknesses);
+        } catch (error) {
+            console.error("Error fetching weaknesses:", error);
+            return [];
+        }
+    }
+
+    useEffect(() => {
+        const fetchPokemonWeaknesses = async () => {
+            if (pokemon && pokemon.types) {
+                const weaknesses = await fetchWeaknesses(pokemon.types);
+                setWeaknesses(weaknesses);
+            }
+        };
+
+        fetchPokemonWeaknesses();
+    }, [pokemon]);
+
     useEffect(() => {
         const fetchPokemon = async () => {
             const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -284,6 +334,9 @@ function PokemonInfo() {
                             <a href="#evolution">Evolution</a>
                         </li>
                         <li>
+                            <a href="#weaknesses">Weaknesses</a>
+                        </li>
+                        <li>
                             <a href="#moves">Moves</a>
                         </li>
                     </ul>
@@ -356,7 +409,15 @@ function PokemonInfo() {
                 ) : pokemonAbilities && pokemonAbilities.length > 0 ? (
                     <ul className={styles.abilitiesContainer}>
                         {pokemonAbilities.map((ability, index) => (
-                            <li key={index}>
+                            <li
+                                key={index}
+                                style={{
+                                    "--hover-color":
+                                        titleColors[
+                                            pokemon.types[0]?.type.name
+                                        ] || "#ccc",
+                                }}
+                            >
                                 <strong>
                                     {capitalizeFirstLetter(ability.name)}
                                     {pokemon.abilities[index].is_hidden ? (
@@ -400,7 +461,11 @@ function PokemonInfo() {
                                         <div
                                             className={styles.imgContainer}
                                             style={{
-                                                backgroundColor: colors[pokemon.types[0].type.name],
+                                                backgroundColor:
+                                                    colors[
+                                                        pokemon.types[0].type
+                                                            .name
+                                                    ],
                                             }}
                                         >
                                             <img
@@ -423,14 +488,16 @@ function PokemonInfo() {
 
                                     {/* Verifica se existe uma próxima evolução */}
                                     {nextEvolution && (
-                                        <div 
+                                        <div
                                             className={styles.evolutionArrow}
                                             style={{
-                                                color: titleColors[pokemon.types[0].type.name],
+                                                color: titleColors[
+                                                    pokemon.types[0].type.name
+                                                ],
                                             }}
                                         >
                                             <span>
-                                                Level {nextEvolution.level} 
+                                                Level {nextEvolution.level}
                                             </span>
                                             <FaArrowRight />
                                         </div>
@@ -441,6 +508,26 @@ function PokemonInfo() {
                     </ul>
                 ) : (
                     <p>No evolution chain found.</p>
+                )}
+            </section>
+
+            <section id="weaknesses" className={styles.weaknessesSection}>
+                <h2>Weaknesses</h2>
+                {weaknesses.length > 0 ? (
+                    <ul className={styles.weaknessesContainer}>
+                        {weaknesses.map((weakness, index) => (
+                            <li
+                                key={index}
+                                style={{
+                                    backgroundColor: colors[weakness],
+                                }}
+                            >
+                                {capitalizeFirstLetter(weakness)}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No weaknesses found.</p>
                 )}
             </section>
 

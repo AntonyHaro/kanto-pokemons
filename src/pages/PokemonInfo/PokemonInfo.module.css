@@ -81,7 +81,7 @@ html {
 }
 
 .button {
-    border: 2px solid ;
+    border: 2px solid;
     font-size: 1.4em;
     padding: 0.5rem;
     display: grid;
@@ -204,12 +204,17 @@ section {
 }
 
 .abilitiesContainer li:hover {
-    border-color: var(--pokemon-name-hover);
+    border-color: var(--hover-color);
     transform: translateX(0.2rem);
+
+    strong {
+        color: var(--hover-color);
+    }
 }
 
 .abilitiesContainer strong span {
     color: hsl(210, 10%, 53%);
+    transition: 0.2s;
 }
 
 .abilitiesContainer p {
@@ -267,6 +272,21 @@ section {
 
 .evolutionArrow span {
     font-weight: bold;
+}
+
+.weaknessesSection {
+    margin: 2rem 0;
+}
+
+.weaknessesContainer {
+    display: flex;
+    gap: 0.7rem;
+    list-style: none;
+}
+
+.weaknessesContainer li {
+    padding: 0.4rem;
+    border-radius: 3px;
 }
 
 @media (max-width: 1075px) {
