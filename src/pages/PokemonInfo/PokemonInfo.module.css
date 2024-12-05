@@ -10,7 +10,7 @@ html {
     transition: 0.2s;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 4rem;
     scroll-behavior: smooth;
 }
 
@@ -145,18 +145,14 @@ section {
 
 .sprites {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     gap: 1rem;
     padding: 0;
 }
 
 .sprites img {
-    width: 160px;
+    width: 120px;
     height: auto;
-}
-
-.sprites img:hover {
-    animation: balanco 0.2s ease-in-out;
 }
 
 @keyframes balanco {
@@ -164,13 +160,13 @@ section {
         transform: rotate(0deg);
     }
     25% {
-        transform: rotate(-5deg);
+        transform: rotate(-2deg);
     }
     50% {
         transform: rotate(0deg);
     }
     75% {
-        transform: rotate(5deg);
+        transform: rotate(2deg);
     }
     100% {
         transform: rotate(0deg);
@@ -232,7 +228,7 @@ section {
     display: flex;
     align-items: center;
     /* justify-content: space-around; */
-    gap: 2.4rem;
+    gap: 2rem;
 }
 
 .evolutionItem {
@@ -243,20 +239,21 @@ section {
 }
 
 .imgContainer {
-    padding: 0.4rem;
+    padding: 0.6rem;
     background-color: var(--border);
     display: grid;
     place-items: center;
-    border-radius: 50% 0;
+    border-radius: 50%;
+    transition: 0.2s ease-out;
+}
+
+.imgContainer:hover {
+    transform: scale(1.04);
 }
 
 .imgContainer img {
     height: 160px;
     filter: drop-shadow(0 0 2rem white);
-}
-
-.imgContainer img:hover {
-    animation: balanco 0.2s ease-in-out;
 }
 
 .evolutionItem strong {
@@ -274,18 +271,36 @@ section {
     font-weight: bold;
 }
 
-.weaknessesSection {
-    margin: 2rem 0;
+.typesRelationSection {
+    display: grid;
+    gap: 1.8rem;
+    justify-content: space-between;
 }
 
-.weaknessesContainer {
+.typesRelationSection h2 {
     display: flex;
+    gap: 0.6rem;
+    align-items: center;
+}
+
+.typesRelationContainer {
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.7rem;
     list-style: none;
 }
 
-.weaknessesContainer li {
-    padding: 0.4rem;
+.relationTypes {
+    display: grid;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.typesRelationContainer li {
+    text-align: center;
+    min-width: 5rem;
+    border: 1px solid var(--border);
+    padding: 0.1rem 0.8rem;
     border-radius: 3px;
 }
 

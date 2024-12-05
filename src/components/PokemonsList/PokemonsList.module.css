@@ -10,15 +10,14 @@
 
 .pokemonCard {
     list-style: none;
-    padding: 1rem;
-    border: 1px solid var(--border);
+    padding: 1.7rem;
+    border: 1px solid hsl(0, 0%, 50%);
     border-radius: 4px;
     transition: 0.2s;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    position: relative;
 }
 
 .pokemonCard:hover {
@@ -31,12 +30,12 @@
     }
 
     img {
-        animation: balanco 0.2s ease-in-out;
+        animation: bounce 0.2s ease-in-out;
     }
 }
 
 .pokemonCard .id {
-    color: #eee;
+    color: var(--pokemon-name);
 }
 
 .pokemonCard .nameContainer {
@@ -48,7 +47,7 @@
 .pokemonCard .name {
     font-weight: bold;
     font-size: 2em;
-    color: white;
+    color: var(--pokemon-name);
     transition: 0.2s;
     margin-bottom: 1rem;
 }
@@ -56,57 +55,61 @@
 .pokemonCard .typesContainer {
     display: flex;
     gap: 0.4rem;
-    color: white;
+    color: hsla(0, 0%, 20%, 0.8);
     font-size: 0.8em;
     font-weight: bold;
 }
 
 .pokemonCard .typesContainer .type {
+    border: 1px solid var(--border);
     min-width: 4rem;
     text-align: center;
     padding: 0.3rem 0.8rem;
     border-radius: 3px;
-    border-radius: 1rem;
+    /* border-radius: 1rem; */
     transition: 0.2s;
 }
 
-/* .imgContainer {
-    background-color: var(--border);
-    display: grid;
-    place-items: center;
-    border-radius: 50% 0;
-    transition: 0.2s;
-} */
-
 .imgContainer img {
-    height: 140px;
-    /* filter: drop-shadow(0 0 1rem white); */
+    height: 120px;
 }
 
 .selected {
-    background-color: hsl(210, 50%, 80%);
+    background-color: hsla(0, 0%, 0%, 0.95);
+    color: white;
     border-color: var(--pokemon-name);
+
+    .name, .id {
+        color: white;
+    }
 }
 
-@keyframes balanco {
+@keyframes bounce {
     0% {
         transform: rotate(0deg);
     }
     25% {
-        transform: rotate(-2.5deg);
+        transform: rotate(-3deg);
     }
     50% {
         transform: rotate(0deg);
     }
     75% {
-        transform: rotate(2.5deg);
+        transform: rotate(3deg);
     }
     100% {
         transform: rotate(0deg);
     }
 }
 
-@media (max-width: 1380px) {
+@media (min-width: 1600px) {
+    /* Ajustes para telas maiores que 1400px */
+    #pokemonsContainer {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 1200px) {
     #pokemonsContainer {
         grid-template-columns: repeat(2, 1fr);
     }

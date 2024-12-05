@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
-import { FaStar, FaUsers } from "react-icons/fa6";
-import { FaRulerVertical, FaWeight, FaArrowRight } from "react-icons/fa";
+import { FaStar } from "react-icons/fa6";
+import {
+    FaChevronCircleUp,
+    FaChevronCircleDown,
+    FaRulerVertical,
+    FaWeight,
+    FaArrowRight,
+} from "react-icons/fa";
 
 import titleColors from "../../constants/titleColors";
 import colors from "../../constants/colors";
@@ -28,64 +34,50 @@ function PokemonInfo() {
     const [errorAbilities, setErrorAbilities] = useState(null);
     const [loadingAbilities, setLoadingAbilities] = useState(true);
 
-    const [favorite, setFavorite] = useState(false);
-    const [team, setTeam] = useState(false);
-
-    const [isModalOpen, setIsModalOpen] = useState(true);
-
     const [evolutionChain, setEvolutionChain] = useState(null);
     const [loadingEvolution, setLoadingEvolution] = useState(true);
     const [errorEvolution, setErrorEvolution] = useState(null);
 
-    const [weaknesses, setWeaknesses] = useState([]);
+    const [pokemonSprites, setPokemonSprites] = useState(null);
 
-    async function fetchWeaknesses(types) {
+    const [favorite, setFavorite] = useState(false);
+
+    const [weaknesses, setWeaknesses] = useState([]);
+    const [advantages, setAdvantages] = useState([]);
+
+    async function fetchTypeRelations(types, relationType = "weaknesses") {
         try {
-            const typeDataPromises = types.map((type) =>
-                fetch(type.type.url).then((response) => response.json())
+            // Faz a requisição para todos os tipos e aguarda as respostas
+            const typeDataArray = await Promise.all(
+                types.map((type) =>
+                    fetch(type.type.url).then((response) => response.json())
+                )
             );
 
-            const typeDataArray = await Promise.all(typeDataPromises);
+            // Inicializa um conjunto para armazenar as fraquezas ou vantagens
+            const relations = new Set();
 
-            const weaknesses = new Set();
+            // Itera sobre os dados dos tipos e atualiza as fraquezas ou vantagens
+            typeDataArray.forEach(({ damage_relations }) => {
+                let relationArray;
+                if (relationType === "weaknesses") {
+                    // Adiciona tipos contra os quais o Pokémon tem fraqueza (dano recebido)
+                    relationArray = damage_relations.double_damage_from;
+                } else if (relationType === "advantages") {
+                    // Adiciona tipos contra os quais o Pokémon tem vantagem (dano causado)
+                    relationArray = damage_relations.double_damage_to;
+                }
 
-            typeDataArray.forEach((typeData) => {
-                typeData.damage_relations.double_damage_from.forEach((type) =>
-                    weaknesses.add(type.name)
-                );
+                relationArray.forEach((type) => relations.add(type.name));
             });
 
-            // Remova tipos que também são resistentes (se o Pokémon tiver múltiplos tipos)
-            const resistances = new Set();
-            typeDataArray.forEach((typeData) => {
-                typeData.damage_relations.half_damage_from.forEach((type) =>
-                    resistances.add(type.name)
-                );
-                typeData.damage_relations.no_damage_from.forEach((type) =>
-                    resistances.add(type.name)
-                );
-            });
-
-            // Finaliza removendo resistências das fraquezas
-            resistances.forEach((type) => weaknesses.delete(type));
-
-            return Array.from(weaknesses);
+            // Retorna as fraquezas ou vantagens como um array
+            return Array.from(relations);
         } catch (error) {
-            console.error("Error fetching weaknesses:", error);
+            console.error(`Error fetching ${relationType}:`, error);
             return [];
         }
     }
-
-    useEffect(() => {
-        const fetchPokemonWeaknesses = async () => {
-            if (pokemon && pokemon.types) {
-                const weaknesses = await fetchWeaknesses(pokemon.types);
-                setWeaknesses(weaknesses);
-            }
-        };
-
-        fetchPokemonWeaknesses();
-    }, [pokemon]);
 
     useEffect(() => {
         const fetchPokemon = async () => {
@@ -117,7 +109,48 @@ function PokemonInfo() {
             setFavorite(isFavorite);
         };
 
+        const fetchEvolutionChain = async () => {
+            try {
+                // Buscar dados de espécie
+                const speciesResponse = await fetch(
+                    `https://pokeapi.co/api/v2/pokemon-species/${id}`
+                );
+                if (!speciesResponse.ok)
+                    throw new Error("Failed to fetch Pokémon species");
+                const speciesData = await speciesResponse.json();
+
+                // Buscar dados da cadeia de evolução
+                const evolutionResponse = await fetch(
+                    speciesData.evolution_chain.url
+                );
+                if (!evolutionResponse.ok)
+                    throw new Error("Failed to fetch evolution chain");
+                const evolutionData = await evolutionResponse.json();
+
+                // Processar dados para uma estrutura mais amigável
+                const chain = [];
+                let current = evolutionData.chain;
+                while (current) {
+                    chain.push({
+                        name: current.species.name,
+                        url: current.species.url,
+                    });
+                    current = current.evolves_to[0] || null;
+                }
+
+                setEvolutionChain(chain);
+            } catch (error) {
+                setErrorEvolution(
+                    "Failed to fetch evolution chain. Please try again later."
+                );
+                console.error("Error fetching evolution chain:", error);
+            } finally {
+                setLoadingEvolution(false);
+            }
+        };
+
         fetchPokemon();
+        fetchEvolutionChain();
         checkFavoriteStatus();
     }, [id]);
 
@@ -182,54 +215,44 @@ function PokemonInfo() {
                 }
             };
 
+            const fetchPokemonWeaknessesAdvantages = async () => {
+                if (pokemon && pokemon.types) {
+                    const advantages = await fetchTypeRelations(
+                        pokemon.types,
+                        "advantages"
+                    );
+
+                    const weaknesses = await fetchTypeRelations(
+                        pokemon.types,
+                        "weaknesses"
+                    );
+
+                    setAdvantages(advantages);
+                    setWeaknesses(weaknesses);
+                }
+            };
+
+            const fetchSprites = () => {
+                const fetchSprites = () => {
+                    const sprites = {
+                        front: `https://play.pokemonshowdown.com/sprites/ani/${pokemon.name.toLowerCase()}.gif`,
+                        back: `https://play.pokemonshowdown.com/sprites/ani-back/${pokemon.name.toLowerCase()}.gif`,
+                        shinyFront: `https://play.pokemonshowdown.com/sprites/ani-shiny/${pokemon.name.toLowerCase()}.gif`,
+                        shinyBack: `https://play.pokemonshowdown.com/sprites/ani-back-shiny/${pokemon.name.toLowerCase()}.gif`,
+                    };
+
+                    setPokemonSprites(sprites);
+                };
+
+                fetchSprites();
+            };
+
+            fetchSprites();
             fetchAbilities();
+            fetchPokemonWeaknessesAdvantages();
             fetchMoves();
         }
     }, [pokemon]);
-
-    useEffect(() => {
-        const fetchEvolutionChain = async () => {
-            try {
-                // Buscar dados de espécie
-                const speciesResponse = await fetch(
-                    `https://pokeapi.co/api/v2/pokemon-species/${id}`
-                );
-                if (!speciesResponse.ok)
-                    throw new Error("Failed to fetch Pokémon species");
-                const speciesData = await speciesResponse.json();
-
-                // Buscar dados da cadeia de evolução
-                const evolutionResponse = await fetch(
-                    speciesData.evolution_chain.url
-                );
-                if (!evolutionResponse.ok)
-                    throw new Error("Failed to fetch evolution chain");
-                const evolutionData = await evolutionResponse.json();
-
-                // Processar dados para uma estrutura mais amigável
-                const chain = [];
-                let current = evolutionData.chain;
-                while (current) {
-                    chain.push({
-                        name: current.species.name,
-                        url: current.species.url,
-                    });
-                    current = current.evolves_to[0] || null;
-                }
-
-                setEvolutionChain(chain);
-            } catch (error) {
-                setErrorEvolution(
-                    "Failed to fetch evolution chain. Please try again later."
-                );
-                console.error("Error fetching evolution chain:", error);
-            } finally {
-                setLoadingEvolution(false);
-            }
-        };
-
-        fetchEvolutionChain();
-    }, [id]);
 
     const handleFavorite = (pokemon) => {
         if (!pokemon || typeof pokemon !== "object") {
@@ -337,6 +360,9 @@ function PokemonInfo() {
                             <a href="#weaknesses">Weaknesses</a>
                         </li>
                         <li>
+                            <a href="#advantages">Advantages</a>
+                        </li>
+                        <li>
                             <a href="#moves">Moves</a>
                         </li>
                     </ul>
@@ -382,18 +408,35 @@ function PokemonInfo() {
             </section>
 
             <div className={styles.sprites}>
-                <img src={pokemon.sprites.front_default} alt="Front Default" />
-                <img src={pokemon.sprites.back_default} alt="Back Default" />
-                {pokemon.sprites.front_shiny && (
+                {pokemonSprites ? (
+                    <>
+                        <img src={pokemonSprites.front} alt="Front" />
+                        <img src={pokemonSprites.back} alt="Front" />
+                        <img src={pokemonSprites.shinyFront} alt="Front" />
+                        <img src={pokemonSprites.shinyBack} alt="Front" />
+                    </>
+                ) : (
                     <>
                         <img
-                            src={pokemon.sprites.front_shiny}
-                            alt="Front Shiny"
+                            src={pokemon.sprites.front_default}
+                            alt="Front Default"
                         />
                         <img
-                            src={pokemon.sprites.back_shiny}
-                            alt="Back Shiny"
+                            src={pokemon.sprites.back_default}
+                            alt="Back Default"
                         />
+                        {pokemon.sprites.front_shiny && (
+                            <>
+                                <img
+                                    src={pokemon.sprites.front_shiny}
+                                    alt="Front Shiny"
+                                />
+                                <img
+                                    src={pokemon.sprites.back_shiny}
+                                    alt="Back Shiny"
+                                />
+                            </>
+                        )}
                     </>
                 )}
             </div>
@@ -448,6 +491,7 @@ function PokemonInfo() {
                     <p>{errorEvolution}</p>
                 ) : evolutionChain && evolutionChain.length > 0 ? (
                     <ul className={styles.evolutionContainer}>
+                        {console.log(evolutionChain)}
                         {evolutionChain.map((evolution, index) => {
                             const nextEvolution =
                                 evolutionChain[index + 1] || null;
@@ -496,9 +540,6 @@ function PokemonInfo() {
                                                 ],
                                             }}
                                         >
-                                            <span>
-                                                Level {nextEvolution.level}
-                                            </span>
                                             <FaArrowRight />
                                         </div>
                                     )}
@@ -511,24 +552,52 @@ function PokemonInfo() {
                 )}
             </section>
 
-            <section id="weaknesses" className={styles.weaknessesSection}>
-                <h2>Weaknesses</h2>
-                {weaknesses.length > 0 ? (
-                    <ul className={styles.weaknessesContainer}>
-                        {weaknesses.map((weakness, index) => (
-                            <li
-                                key={index}
-                                style={{
-                                    backgroundColor: colors[weakness],
-                                }}
-                            >
-                                {capitalizeFirstLetter(weakness)}
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>No weaknesses found.</p>
-                )}
+            <section className={styles.typesRelationSection}>
+                <div className={styles.relationTypes} id="weaknesses">
+                    <h2>
+                        Weaknesses{" "}
+                        <FaChevronCircleDown style={{ color: "hsl(0, 70%, 65%)" }} />
+                    </h2>
+                    {weaknesses.length > 0 ? (
+                        <ul className={styles.typesRelationContainer}>
+                            {weaknesses.map((weakness, index) => (
+                                <li
+                                    key={index}
+                                    style={{
+                                        backgroundColor: colors[weakness],
+                                    }}
+                                >
+                                    {capitalizeFirstLetter(weakness)}
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>No weaknesses found.</p>
+                    )}
+                </div>
+
+                <div className={styles.relationTypes} id="advantages">
+                    <h2>
+                        Advantages{" "}
+                        <FaChevronCircleUp style={{ color: "hsl(130, 70%, 50%)" }} />
+                    </h2>
+                    {advantages.length > 0 ? (
+                        <ul className={styles.typesRelationContainer}>
+                            {advantages.map((advantages, index) => (
+                                <li
+                                    key={index}
+                                    style={{
+                                        backgroundColor: colors[advantages],
+                                    }}
+                                >
+                                    {capitalizeFirstLetter(advantages)}
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>No advantages found.</p>
+                    )}
+                </div>
             </section>
 
             <section className={styles.movesSection} id="moves">
